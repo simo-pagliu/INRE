@@ -1,0 +1,72 @@
+Number of Ouliars excluded 0
+Number of buildings considered 68868
+Total number of records: 68868
+
+Scaling correction factors to match average heated area:
+A4: Sup Disp = 687 m², CorrF = 0.13
+A3: Sup Disp = 210 m², CorrF = 0.44
+A2: Sup Disp = 164 m², CorrF = 0.56
+A1: Sup Disp = 164 m², CorrF = 0.56
+B: Sup Disp = 306 m², CorrF = 0.3
+C: Sup Disp = 254 m², CorrF = 0.36
+D: Sup Disp = 347 m², CorrF = 0.26
+E: Sup Disp = 306 m², CorrF = 0.3
+F: Sup Disp = 155 m², CorrF = 0.59
+G: Sup Disp = 311 m², CorrF = 0.29
+
+Total Annual energy consumption by source:
+Electricity: 45391872.48 kWh
+Natural Gas: 1039900848.93 m³
+GPL: 1575706.00 m³
+Coal: 0.00 m³
+Diesel: 3630960.16 m³
+Biomass: 10733968.00 m³
+Solar PV: 15791020.00 kWh
+Solar Thermal: 3671141.00 kWh
+Wind: 0.00 kWh
+District Heating: 6266882.00 kWh
+District Cooling: 0.00 kWh
+EP GL NREN: 17316775.22 kWh/m²annum
+EP GL REN: 1283997.63 kWh/m²annum
+
+Percentage of buildings with cooling: 9.58%
+
+Distribution of heat pumps by energy class:
+A4: 97.40%
+A3: 91.48%
+A2: 69.84%
+A1: 53.05%
+B: 36.63%
+C: 32.23%
+D: 21.32%
+E: 12.19%
+F: 6.66%
+G: 1.77%
+
+Percentage of buildings with PV: 10.89%
+
+Distribution of PV systems by energy class:
+A4: 96.71%
+A3: 84.03%
+A2: 59.73%
+A1: 43.61%
+B: 23.98%
+C: 16.72%
+D: 7.88%
+E: 2.63%
+F: 0.76%
+G: 0.15%
+
+Stats Impianti Fotovoltaici:
+A4: Autosufficienza = 61.51%, Sovradimensionamento = 3.96%
+A3: Autosufficienza = 44.08%, Sovradimensionamento = 34.20%
+A2: Autosufficienza = 31.68%, Sovradimensionamento = 267.82%
+A1: Autosufficienza = 25.57%, Sovradimensionamento = 1004.33%
+B: Autosufficienza = 19.29%, Sovradimensionamento = 947.18%
+C: Autosufficienza = 15.51%, Sovradimensionamento = 419.08%
+D: Autosufficienza = 9.16%, Sovradimensionamento = 102.67%
+E: Autosufficienza = 3.92%, Sovradimensionamento = 116.66%
+F: Autosufficienza = 1.15%, Sovradimensionamento = -68.68%
+G: Autosufficienza = 0.24%, Sovradimensionamento = -95.72%
+
+
