@@ -1,0 +1,62 @@
+\thispagestyle{plain}
+
+% Title with Titles Font (Anonymous Pro)
+{\titlesfont\fontsize{18}{22}\textbf{\color{cherenkovblue}{First Line of the Title \\ Second Line of the Title}}}\\
+{\titlesfont\fontsize{11}{13}\color{cherenkovblue} Nuclear Engineering - Politecnico di Milano}\\
+
+\vspace{-8pt}
+
+% Author information with Main Font (Poppins)
+{\normalsize\textbf{Pagliuca Simone, et al.}} \\
+{\footnotesize\textit{my contact, al.'s contacts}} \\
+
+\vspace{8pt}
+
+% Course and Academic Year
+{\footnotesize\textbf{Course:} Or other indication}\\
+{\footnotesize\textbf{Academic Year:} Or some time indication}\\
+
+% Horizontal rule
+\vspace{6pt}
+\centerline{\rule{0.95\textwidth}{0.5pt}}
+\vspace{8pt}
+
+% Abstract with Titles Font for Heading, Main Font for Body
+{\titlesfont\fontsize{10}{12}\textbf{\color{cherenkovblue} ABSTRACT}} 
+
+\vspace{4pt}
+{\normalsize
+Here write you Abstract.
+}
+
+\vspace{10pt}
+
+% Key-words box with Titles Font
+\begin{tcolorbox}[arc=0pt, boxrule=0pt, colback=cherenkovblue!60, width=\textwidth, colupper=white]
+    {\titlesfont\fontsize{10}{12}\textbf{Key-words:}} Key, Words, Here
+\end{tcolorbox}
+
+\vspace{12pt}
+
+% Nomenclature Definitions
+\makenomenclature
+\renewcommand\nomgroup[1]{%
+\item[\bfseries
+\ifstrequal{#1}{A}{Type A}{%
+\ifstrequal{#1}{B}{Type B \& Misc}{%
+}}%
+]}
+
+% Neutronics Quantities
+\nomenclature[A]{$math$}{Description ($units-of-measurement$)}
+
+% Data & Statistics
+\nomenclature[B]{$math$}{Description ($units-of-measurement$)}
+
+% Two-column layout for the nomenclature
+\renewcommand{\nompreamble}{\begin{multicols}{2}}
+\renewcommand{\nompostamble}{\end{multicols}}
+
+% Render Nomenclature Without Section Break
+\vspace{-5pt} % Adjust spacing to fit table
+\printnomenclature

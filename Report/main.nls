@@ -1,0 +1,8 @@
+
+\begin{thenomenclature} 
+\nomgroup{A}
+  \item [{$x$}]\begingroup X quantity\nomeqref {0}\nompageref{1}
+\nomgroup{B}
+  \item [{$y$}]\begingroup Y quantity\nomeqref {0}\nompageref{1}
+
+\end{thenomenclature}

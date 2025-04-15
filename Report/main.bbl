@@ -1,0 +1,88 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{cened2025}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=b3925b2107e8e546f6cb93163dab0f41}{%
+           family={{Regione Lombardia}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{fullhash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{bibnamehash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{authorbibnamehash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{authornamehash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{authorfullhash}{b3925b2107e8e546f6cb93163dab0f41}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.dati.lombardia.it/Energia/Database-CENED-2-Certificazione-ENergetica-degli-E/bbky-sde5}}
+      \field{note}{Accessed: 2025-03-25}
+      \field{title}{{Database CENED+2 - Certificazione ENergetica degli EDifici}}
+      \field{year}{2025}
+    \endentry
+    \entry{gse_cabine_primarie}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=17c1d6c196727a838b8de026459b7b2e}{%
+           family={{Gestore dei Servizi Energetici (GSE)}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{fullhash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{bibnamehash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{authorbibnamehash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{authornamehash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{authorfullhash}{17c1d6c196727a838b8de026459b7b2e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.gse.it/servizi-per-te/autoconsumo/mappa-interattiva-delle-cabine-primarie}}
+      \field{note}{Accessed: 2025-04-14}
+      \field{title}{{Mappa Interattiva delle Cabine Primarie}}
+      \field{year}{2025}
+    \endentry
+    \entry{portaleconsumi_energia_domestica}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=a768927491c736f421c7084da842faea}{%
+           family={{Acquirente Unico S.p.A.}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{a768927491c736f421c7084da842faea}
+      \strng{fullhash}{a768927491c736f421c7084da842faea}
+      \strng{bibnamehash}{a768927491c736f421c7084da842faea}
+      \strng{authorbibnamehash}{a768927491c736f421c7084da842faea}
+      \strng{authornamehash}{a768927491c736f421c7084da842faea}
+      \strng{authorfullhash}{a768927491c736f421c7084da842faea}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.consumienergia.it/portaleConsumi/it/energia-elettrica-utenze-domestiche.page}}
+      \field{note}{Accessed: 2025-04-14}
+      \field{title}{{Electricity residential demand}}
+      \field{year}{2025}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

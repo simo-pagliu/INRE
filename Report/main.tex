@@ -1,0 +1,140 @@
+\documentclass[11pt,a4paper,twoside]{article}
+
+% Basic packages
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{nomencl}
+\usepackage{multicol}
+\usepackage{etoolbox}
+\usepackage{multirow}
+\usepackage{csquotes}
+\usepackage{tcolorbox}
+\usepackage{listings}
+
+% Restore \underbar and \underline before loading sectsty
+\let\oldunderbar\underbar
+\let\oldunderline\underline
+\usepackage{sectsty} % Custom section styles
+
+% Fonts
+\setmainfont{Poppins} % Main font
+\newfontfamily\titlesfont{Anonymous Pro} % Titles font
+\setmonofont{Anonymous Pro} % Monospace font
+
+% Bibliography
+\usepackage[backend=biber, style=ieee, citestyle=numeric]{biblatex}
+\addbibresource{references.bib}
+
+% Define colors
+\definecolor{cherenkovblue}{RGB}{55, 139, 230} % Signature blue
+\definecolor{darkgreen}{RGB}{34,139,34}  % Comments (green)
+\definecolor{darkorange}{RGB}{255,140,0} % Strings (orange)
+\definecolor{blue}{RGB}{30,144,255}      % Keywords (blue)
+\definecolor{lightgray}{RGB}{245,245,245} % Background
+
+
+% Itemize lists use bullets
+\renewcommand{\labelitemi}{\textbullet}
+
+% Adjust default font sizes
+\renewcommand{\normalsize}{\fontsize{9}{11}\selectfont}
+\renewcommand{\small}{\fontsize{8}{10}\selectfont}
+\renewcommand{\footnotesize}{\fontsize{7}{9}\selectfont}
+
+% Section formatting
+\makeatletter
+\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus.2ex}%
+  {\titlesfont\fontsize{14}{16}\bfseries\color{cherenkovblue}\MakeUppercase}}
+\makeatother
+
+\subsectionfont{\titlesfont\fontsize{12}{14}\bfseries\color{cherenkovblue}}
+
+% Customize spacing
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+\setlength{\itemsep}{4pt}
+
+% Fancy headers & footers
+\fancypagestyle{plain}{\fancyhf{}} % Default plain style
+\fancypagestyle{post-index}{
+    \fancyhf{}
+    \fancyhead[LE]{\textit{Simone Pagliuca, et al.}}
+    \fancyhead[RO]{\textit{Title or whatever}}
+    \fancyfoot[LE,RO]{\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \setlength{\headheight}{14pt}
+}
+
+% Code Formatting
+\lstdefinestyle{custombox}{
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    rulecolor=\color{black},
+    basicstyle=\ttfamily\small, % Monospace font
+    breaklines=true,
+    captionpos=b,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue}\bfseries,  % Bold blue keywords
+    commentstyle=\color{darkgreen}\itshape, % Italic green comments
+    stringstyle=\color{darkorange}, % Orange strings
+    showstringspaces=false,
+    tabsize=4
+}
+\lstset{style=custombox}
+
+% Box styles
+\tcbset{
+    boxstyle/.style={
+        colframe=cherenkovblue,
+        colback=white,
+        coltitle=white,
+        fonttitle=\bfseries,
+        rounded corners,
+        width=\textwidth,
+        boxrule=0.75mm,
+        arc=2mm,
+        toptitle=2mm,
+        bottomtitle=2mm,
+        sharp corners=downhill
+    }
+}
+
+% Document begins
+\begin{document}
+
+% Title Page
+\input{title_page.tex}
+\newpage
+
+% Table of Contents
+\tableofcontents
+\newpage
+\pagestyle{post-index}
+
+% Main Content
+\graphicspath{{images/}}
+\input{content_0.tex}
+\input{content_1.tex}
+\input{content_2.tex}
+\input{content_3.tex}
+
+\newpage
+
+% Bibliography
+\printbibliography
+
+\end{document}
