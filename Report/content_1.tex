@@ -1,23 +1,52 @@
 \section{Energy Demand and Supply}
-At the basis of our work is the knowledge of a rapresentative, realistic demand profile, that would catch the transient of the energy deamnd throughout the year.
+At the basis of our work is the knowledge of a realistic energy demand profile, that would catch the transients throughout the year.
 Given our focus on the residential sector, the overall energy demand can be seen as the sum of the heating/cooling contribution + all the other electricity consuptions for appliances and lightning.
-Based on the available data we have chosen to model the system based on the distribution of energy classes.
 Several semplifications will be made through the following derivation but we point out any possible improvment that could be made but was considered out of the scope of this work.
 
-\subsection{Methodology}
-We utilize energy classes to characterize residential homes based on data from the CENED database. 
-In Italy, an APE (Attestato di Prestazione Energetica) is a document that certifies the energy performance of a building. 
-This certification must be issued by a qualified technician and is mandatory for all buildings that are sold or rented. 
-Each residential unit, corresponding to the residence of a single family, requires its own APE. 
-For instance, a building with three apartments will have three separate APEs, one for each apartment.
+\subsection{Approach}
+\subsubsection{Introduction}
+In Italy, an APE (Attestato di Prestazione Energetica) is a document that certifies the energy performance of a propriety unit (unità immobiliare). This certification must be issued by a qualified technician and is mandatory for all buildings that are sold, rented or refurbished. 
 
-By analyzing the APE database, we can establish correlations between energy classes and specific building characteristics, 
-such as the presence of photovoltaic (PV) installations or heat pumps. 
-This approach allows for the easy modification of future scenarios by adjusting the distribution of 
-energy classes across the total number of buildings. 
-Our objective is to determine the most relevant characteristics of each energy class and to derive 
-a representative energy demand profile for each class.
+The APE provides information about the energy consumption of the property, its energy class. The energy class is a letter grade (from A4 to G) that indicates the energy performance of the building, with A4 being the most efficient and G being the least efficient.
 
+Each unit refers to a distinct and identifiable part of a real estate property, such as an apartment, a house, or a commercial space, that can be individually owned, sold, or rented. It is a specific segment of a larger property that has its own legal and functional identity. For instance, a building with three apartments will have three separate APEs, one for each apartment.
+For this reason we can safely assume that each unit is the residence of a single family.
+
+\subsubsection{Methodology}
+We plan to determine the demand profile of electricity in the region $P_{e, \text{tot}}$.
+
+From simulations we are able to retrive the hourly demand profile of thermal energy for heating $\dot{Q}_h$ and cooling $\dot{Q}_c$ for each energy class $i$.
+This is converted to electicty demand by taking into account the share of buildings in that energy class that use a heat pump for climatization purposes $\text{\chi}_{HP}$ and its efficency for heating $COP$ and for cooling $EER$. To this we then add a contribution of electric consumption for other purposes $P_{other}$.
+
+\begin{equation}
+    P_{e,i}^- = 
+    \left( 
+        \frac{\dot{Q}_{h,i}}{COP} 
+        + 
+        \frac{\dot{Q}_{c,i}}{EER} 
+    \right)  
+    \cdot 
+    \text{\chi}_{HP} 
+    + P_{other}
+\end{equation}
+
+Then we estimate the production of photovoltaic systems for each energy class $P_{e,i}^+$. Finally the reference energy demand for each energy class can be obtained by subtraction of demand and production: $P_{e, \text{ref}, i} = P_{e,i}^- - P_{e,i}^+$
+
+Then, we can simply sum the contributions, each wheighted on their respective class share $\text{\chi}_{i}$, to get a reference profile of the region under study.
+This can be multiplied by the number of buildings in the region $N_{\text{UI}}$ to obtain the total demand $P_{e, \text{tot}}$.
+
+\begin{equation}
+    P_{e, \text{tot}} = 
+    N_{\text{UI}} 
+    \cdot 
+    \sum_{i=\text{A4}}^{\text{G}} P_{e, \text{ref}, i} 
+    \cdot 
+    \text{\chi}_{i} 
+\end{equation}
+
+
+
+\subsubsection{Data Sources}
 From the CENED database \cite{cened2025} we extracted the information about the relevant municipalities of the region,
 which we derived based on the map of primary substations from the national grid operator (GSE) \cite{gse_cabine_primarie}.
 The data was also filtered to include only residential buildings, excluding commercial and industrial ones.
@@ -60,62 +89,60 @@ This is a very low share and is to be expected as the region under investigation
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/1_heat-pump-share.png}
+    \includegraphics[width=0.8\textwidth]{figures/1_heat_pump_distribution.png}
     \caption{Distribution of heat pumps across energy classes.}
     \label{fig:heat_pump_distribution}
 \end{figure}
 
-\begin{lstlisting}[language=python, caption={Code to extract heat pump data from the CENED database.}, label={lst:heat_pump_query}]
-    df = pd.read_csv(path, dtype=str) # Read the data
-    energy_classes = ["A4", "A3", "A2", "A1", "B", "C", "D", "E", "F", "G"]
-    impianto_cols = [col for col in df.columns if 'TIPO_IMPIANTO' in col]
-    has_pdc = df[impianto_cols].apply(lambda row: row.str.lower().str.contains('pompa di calore', na=False).any(), axis=1)
-    classe = df['CLASSE_ENERGETICA']
-    total_by_class = classe.value_counts()
-    pdc_by_class = classe[has_pdc].value_counts()
-    total_by_class = total_by_class.reindex(energy_classes, fill_value=0)
-    pdc_by_class = pdc_by_class.reindex(energy_classes, fill_value=0) # Reorder by class
-    pdc_percentage = (pdc_by_class / total_by_class * 100).fillna(0) # Calculate share
-\end{lstlisting}
-
-\begin{lstlisting}[language=python, caption={Code to extract cooling system data from the CENED database.}, label={lst:cooling_share}]
-    df = pd.read_csv(path, dtype=str) # Read the data
-    sup_raffrescata = df['SUPERF_UTILE_RAFFRESCATA'].astype(float)
-    cooling_count = len(sup_raffrescata[sup_raffrescata > 0]) # Count how many buildings have cooling
-    cooling_percentage = (cooling_count / len(df)) * 100 # Percentage of buildings with cooling
-\end{lstlisting}
-
-\subsubsection{Photovoltaic distribution}
-We identified the share of buildings with photovoltaic systems installed.
-\begin{lstlisting}[language=python, caption={Code to extract photovoltaic data from the CENED database.}, label={lst:photovoltaic_query}]
-    df = pd.read_csv(path, dtype=str) # Read the data
-    has_pv = df['CONSUMI_SOLARE_FOTOVOLTAICO'].astype(float) > 0
-    classe = df['CLASSE_ENERGETICA']
-    total_by_class = classe.value_counts() # Total buildings per class
-    pv_by_class = classe[has_pv].value_counts() # Buildings with PV per class
-    pv_percentage = (pv_by_class / total_by_class * 100).fillna(0) # Calculate percentage
-\end{lstlisting}
-
+\subsubsection{Photovoltaic Distribution}
+We identified the share of building that have photovoltaic systems installed per energy class.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/1_photovoltaic_distribution.png}
-    \caption{Distribution of photovoltaic system sizes across energy classes.}
-    \label{fig:photovoltaic_size_distribution}
+    \caption{Distribution of photovoltaic systems across energy classes.}
+    \label{fig:pv_distribution}
 \end{figure}
+
+Moreover we then divided the data into two groups, those with an heat pump and those without.
+From these we plotted the distribution of the size of the photovoltaic system installed. And computed the average (of the $P_99$)
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/1_pv_size_hp.png}
+        \caption{Photovoltaic system size distribution for buildings with heat pumps.}
+        \label{fig:pv_size_hp}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/1_pv_size_no_hp.png}
+        \caption{Photovoltaic system size distribution for buildings without heat pumps.}
+        \label{fig:pv_size_no_hp}
+    \end{subfigure}
+    \caption{Distribution of photovoltaic system sizes based on heat pump presence.}
+    \label{fig:pv_size_comparison}
+\end{figure}
+
+The averages values are: $4.30$kW and $3.70$kW for the sistem with and without heat pumps respectevely.
+
+\paragraph{Observation on the relative sizes of PV systems}
 
 Another interesting information we gathered is the relative size of the photovoltaic system. 
 Using data from the CENED database: Exported Electricity, Imported Electricity and In situ consumption.
 
 \begin{equation}
-    \text{SCF: Self-Consumption Factor} = 1 - \frac{\text{Import}}{\text{Export} + \text{In situ consumption}}
+    \text{SCF: Self-Consumption Factor} = \frac{\text{In situ consumption}}{\text{Import} + \text{In situ consumption}}
 \end{equation}
 
 \begin{equation}
-    \text{OSF: Over-Sizing Factor} = \frac{\text{Export}}{\text{Export} + \text{In situ consumption}} - 1
+    \text{OSF: Over-Sizing Factor} = \frac{\text{Export - Import}}{\text{Import} + \text{In situ consumption}}
 \end{equation}
 
-Mind that this data comes from the CENED 2.0 calculation system which uses a non dynamic simulation of the energy system and neglects
-any storage.
+Whie the SCF is quite obvius, 
+we defined the OSF to consider the resonable oversizing of the system that ensures that the energy exoported covers, at least, the imported energy.
+A value of $0\%$ indicates a balanced system, positive values indicate greater export then import, negative the opposite.
 
 \begin{table}[H]
     \centering
@@ -123,28 +150,62 @@ any storage.
         \hline
         \textbf{Class} & \textbf{SCF (\%)} & \textbf{OSF (\%)} \\
         \hline
-        A4 & 61.51 & 3.96 \\
-        A3 & 44.08 & 34.20 \\
-        A2 & 31.68 & 267.82 \\
-        A1 & 25.57 & 1004.33 \\
-        B  & 19.29 & 947.18 \\
-        C  & 15.51 & 419.08 \\
-        D  & 9.16  & 102.67 \\
-        E  & 3.92  & 116.66 \\
-        F  & 1.15  & -68.68 \\
-        G  & 0.24  & -95.72 \\
+        A4 & 38.49 & 65.47 \\
+        A3 & 55.92 & 78.28 \\
+        A2 & 68.32 & 299.50 \\
+        A1 & 74.43 & 1029.90 \\
+        B  & 80.71 & 966.47 \\
+        C  & 84.49 & 434.58 \\
+        D  & 90.84 & 111.82 \\
+        E  & 96.08 & 120.58 \\
+        F  & 98.85 & -67.53 \\
+        G  & 99.76 & -95.48 \\
         \hline
     \end{tabular}
     \caption{SCF and OSF indicators by Energy Class.}
     \label{tab:pv_scf_osf}
 \end{table}
 
-The extreme overdimensioning on some classes can be explained with hands-on experince:
-To boost the energy class of those in the middle of the scale (betwwen C and E),
-it is common that contractors choose to an over sized photovoltaic system.
-This effect was exagerated during the "superbonus" (2021-2023) period which required a mandatory jump of 2 energy classes to be eligible for the tax deduction.
+The extreme overdimensioning on some classes can be explained as the result of two effects:
+\begin{itemize}
+    \item Units with PV installed but using gas for heating.
+    \item Simplified calculation of the CENED engine
+    \item Counter effects of inventives and tax deductions.
+\end{itemize}
 
-% Still missing how we get the PV production profile, work in progress we might change the way we get the plant size.
+Units in the middle of the energy class scale (A1 to D) are likely to still use gas for heating, as seen from the previous Figure~\ref{fig:heat_pump_distribution}.
+None the less a some of them still have a photovoltaic system installed. This means that most of the energy produced is not used on site.
+
+Regarding the CENED engine, it is important to note that is uses a simplifyued calculation: it computes monthly averages, doesn't take into account energy storage,
+nor it consider any other time of electric consumption (such as appliances or lighting).
+
+At last, it's known from professional experience that boost the energy class,
+it is common that contractors choose to an over sized photovoltaic system. 
+This practice was particularly common during the "superbonus" (2020-2023) period which required a mandatory jump of 2 energy classes to be eligible for the tax deduction.
+It could be interesting to evaluate the impact of this on the efficiency of the grid.
+
+\subsubsection{Electricity Production}
+We have to obtain a reference value of the photovoltaic production profile.
+First, the list of municipalities is fed to the Nominatim API \cite{Nominatim} to obtain the coordinates of the center of each municipality.
+Then, we use the PVGIS API \cite{PVGIS} to obtain the hourly production profile for each municipality.
+We fixed the angle to an average $22^\circ$ and a plant size of $1kW$.
+For each municipaly we obtain a profile every $10^\circ$ of the azithmut angle, from $0^\circ$ to $360^\circ$. 
+Those are then weighted to a gaussian distribution to represent that it is prefered to point the photovoltaic system to the south.
+This gives us a reference photovoltaic production profile for each municipality $P_{e,m}^+$, where $m$ is the municipality.
+Then we can obtain the reference production profile for each energy class $P_{e,ref}^+$ by weighting the production profile of each municipality on the share of buildings in that municipality over the total.
+
+Finally to obtain the referece production profile we used the following formula:
+\begin{equation}
+    P_{e}^+ 
+    = 
+    \sum_{i=A4}^{G}
+    P_{e,ref}^+ 
+    \cdot 
+    \left( 4.30 \chi_{hp}(i) + 3.70 (1-\chi_{hp}(i)) \right)
+    \cdot
+    N_{b}(i) \chi_{pv}(i)
+\end{equation}
+
 
 \subsection{Convertion from thermal to primary energy demand}
 The dynamic simulation outputs the thermal demand of the building. 

@@ -5,16 +5,21 @@
 \contentsline {subsubsection}{\numberline {1.2.2}Secondary Plant}{3}{subsubsection.1.2.2}%
 \contentsline {subsection}{\numberline {1.3}Objectives}{3}{subsection.1.3}%
 \contentsline {section}{\numberline {2}Energy Demand and Supply}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Methodology}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Heating and Cooling Demand}{4}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Normalization of the Data}{4}{subsubsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.1}Approach}{4}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Introduction}{4}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Methodology}{4}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Data Sources}{4}{subsubsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.2}Heating and Cooling Demand}{5}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Normalization of the Data}{5}{subsubsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.3}By class distributions}{5}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Heat Pump distribution and Cooling Demand}{5}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Photovoltaic distribution}{6}{subsubsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.4}Convertion from thermal to primary energy demand}{8}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Other Electricity Demand}{8}{subsection.2.5}%
-\contentsline {subsection}{\numberline {2.6}Total Grid Demand}{9}{subsection.2.6}%
-\contentsline {subsubsection}{\numberline {2.6.1}Comparison and Tuning}{9}{subsubsection.2.6.1}%
-\contentsline {subsubsection}{\numberline {2.6.2}Possible Improvments}{9}{subsubsection.2.6.2}%
-\contentsline {section}{\numberline {3}Plant Modelling}{10}{section.3}%
-\contentsline {section}{\numberline {4}Economic Study}{10}{section.4}%
+\contentsline {subsubsection}{\numberline {2.3.1}Heat Pump distribution and Cooling Demand}{6}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Photovoltaic Distribution}{6}{subsubsection.2.3.2}%
+\contentsline {paragraph}{Observation on the relative sizes of PV systems}{7}{section*.7}%
+\contentsline {subsubsection}{\numberline {2.3.3}Electricity Production}{8}{subsubsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.4}Convertion from thermal to primary energy demand}{9}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Other Electricity Demand}{9}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Total Grid Demand}{10}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Comparison and Tuning}{10}{subsubsection.2.6.1}%
+\contentsline {subsubsection}{\numberline {2.6.2}Possible Improvments}{10}{subsubsection.2.6.2}%
+\contentsline {section}{\numberline {3}Plant Modelling}{11}{section.3}%
+\contentsline {section}{\numberline {4}Economic Study}{11}{section.4}%

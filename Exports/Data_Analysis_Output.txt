@@ -43,19 +43,19 @@ E: 12.19%
 F: 6.66%
 G: 1.77%
 
-Percentage of buildings with PV: 10.89%
+Percentage of buildings with PV: 11.57%
 
 Distribution of PV systems by energy class:
-A4: 96.71%
-A3: 84.03%
-A2: 59.73%
-A1: 43.61%
-B: 23.98%
-C: 16.72%
-D: 7.88%
-E: 2.63%
-F: 0.76%
-G: 0.15%
+A4: 97.03%
+A3: 84.27%
+A2: 61.70%
+A1: 46.90%
+B: 26.70%
+C: 18.42%
+D: 9.08%
+E: 3.40%
+F: 1.07%
+G: 0.40%
 
 Stats Impianti Fotovoltaici:
 A4: Autosufficienza = 61.51%, Sovradimensionamento = 3.96%

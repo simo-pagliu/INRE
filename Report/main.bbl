@@ -61,6 +61,54 @@
       \field{title}{{Mappa Interattiva delle Cabine Primarie}}
       \field{year}{2025}
     \endentry
+    \entry{Nominatim}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=95bb8a37ccf2fa2fd2666e6bc45604e6}{%
+           family={{OpenStreetMap Contributors}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {OpenStreetMap Foundation}%
+      }
+      \strng{namehash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{fullhash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{bibnamehash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{authorbibnamehash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{authornamehash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{authorfullhash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://nominatim.openstreetmap.org/ui/search.html}}
+      \field{note}{Accessed: 2025-04-16}
+      \field{title}{{Nominatim Search Tool}}
+      \field{year}{2025}
+    \endentry
+    \entry{PVGIS}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=c53044c85e716d7659dae304cc0ab206}{%
+           family={{Joint Research Centre}},
+           familyi={J\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {European Commission}%
+      }
+      \strng{namehash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{fullhash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{bibnamehash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{authorbibnamehash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{authornamehash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{authorfullhash}{c53044c85e716d7659dae304cc0ab206}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://re.jrc.ec.europa.eu/pvg_tools/en/}}
+      \field{note}{Accessed: 2025-04-16}
+      \field{title}{{Photovoltaic Geographical Information System (PVGIS)}}
+      \field{year}{2025}
+    \endentry
     \entry{portaleconsumi_energia_domestica}{misc}{}
       \name{author}{1}{}{%
         {{hash=a768927491c736f421c7084da842faea}{%
@@ -73,8 +121,8 @@
       \strng{authorbibnamehash}{a768927491c736f421c7084da842faea}
       \strng{authornamehash}{a768927491c736f421c7084da842faea}
       \strng{authorfullhash}{a768927491c736f421c7084da842faea}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.consumienergia.it/portaleConsumi/it/energia-elettrica-utenze-domestiche.page}}
