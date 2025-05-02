@@ -58,15 +58,27 @@ F: 1.07%
 G: 0.40%
 
 Stats Impianti Fotovoltaici:
-A4: Autosufficienza = 61.51%, Sovradimensionamento = 3.96%
-A3: Autosufficienza = 44.08%, Sovradimensionamento = 34.20%
-A2: Autosufficienza = 31.68%, Sovradimensionamento = 267.82%
-A1: Autosufficienza = 25.57%, Sovradimensionamento = 1004.33%
-B: Autosufficienza = 19.29%, Sovradimensionamento = 947.18%
-C: Autosufficienza = 15.51%, Sovradimensionamento = 419.08%
-D: Autosufficienza = 9.16%, Sovradimensionamento = 102.67%
-E: Autosufficienza = 3.92%, Sovradimensionamento = 116.66%
-F: Autosufficienza = 1.15%, Sovradimensionamento = -68.68%
-G: Autosufficienza = 0.24%, Sovradimensionamento = -95.72%
+A4: SCF = 38.49%, OSF = 65.47%
+A3: SCF = 55.92%, OSF = 78.28%
+A2: SCF = 68.32%, OSF = 299.50%
+A1: SCF = 74.43%, OSF = 1029.90%
+B: SCF = 80.71%, OSF = 966.47%
+C: SCF = 84.49%, OSF = 434.58%
+D: SCF = 90.84%, OSF = 111.82%
+E: SCF = 96.08%, OSF = 120.58%
+F: SCF = 98.85%, OSF = -67.53%
+G: SCF = 99.76%, OSF = -95.48%
+
+Average of the sums (EP_GL_REN + EP_GL_NREN) per energy class:
+A4: EP_GL_TOTAL_AVG = 125341.43
+A3: EP_GL_TOTAL_AVG = 104980.65
+A2: EP_GL_TOTAL_AVG = 109383.93
+A1: EP_GL_TOTAL_AVG = 130727.61
+B: EP_GL_TOTAL_AVG = 139922.65
+C: EP_GL_TOTAL_AVG = 222359.60
+D: EP_GL_TOTAL_AVG = 488873.52
+E: EP_GL_TOTAL_AVG = 861249.53
+F: EP_GL_TOTAL_AVG = 1806752.98
+G: EP_GL_TOTAL_AVG = 5310794.52
 
 
