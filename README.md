@@ -25,4 +25,7 @@ https://www.gse.it/servizi-per-te/autoconsumo/mappa-interattiva-delle-cabine-pri
 
 ## Part 2: Plant Modelling
 
+SOURCES:
+Da questo abbiamo info sui modelli implementati in TANDEM  
+https://tandemproject.eu/wp-content/uploads/2024/07/D2_3_Modelica_models_description_for_the_tandem_library_V1-1.pdf 
 ## Part 3: Economical Evaluation
