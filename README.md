@@ -118,6 +118,20 @@ Various studies provide reference values for the pre-exponential factor $ A $ an
 - **Koschany et al. (Applied Catalysis B, 2016)** for Ni/Al₂O₃:
   - They fit detailed Langmuir–Hinshelwood models, but for simplified global expressions, $ A $ is approximately $ 10^9–10^{11} $.
 
+#### On the Plant
+**Manuel Gotz et al.: Renewable Power-to-Gas: A technological and economic review**
+- Parte tecnica sezione 5.2
+- Parte economica sezione 5.3
+
+#### Se volessimo fare modello dinamico
+@inproceedings{bader2011modelling,
+  title={Modelling of a Chemical Reactor for Simulation of a Methanisation Plant},
+  author={Bader, A. and Bauersfeld, S. and Brunhuber, C. and Pardemann, R. and Meyer, B.},
+  booktitle={Proceedings of the 8th International Modelica Conference},
+  year={2011},
+  organization={Modelica Association}
+}
+https://2011.international.conference.modelica.org/proceedings/pages/papers/44_4_ID_202_a_fv.pdf
 
 ### Trial 2
 - EnergyHUB simulator H2
