@@ -34,6 +34,7 @@
 - [HenergyHub Models](https://tandemproject.eu/wp-content/uploads/2023/07/D1_4_Description_of_selected_study_cases_for_safety__technoeconomic_analysis_and_optimisation_V3.pdf)
 
 ### Model Components from TANDEM
+https://tandem-heu.eu/outputs/
 
 #### SMR
 - ThermoSysPro --> BOP --> Demo --> StaticBoP3_T_Plugged_N3Ssimple_TMPower_Tail
@@ -132,6 +133,7 @@ Various studies provide reference values for the pre-exponential factor $ A $ an
   organization={Modelica Association}
 }
 https://2011.international.conference.modelica.org/proceedings/pages/papers/44_4_ID_202_a_fv.pdf
+https://pubs.acs.org/doi/10.1021/acs.iecr.1c00389
 
 ### Trial 2
 - EnergyHUB simulator H2
