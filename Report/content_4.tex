@@ -1,0 +1,38 @@
+\section{Results}
+\subsection{Scenario 1}
+distribuzione enrgy classes
+profilo DOMANDA
+bilanci finali usciti da dymola
+balance economico
+risposta ai transients
+key psarameters
+
+\section{Possible Improvements}
+\subsection{On the Data Collection}
+It is defenitly possible and could give better results if the data for each class was obtained by a set of real building from the region instead of just one.
+Ideally one would use a statistically signfinicant set of buldings and vary the utilization profile as well.
+Moreover, it would be beneficial to wheight the simulation data on the real energy requirments of those same buildings,
+which is a much more complex task since it would require extensive data acquisition during the year. 
+While this is feasible for electrical demand (most operators give to the customer a detailed bill with hourly consumption),
+it is much more difficult to get the same data for fossil fuel consumption.
+At last, the normalization has been done with the heated area an not with the volume (which is much more indicative of the energy requirment of a building) 
+given the on-field knowledge that the volume is usually approximatly obtained by a the rule of thumb of multiplying the heated area by a factor of 2.7 or 3 in most cases.
+From the simulation we have neglected humidification and dehumidification electricity needs since these plants are rearly installed today,
+a better evaluation would evaluate the possible future share of air treatment plants in the residential sector.
+
+Photovoltaic: We have neglected any solar-thermal system installed since their are considered not very impactful and their impact is complex to evaluate.
+
+Convertion thermal to primary: use time dependent efficiency for heat pumps that take into account the ambient temperature,
+this could be accomplished considering that our code uses hourly data.
+
+Other Electricity Demand: This is without a doubt the most complex contribution to evaluate,
+expecially considering that it is not easy to imagine how the electricity consumption will evolve in 25 years.
+It could be improved by collecting a statistically signficant number of examples from the region on the type of appliances installed and their consumption.
+
+Overall: the methodology of using class distribution as a way of evaluating the energy demand is considered a good approach,
+for the best results we shall gather consumption data for both electric and fossil fuels for a statistically significant number of buildings for each energy class.
+
+\subsection{On the Plant Modelling}
+\subsection{On the Economic Study}
+
+\section{Conclusion}

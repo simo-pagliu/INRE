@@ -1,34 +1,19 @@
-\section{Plant Modelling}
+\section{Modelica Plant Modelling}
 
+\subsection{Plant Components}
+PRIMA DI TUTTO IL LAYAOUT
 
-\subsection{Methanation Reactor Modeling Approach}
+\subsubsection{SMR}
+
+\subsubsection{H2 Plant}
+
+\subsubsection{Methanation Reactor Modeling Approach}
 
 The methanation reactor was modeled in \texttt{Modelica} to simulate the conversion of hydrogen (H\textsubscript{2}) and carbon dioxide (CO\textsubscript{2}) into methane (CH\textsubscript{4}) and water (H\textsubscript{2}O) via the Sabatier reaction:
 \begin{equation}
 \mathrm{CO_2 + 4H_2 \rightarrow CH_4 + 2H_2O} \qquad \Delta H = -165.1\ \text{kJ/mol}
 \end{equation}
 
-\subsubsection{Reactor Type and Configuration}
-
-A lumped parameter model was adopted, representing a fixed-bed catalytic reactor under ideal mixing assumptions. The reactor was modeled with a nominal volume of 0.01~m\textsuperscript{3}, while the gas hourly space velocity (GHSV) was indirectly controlled through the inlet molar flow rates. Typical GHSV values for methanation reactors range from 2000 to 5000~h\textsuperscript{-1} in industrial applications, with higher values used in laboratory-scale systems~\cite{Gotz2016}.
-
-\subsubsection{Kinetics and Reaction Limiting}
-
-The reaction rate $r$ is modeled using an Arrhenius-type expression:
-\begin{equation}
-r = A \cdot \exp\left(-\frac{E_a}{RT}\right) \cdot c_{\mathrm{CO}_2} \cdot c_{\mathrm{H}_2}^4
-\end{equation}
-where:
-\begin{itemize}
-  \item $A = 10^{10}$~mol/(m\textsuperscript{3}·s) is the pre-exponential factor,
-  \item $E_a = 100$~kJ/mol is the activation energy,
-  \item $R = 8.314$~J/(mol·K) is the universal gas constant,
-  \item $c_i$ are the species concentrations in mol/m\textsuperscript{3}.
-\end{itemize}
-
-These values are consistent with those reported for Ni-based catalysts used in CO\textsubscript{2} methanation~\cite{Ronsch2016}.
-
-\subsubsection{Conversion Efficiency}
 To approximate the level of CH\textsubscript{4} produced from a given feed, a dimensionless parameter \texttt{conversionEfficiency} was introduced. This factor (default: 0.78) reflects the maximum chemical efficiency of catalytic methanation as reported in Götz et al.~\cite{Gotz2016}. It represents the fraction of the limiting reactant (either CO\textsubscript{2} or H\textsubscript{2}) that is effectively converted to CH\textsubscript{4}, accounting for reactor inefficiencies and incomplete conversion at realistic temperature and pressure conditions.
 
 The molar output flows are then calculated via stoichiometry:
@@ -39,10 +24,23 @@ The molar output flows are then calculated via stoichiometry:
 \dot{n}_{\mathrm{CO}_2} &= \dot{n}_{\mathrm{CO}_2,\text{in}} - \dot{n}_{\mathrm{CH}_4}
 \end{align*}
 
-\subsubsection{Energy Balance and Temperature}
+\subsubsection{Turbine}
 
-A simplified dynamic energy balance is used to compute the reactor temperature $T$, assuming negligible heat loss:
-\begin{equation}
-T = T + \frac{Q_r \cdot \Delta t}{V \cdot \rho \cdot c_p}
-\end{equation}
-where $Q_r = -\Delta H_r \cdot \dot{n}_{\mathrm{CH}_4}$ is the heat released, and an approximation of $\rho c_p \approx 1000$~J/(K·m\textsuperscript{3}) is used. The output temperature is exposed through a dedicated variable \texttt{T\_out}.
+\subsubsection{Other BOP Components}
+Control room, buffers etc etc
+
+
+\subsection{Demand Definition}
+To run the model we decided to compute a priori the daily setpoint for:
+\begin{itemize}
+  \item Turbine load
+  \item HTSE load
+  \item Steam tap flow
+\end{itemize} 
+to do so ..
+SPIEGA PROCEDIMENTO DA INPUT FOR MODELICA SECTION DI ENERGY_DEMAND
+\subsubsection{Dati che diamo in input}
+\subsubsection{Rate limiting}
+
+\subsubsection{Clusters}
+spiega che famo i clusters + cita che usiamo dei profili di alcuni gioni particolari per vedere rispospta del sistema

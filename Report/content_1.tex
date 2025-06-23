@@ -1,4 +1,4 @@
-\section{Energy Demand and Supply}
+\section{Data Collection}
 At the basis of our work is the knowledge of a realistic energy demand profile, that would catch the transients throughout the year.
 Given our focus on the residential sector, the overall energy demand can be seen as the sum of the heating/cooling contribution + all the other electricity consuptions for appliances and lightning.
 Several semplifications will be made through the following derivation but we point out any possible improvment that could be made but was considered out of the scope of this work.
@@ -16,7 +16,8 @@ For this reason we can safely assume that each unit is the residence of a single
 We plan to determine the demand profile of electricity in the region $P_{e, \text{tot}}$.
 
 From simulations we are able to retrive the hourly demand profile of thermal energy for heating $\dot{Q}_h$ and cooling $\dot{Q}_c$ for each energy class $i$.
-This is converted to electicty demand by taking into account the share of buildings in that energy class that use a heat pump for climatization purposes $\text{\chi}_{HP}$ and its efficency for heating $COP$ and for cooling $EER$. To this we then add a contribution of electric consumption for other purposes $P_{other}$.
+We then evaluated a reference-day profile for the thermal demand for domestic hot water $\dot{Q}_{dhw}$, which is assumed to be constant throughout the year, based on REFERENCE.
+This is converted to electicty demand by taking into account the share of buildings in that energy class that use a heat pump for climatization purposes $\text{\chi}_{HP}$ and its efficency for heating $COP$ and for cooling $EER$. To this we then add a contribution of electric consumption for other purposes $P_{other}$ namely lighting and appliances.
 
 \begin{equation}
     P_{e,i}^- = 
@@ -30,9 +31,11 @@ This is converted to electicty demand by taking into account the share of buildi
     + P_{other}
 \end{equation}
 
+ESPANDI SULLA QUESTIONE FOTOVOLTAICO
 Then we estimate the production of photovoltaic systems for each energy class $P_{e,i}^+$. Finally the reference energy demand for each energy class can be obtained by subtraction of demand and production: $P_{e, \text{ref}, i} = P_{e,i}^- - P_{e,i}^+$
 
 Then, we can simply sum the contributions, each wheighted on their respective class share $\text{\chi}_{i}$, to get a reference profile of the region under study.
+AGGIUNGI REFERENCE ISTAT E CAZZI
 This can be multiplied by the number of buildings in the region $N_{\text{UI}}$ to obtain the total demand $P_{e, \text{tot}}$.
 
 \begin{equation}
@@ -51,6 +54,7 @@ From the CENED database \cite{cened2025} we extracted the information about the 
 which we derived based on the map of primary substations from the national grid operator (GSE) \cite{gse_cabine_primarie}.
 The data was also filtered to include only residential buildings, excluding commercial and industrial ones.
 This was necessary given the large amount of data from the complete regional database. This way an easier to manage csv file was obtained.
+AGGIUNGI CHE HO TOLO VALORI WEIRD
 Note that an API is available to access the database but it was found to be very slow and inefficient.
 
 \subsection{Heating and Cooling Demand}
@@ -64,12 +68,13 @@ The output of the calculation is an hourly profile of the thermal demand for hea
 % Add one example of the houdly profile
 
 \subsubsection{Normalization of the Data}
-The data of each building had to be normilized to be rapresentative of the "average building".
-To do so we used the "userful heated area" information from the CENED database.
-This is the area of the building that is actually used for heating and cooling, excluding areas such as garages, attics, and basements.
-We normalized the reference profiles over their area and then used the average area 
-of the buildings removing the top 99 buildings since some anomalies have been encountered.
-The average area ended up being $91.37 m^2$.
+RISCRIVI E TUTTO SBAGLIATO
+% The data of each building had to be normilized to be rapresentative of the "average building".
+% To do so we used the "userful heated area" information from the CENED database.
+% This is the area of the building that is actually used for heating and cooling, excluding areas such as garages, attics, and basements.
+% We normalized the reference profiles over their area and then used the average area 
+% of the buildings removing the top 99 buildings since some anomalies have been encountered.
+% The average area ended up being $91.37 m^2$.
 
 \begin{figure}[H]
     \centering
@@ -128,7 +133,7 @@ From these we plotted the distribution of the size of the photovoltaic system in
 The averages values are: $4.30$kW and $3.70$kW for the sistem with and without heat pumps respectevely.
 
 \paragraph{Observation on the relative sizes of PV systems}
-
+VERIFICA SE HA ANCORA SENSO DI ESISTERE
 Another interesting information we gathered is the relative size of the photovoltaic system. 
 Using data from the CENED database: Exported Electricity, Imported Electricity and In situ consumption.
 
@@ -208,6 +213,7 @@ Finally to obtain the referece production profile we used the following formula:
 
 
 \subsection{Convertion from thermal to primary energy demand}
+UN PO  UNA RIPETIZIONE VEDI SE TOGLIERE PRIMA E ESPANDERE QUESTA
 The dynamic simulation outputs the thermal demand of the building. 
 To estimate the primary energy needed we used average efficiencies of the heating and cooling systems.
 
@@ -244,11 +250,15 @@ Moreover we added a parameter to rapresent the share of buildings with an induct
 
 % reference hourly profile through the year
 
+\subsection{Domestic Hot Water}
+QUI MANCA IL DHW !!!!!
+
 \subsection{Total Grid Demand}
 In the end we choose an energy class distribution to rapresent a future scenario.
 Given that we know the reference demand-production profile of each building we can sum them up by  weighting on their supposed share to obtain the total reference demand
 which is then multiplied by the number of buildings in the region to obtain the total demand.
 
+\subsubsection{Total Buildings in the Region}
 % WIP how many buildings in the region
 
 \subsubsection{Comparison and Tuning}
@@ -256,28 +266,5 @@ To verify our method is acceptable we compare the total demand by the data avail
 in the residential sector for the province of Varese \cite{portaleconsumi_energia_domestica}, which happends to be $1931 kWh$ in 2023,
 with a decreasing trend in the last years ($2016kWh$ in 2022 and $2119kWh$ in 2021). 
 
-% WIP tuning the data
-
-\subsubsection{Possible Improvments}
-It is defenitly possible and could give better results if the data for each class was obtained by a set of real building from the region instead of just one.
-Ideally one would use a statistically signfinicant set of buldings and vary the utilization profile as well.
-Moreover, it would be beneficial to wheight the simulation data on the real energy requirments of those same buildings,
-which is a much more complex task since it would require extensive data acquisition during the year. 
-While this is feasible for electrical demand (most operators give to the customer a detailed bill with hourly consumption),
-it is much more difficult to get the same data for fossil fuel consumption.
-At last, the normalization has been done with the heated area an not with the volume (which is much more indicative of the energy requirment of a building) 
-given the on-field knowledge that the volume is usually approximatly obtained by a the rule of thumb of multiplying the heated area by a factor of 2.7 or 3 in most cases.
-From the simulation we have neglected humidification and dehumidification electricity needs since these plants are rearly installed today,
-a better evaluation would evaluate the possible future share of air treatment plants in the residential sector.
-
-Photovoltaic: We have neglected any solar-thermal system installed since their are considered not very impactful and their impact is complex to evaluate.
-
-Convertion thermal to primary: use time dependent efficiency for heat pumps that take into account the ambient temperature,
-this could be accomplished considering that our code uses hourly data.
-
-Other Electricity Demand: This is without a doubt the most complex contribution to evaluate,
-expecially considering that it is not easy to imagine how the electricity consumption will evolve in 25 years.
-It could be improved by collecting a statistically signficant number of examples from the region on the type of appliances installed and their consumption.
-
-Overall: the methodology of using class distribution as a way of evaluating the energy demand is considered a good approach,
-for the best results we shall gather consumption data for both electric and fossil fuels for a statistically significant number of buildings for each energy class.
+\subsubsection{Demand Distribution}
+IMMAGINE DELLA DISTRIBUZIONE DELLA DOMANDA
