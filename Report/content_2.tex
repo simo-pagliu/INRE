@@ -1,33 +1,133 @@
-\section{Modelica Plant Modelling}
+\section{Technical Plant Modelling}
+The whole plant was modeled in Dymola, a technical software using the Modelica language for the dynamic analysis of complex systems. The model is based on the hybrid plant concept, 
+which combines two 177 $MW_e$ Small Modular Reactors (SMR) with a hydrogen production plant and a methanation reactor producing $CO_2$-neutral syngas for a gas turbine. 
+The TANDEM project library (reference) was widely used to model the enritre plant, with the exception of the methanation reactor, which was modeled from scratch in Dymola.
 
-\subsection{Plant Components}
-PRIMA DI TUTTO IL LAYAOUT
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{placeholder.png}
+    \caption{Simple schematic of the proposed hybrid plant in Dymola.}
+    \label{fig:plant_schematic}
+\end{figure}
+
+
+\subsection{Main assumptions and plant layout}
+To meet the overall energy demand of the target region, the plant design combines two 177 $MW_e$ Small Modular Reactors (SMRs) with fifteen
+High Temperature Steam Electrolyzers (HTSEs), a Methanation Reactor and a small Gas Turbine (47 $MW_e$). However, to reduce the computational burden of the simulation in Dymola, 
+the system is modeled using a single SMR and a single HTSE module. The actual electricity output from the SMR and hydrogen production from the HTSE are then scaled
+by multiplying the simulated values by the respective number of units within the model. These scaled values are used to evaluate the overall energy balance and to feed 
+the syngas production module.
+
+The SMR supplies electricity to the grid, as well as both electricity and the required heat to the hydrogen production unit.
+The HTSE generates hydrogen from water using the thermal and electrical energy provided by the SMR. 
+At each time step, 10\% of the produced hydrogen is assumed to be stored temporarily in a buffer for future sale. 
+The remaining 90\% is sent to a methanation reactor, where it reacts with carbon dioxide to produce methane.
+
+The resulting syngas is used as fuel in the gas turbine, while any surplus is stored in a buffer tank. This stored syngas can later be used to cover the 
+residual fossil fuel demand of the region (i.e., the remaining heat demand not met by other sources).
+
 
 \subsubsection{SMR}
+The TANDEM library~\cite{TANDEM} was used to model the SMR, employing a simplified representation of a Small Modular Reactor.
+Despite being a simplified model, the overall system is quite detailed and includes various components, allowing for a realistic simulation of the reactor's behavior. 
+It captures the dynamics of the primary and secondary loops, the turbine, the condenser, and the associated control systems. 
+%qui magari citare meglio tandem e dire quale modello abbiamo scelto nel dettaglio (polimi...)
+
+The selected model is a 177 $MW_e$ Light Water Reactor (LWR), originally designed for cogeneration, providing both electricity and thermal energy.
+To support this dual purpose, the reactor features three steam extraction points — High Pressure (HP), Intermediate Pressure (IP), and Low Pressure (LP) —
+which allow heat to be drawn from different stages of the turbine.
+In the present configuration, the heat required for the HTSE is extracted via the IP tap, immediately downstream of the HP turbine stages.
+The HP and LP extraction lines are disabled and manually set to zero, as they are not utilized in this setup.
+
+Some useful specifics of the SMR model are:
+
+\begin{itemize}
+  \item Thermal power: ... $MW_{th}$
+  \item Electrical power: 177 $MW_{e}$
+  \item Thermodynamic Efficiency: ...
+  \item ....
+  \item ....
+\end{itemize}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{placeholder.png}
+    \caption{Simple schematic of the selected SMR model in Dymola.}
+    \label{fig:plant_schematic}
+\end{figure}
+
 
 \subsubsection{H2 Plant}
+The hydrogen production plant is modeled using the \textbf{TANDEM} library~\cite{TANDEM}, which provides a detailed representation of a High Temperature Steam Electrolyzer (HTSE).
+The HTSE is designed to produce hydrogen from water by utilizing both thermal and electrical energy supplied by the SMR.
+The model captures the dynamic behavior of the HTSE, including its thermal and electrical inputs, and simulates the hydrogen production process accordingly.
+
+The model receives as input a target hydrogen production rate—defined in the demand section of the system—and the thermal energy extracted from the SMR's steam tapping point.
+A key modeling assumption is that the heat input to the HTSE corresponds to the \texttt{Real} value of the heat exchanged in the Heat Exchanger connected to the 
+Intermediate Pressure (IP) tap loop of the SMR, and thermally linked to the HTSE model.
+
+Based on this thermal input, along with several operational parameters, the HTSE model calculates the corresponding hydrogen production, resulting in a computed 
+mass flow rate of $H_2$.
+An estimate of the energy consumption associated with hydrogen production is also computed and subsequently included in the overall energy balance of the system.
+
+Some key characteristics of the HTSE include:
+
+\begin{itemize}
+\item operating temperature?
+\item operating pressure?
+\item efficiency?
+\item electricity consumption?
+\item production rate?
+\end{itemize}
+
+The $H_2$ plant is equipped with a buffer tank used to temporarily store the portion of hydrogen intended for sale, while the remainder is sent directly to the methanation reactor.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{placeholder.png}
+    \caption{Simple schematic of the $H_2$ plant model in Dymola.}
+    \label{fig:plant_schematic}
+\end{figure}
+
 
 \subsubsection{Methanation Reactor Modeling Approach}
 
-The methanation reactor was modeled in Modelica to simulate the conversion of hydrogen ($H_{2}$) and carbon dioxide ($CO_{2}$) into methane ($CH_{4}$) and water (H$_{2}O$) via the Sabatier reaction:
+The methanation reactor was modeled to simulate the conversion of hydrogen ($H_{2}$) and carbon dioxide ($CO_{2}$) into methane ($CH_{4}$) and water (H$_{2}$O) through
+the Sabatier reaction:
 \begin{equation}
 \mathrm{CO_2 + 4H_2 \rightarrow CH_4 + 2H_2O} \qquad \Delta H = -165.1\ \text{kJ/mol}
 \end{equation}
 
-To approximate the level of $CH_4$ produced from a given feed, a dimensionless parameter $conversionEfficiency$ was introduced. This factor (default: 0.78) reflects the maximum chemical efficiency of catalytic methanation as reported in Götz et al.~\cite{Gotz2016}. It represents the fraction of the limiting reactant (either $CO_{2}$ or $H_{2}$) that is effectively converted to $CH_{4}$, accounting for reactor inefficiencies and incomplete conversion at realistic temperature and pressure conditions.
+To estimate the amount of $CH_4$ produced from a given reactant feed, a dimensionless parameter, $conversionEfficiency$, was introduced.
+This parameter (default value: 0.78) represents the maximum chemical efficiency of catalytic methanation, as reported by Götz et al.~\cite{Gotz2016}.
+It defines the fraction of the limiting reactant (either $CO_{2}$ or $H_{2}$) that is effectively converted into $CH_{4}$, accounting for real-world inefficiencies
+and the incomplete conversion typical under practical temperature and pressure conditions.
 
-The molar output flows are then calculated via stoichiometry:
+The molar output flows are then determined based on reaction stoichiometry:
 \begin{align*}
-\dot{n}_{\mathrm{CH}_4} &= \dot{n}_{\text{lim}} \cdot \eta \\
-\dot{n}_{\mathrm{H}_2O} &= 2 \cdot \dot{n}_{\mathrm{CH}_4} \\
-\dot{n}_{\mathrm{H}_2} &= \dot{n}_{\mathrm{H}_2,\text{in}} - 4 \cdot \dot{n}_{\mathrm{CH}_4} \\
-\dot{n}_{\mathrm{CO}_2} &= \dot{n}_{\mathrm{CO}_2,\text{in}} - \dot{n}_{\mathrm{CH}_4}
+\dot{n}{\mathrm{CH}4} &= \dot{n}{\text{lim}} \cdot \eta \
+\dot{n}{\mathrm{H}2O} &= 2 \cdot \dot{n}{\mathrm{CH}4} \
+\dot{n}{\mathrm{H}2} &= \dot{n}{\mathrm{H}2,\text{in}} - 4 \cdot \dot{n}{\mathrm{CH}4} \
+\dot{n}{\mathrm{CO}2} &= \dot{n}{\mathrm{CO}2,\text{in}} - \dot{n}{\mathrm{CH}_4}
 \end{align*}
 
-\subsubsection{Turbine}
+The model is reported in the appendix, along with the other components developed from scratch in Dymola. %put citation
 
-\subsubsection{Other BOP Components}
-Control room, buffers etc etc
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{placeholder.png}
+    \caption{Simple schematic of the Methanation Reactor model in Dymola.}
+    \label{fig:plant_schematic}
+\end{figure}
+
+
+
+\subsubsection{Gas Turbine}
+
+\subsubsection{$H_2$ and $CH_4$ buffers}
+
+\subsection{Control Room}
 
 
 \subsection{Demand Definition}
