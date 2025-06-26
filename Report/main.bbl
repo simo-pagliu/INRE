@@ -1,0 +1,243 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{terna_consumi}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=e8014fb6ecf8aa2e96fd039108f4a369}{%
+           family={{Terna SpA}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{e8014fb6ecf8aa2e96fd039108f4a369}
+      \strng{fullhash}{e8014fb6ecf8aa2e96fd039108f4a369}
+      \strng{fullhashraw}{e8014fb6ecf8aa2e96fd039108f4a369}
+      \strng{bibnamehash}{e8014fb6ecf8aa2e96fd039108f4a369}
+      \strng{authorbibnamehash}{e8014fb6ecf8aa2e96fd039108f4a369}
+      \strng{authornamehash}{e8014fb6ecf8aa2e96fd039108f4a369}
+      \strng{authorfullhash}{e8014fb6ecf8aa2e96fd039108f4a369}
+      \strng{authorfullhashraw}{e8014fb6ecf8aa2e96fd039108f4a369}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://dati.terna.it/fabbisogno/dati-statistici}}
+      \field{note}{Accessed: 2025-06-26}
+      \field{title}{{Dati Statistici sui Consumi di Energia Elettrica per Settore}}
+      \field{year}{2025}
+    \endentry
+    \entry{cened2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=b3925b2107e8e546f6cb93163dab0f41}{%
+           family={{Regione Lombardia}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{fullhash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{fullhashraw}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{bibnamehash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{authorbibnamehash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{authornamehash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{authorfullhash}{b3925b2107e8e546f6cb93163dab0f41}
+      \strng{authorfullhashraw}{b3925b2107e8e546f6cb93163dab0f41}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.dati.lombardia.it/Energia/Database-CENED-2-Certificazione-ENergetica-degli-E/bbky-sde5}}
+      \field{note}{Accessed: 2025-03-25}
+      \field{title}{{Database CENED+2 - Certificazione ENergetica degli EDifici}}
+      \field{year}{2025}
+    \endentry
+    \entry{gse_cabine_primarie}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=17c1d6c196727a838b8de026459b7b2e}{%
+           family={{Gestore dei Servizi Energetici (GSE)}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{fullhash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{fullhashraw}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{bibnamehash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{authorbibnamehash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{authornamehash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{authorfullhash}{17c1d6c196727a838b8de026459b7b2e}
+      \strng{authorfullhashraw}{17c1d6c196727a838b8de026459b7b2e}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.gse.it/servizi-per-te/autoconsumo/mappa-interattiva-delle-cabine-primarie}}
+      \field{note}{Accessed: 2025-04-14}
+      \field{title}{{Mappa Interattiva delle Cabine Primarie}}
+      \field{year}{2025}
+    \endentry
+    \entry{Nominatim}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=95bb8a37ccf2fa2fd2666e6bc45604e6}{%
+           family={{OpenStreetMap Contributors}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {OpenStreetMap Foundation}%
+      }
+      \strng{namehash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{fullhash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{fullhashraw}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{bibnamehash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{authorbibnamehash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{authornamehash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{authorfullhash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \strng{authorfullhashraw}{95bb8a37ccf2fa2fd2666e6bc45604e6}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://nominatim.openstreetmap.org/ui/search.html}}
+      \field{note}{Accessed: 2025-04-16}
+      \field{title}{{Nominatim Search Tool}}
+      \field{year}{2025}
+    \endentry
+    \entry{PVGIS}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=c53044c85e716d7659dae304cc0ab206}{%
+           family={{Joint Research Centre}},
+           familyi={J\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {European Commission}%
+      }
+      \strng{namehash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{fullhash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{fullhashraw}{c53044c85e716d7659dae304cc0ab206}
+      \strng{bibnamehash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{authorbibnamehash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{authornamehash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{authorfullhash}{c53044c85e716d7659dae304cc0ab206}
+      \strng{authorfullhashraw}{c53044c85e716d7659dae304cc0ab206}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://re.jrc.ec.europa.eu/pvg_tools/en/}}
+      \field{note}{Accessed: 2025-04-16}
+      \field{title}{{Photovoltaic Geographical Information System (PVGIS)}}
+      \field{year}{2025}
+    \endentry
+    \entry{portaleconsumi_energia_domestica}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=a768927491c736f421c7084da842faea}{%
+           family={{Acquirente Unico S.p.A.}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{a768927491c736f421c7084da842faea}
+      \strng{fullhash}{a768927491c736f421c7084da842faea}
+      \strng{fullhashraw}{a768927491c736f421c7084da842faea}
+      \strng{bibnamehash}{a768927491c736f421c7084da842faea}
+      \strng{authorbibnamehash}{a768927491c736f421c7084da842faea}
+      \strng{authornamehash}{a768927491c736f421c7084da842faea}
+      \strng{authorfullhash}{a768927491c736f421c7084da842faea}
+      \strng{authorfullhashraw}{a768927491c736f421c7084da842faea}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.consumienergia.it/portaleConsumi/it/energia-elettrica-utenze-domestiche.page}}
+      \field{note}{Accessed: 2025-04-14}
+      \field{title}{{Electricity residential demand}}
+      \field{year}{2025}
+    \endentry
+    \entry{Gotz2016}{article}{}{}
+      \name{author}{8}{}{%
+        {{hash=2c8f62ee60088d2ef239063a7b766010}{%
+           family={Götz},
+           familyi={G\bibinitperiod},
+           given={Manuel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=35ac1a9abb95798f70eafbc8da024e67}{%
+           family={Lefebvre},
+           familyi={L\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=26646420304ffefd17f1cb466ee10d97}{%
+           family={Mörs},
+           familyi={M\bibinitperiod},
+           given={Friedemann},
+           giveni={F\bibinitperiod}}}%
+        {{hash=fa5180cb2ed0bd2144d4bd0ed06d0789}{%
+           family={Koch},
+           familyi={K\bibinitperiod},
+           given={Amy\bibnamedelima McDaniel},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=7e8352e3b205f91e52c6ca9d8e431244}{%
+           family={Graf},
+           familyi={G\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod}}}%
+        {{hash=c852926043813d464ca10a807fe27c1f}{%
+           family={Bajohr},
+           familyi={B\bibinitperiod},
+           given={Siegfried},
+           giveni={S\bibinitperiod}}}%
+        {{hash=1f33c96df7dae152098e877863814ac4}{%
+           family={Reimert},
+           familyi={R\bibinitperiod},
+           given={Rainer},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ce95f6cdc00dd032aaf5563205191f53}{%
+           family={Kolb},
+           familyi={K\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{fb61c8e558cf7755f5a9324abb99f375}
+      \strng{fullhash}{b2ad11ffcb4d36946b3ad3fa106fe3da}
+      \strng{fullhashraw}{b2ad11ffcb4d36946b3ad3fa106fe3da}
+      \strng{bibnamehash}{fb61c8e558cf7755f5a9324abb99f375}
+      \strng{authorbibnamehash}{fb61c8e558cf7755f5a9324abb99f375}
+      \strng{authornamehash}{fb61c8e558cf7755f5a9324abb99f375}
+      \strng{authorfullhash}{b2ad11ffcb4d36946b3ad3fa106fe3da}
+      \strng{authorfullhashraw}{b2ad11ffcb4d36946b3ad3fa106fe3da}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The Power-to-Gas (PtG) process chain could play a significant role in the future energy system. Renewable electric energy can be transformed into storable methane via electrolysis and subsequent methanation. This article compares the available electrolysis and methanation technologies with respect to the stringent requirements of the PtG chain such as low CAPEX, high efficiency, and high flexibility.}
+      \field{issn}{1364-0321}
+      \field{journaltitle}{Renewable and Sustainable Energy Reviews}
+      \field{title}{Renewable Power-to-Gas: A technological and economic review}
+      \field{volume}{53}
+      \field{year}{2016}
+      \field{pages}{1472\bibrangedash 1482}
+      \range{pages}{11}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.rser.2015.09.042
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0960148115301610
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0960148115301610
+      \endverb
+      \keyw{Power-to-Gas,Electrolysis,Methanation,SNG,Renewable energy}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
