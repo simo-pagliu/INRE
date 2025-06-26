@@ -9,3 +9,9 @@ Report/main.synctex(busy)
 Report/main.synctex.gz
 Report/main.toc
 *.gz
+*.run.xml
+*.nls
+*.bbl
+*.nlo
+*.nls
+*.synctex.gz
