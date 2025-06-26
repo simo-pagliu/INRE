@@ -88,6 +88,72 @@
       \field{title}{{Mappa Interattiva delle Cabine Primarie}}
       \field{year}{2025}
     \endentry
+    \entry{istat2023}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=3bd5e8c8c7ecd21ee7d7de64073380e0}{%
+           family={{Istituto Nazionale di Statistica (ISTAT)}},
+           familyi={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{3bd5e8c8c7ecd21ee7d7de64073380e0}
+      \strng{fullhash}{3bd5e8c8c7ecd21ee7d7de64073380e0}
+      \strng{fullhashraw}{3bd5e8c8c7ecd21ee7d7de64073380e0}
+      \strng{bibnamehash}{3bd5e8c8c7ecd21ee7d7de64073380e0}
+      \strng{authorbibnamehash}{3bd5e8c8c7ecd21ee7d7de64073380e0}
+      \strng{authornamehash}{3bd5e8c8c7ecd21ee7d7de64073380e0}
+      \strng{authorfullhash}{3bd5e8c8c7ecd21ee7d7de64073380e0}
+      \strng{authorfullhashraw}{3bd5e8c8c7ecd21ee7d7de64073380e0}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.istat.it/wp-content/uploads/2025/04/Censimento-permanente-popolazione_Anno-2023_Lombardia.pdf}}
+      \field{note}{Accessed: 2025-06-26}
+      \field{title}{{Censimento permanente della popolazione - Anno 2023 - Lombardia}}
+      \field{year}{2025}
+    \endentry
+    \entry{Fuentes2017}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=1ff995c4d85727cbce5153fc6983545f}{%
+           family={Fuentes},
+           familyi={F\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=a803add908cebbf5381bcfc6703a723d}{%
+           family={Arce},
+           familyi={A\bibinitperiod},
+           given={L.},
+           giveni={L\bibinitperiod}}}%
+        {{hash=158370c90b2e8bcf39fd602c03349b17}{%
+           family={Salom},
+           familyi={S\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{f1fc42ecfc53edfb3154bf357c22f6c9}
+      \strng{fullhash}{89a54c54cc0a7ab56420b57c831d454d}
+      \strng{fullhashraw}{89a54c54cc0a7ab56420b57c831d454d}
+      \strng{bibnamehash}{89a54c54cc0a7ab56420b57c831d454d}
+      \strng{authorbibnamehash}{89a54c54cc0a7ab56420b57c831d454d}
+      \strng{authornamehash}{f1fc42ecfc53edfb3154bf357c22f6c9}
+      \strng{authorfullhash}{89a54c54cc0a7ab56420b57c831d454d}
+      \strng{authorfullhashraw}{89a54c54cc0a7ab56420b57c831d454d}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Renewable and Sustainable Energy Reviews}
+      \field{title}{A review of domestic hot water consumption profiles for application in systems and buildings energy performance analysis}
+      \field{volume}{81}
+      \field{year}{2017}
+      \field{pages}{1530\bibrangedash 1547}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1016/j.rser.2017.05.229
+      \endverb
+    \endentry
     \entry{Nominatim}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=95bb8a37ccf2fa2fd2666e6bc45604e6}{%
@@ -105,8 +171,8 @@
       \strng{authornamehash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
       \strng{authorfullhash}{95bb8a37ccf2fa2fd2666e6bc45604e6}
       \strng{authorfullhashraw}{95bb8a37ccf2fa2fd2666e6bc45604e6}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://nominatim.openstreetmap.org/ui/search.html}}
@@ -131,8 +197,8 @@
       \strng{authornamehash}{c53044c85e716d7659dae304cc0ab206}
       \strng{authorfullhash}{c53044c85e716d7659dae304cc0ab206}
       \strng{authorfullhashraw}{c53044c85e716d7659dae304cc0ab206}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://re.jrc.ec.europa.eu/pvg_tools/en/}}
@@ -154,13 +220,39 @@
       \strng{authornamehash}{a768927491c736f421c7084da842faea}
       \strng{authorfullhash}{a768927491c736f421c7084da842faea}
       \strng{authorfullhashraw}{a768927491c736f421c7084da842faea}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.consumienergia.it/portaleConsumi/it/energia-elettrica-utenze-domestiche.page}}
       \field{note}{Accessed: 2025-04-14}
       \field{title}{{Electricity residential demand}}
+      \field{year}{2025}
+    \endentry
+    \entry{TANDEM}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=2cea81ac5709d95ef7b52608c1306e0e}{%
+           family={{Politecnico di Milano}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Politecnico di Milano}%
+      }
+      \strng{namehash}{2cea81ac5709d95ef7b52608c1306e0e}
+      \strng{fullhash}{2cea81ac5709d95ef7b52608c1306e0e}
+      \strng{fullhashraw}{2cea81ac5709d95ef7b52608c1306e0e}
+      \strng{bibnamehash}{2cea81ac5709d95ef7b52608c1306e0e}
+      \strng{authorbibnamehash}{2cea81ac5709d95ef7b52608c1306e0e}
+      \strng{authornamehash}{2cea81ac5709d95ef7b52608c1306e0e}
+      \strng{authorfullhash}{2cea81ac5709d95ef7b52608c1306e0e}
+      \strng{authorfullhashraw}{2cea81ac5709d95ef7b52608c1306e0e}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.tandem-library.org/}}
+      \field{note}{Accessed: 2025-04-16}
+      \field{title}{{TANDEM - A Modelica Library for the Simulation of Energy Systems}}
       \field{year}{2025}
     \endentry
     \entry{Gotz2016}{article}{}{}
@@ -214,8 +306,8 @@
       \strng{authornamehash}{fb61c8e558cf7755f5a9324abb99f375}
       \strng{authorfullhash}{b2ad11ffcb4d36946b3ad3fa106fe3da}
       \strng{authorfullhashraw}{b2ad11ffcb4d36946b3ad3fa106fe3da}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The Power-to-Gas (PtG) process chain could play a significant role in the future energy system. Renewable electric energy can be transformed into storable methane via electrolysis and subsequent methanation. This article compares the available electrolysis and methanation technologies with respect to the stringent requirements of the PtG chain such as low CAPEX, high efficiency, and high flexibility.}
