@@ -1,2 +1,2 @@
-Total SynGas exported in the year: 12151497.40 SMC
-Total H2 exported in the year: 19.96 tons
+Total SynGas exported in the year: 417245.84 MWh
+Total H2 exported in the year: 174008.17 MWh
