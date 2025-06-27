@@ -132,16 +132,23 @@ The model is reported in the appendix, along with the other components developed
 
 \subsection{Demand Definition}
 To run the model we decided to compute a priori the daily setpoint for:
-
 \begin{itemize}
-  \item Turbine load
-  \item HTSE load
-  \item Steam tap flow
+  \item Turbine load, limited between $35\%$ and $100\%$ of the maximum load
+  \item HTSE load, limited between $60\%$ and $100\%$ of the maximum load
+  \item Steam tap flow from the intermediate pressure of the SMR.
 \end{itemize} 
 
-to do so 
-SPIEGA PROCEDIMENTO DA INPUT FOR MODELICA SECTION DI ENERGYDEMAND
+We first of all evaluated the electricity available for the H2 plant, from which we determined the load of that the H2 plant can take.
 
+\begin{equation}
+  P_{e, available} = P_{e, SMR} + P_{turbogas}(35\%) - P_{e, grid}
+  load_{H2} = \left( \frac{P_{e, available}}{214} + 0.197775 \right) \cdot \frac{1}{N_{HTSE} \cdot 0.1}
+\end{equation}
+Where the relationship $\dot{m_{H2}} = \frac{P_{e, available}}{214} + 0.197775$ was found by running a sweep simulation of the HTSE model in Dymola.
+The mass flow rate of hydrogen produced $\dot{m_{H2}}$ is the divided by the nominal mass flow rate produced by one module $0.1kg/s$ multiplied by the number of modules $N_{HTSE}$.
+This load had then to be clipped for values between $60\%$ and $100\%$, where $60\%$ is the lower operational limit.
+
+Thereafter we estimated the syngas production rate which from the first simulation appeared to be
 \subsubsection{Dati che diamo in input}
 a
 \subsubsection{Rate limiting}
