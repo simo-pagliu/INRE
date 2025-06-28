@@ -1,7 +1,8 @@
 \section{Technical Plant Modelling}
-The whole plant was modeled in Dymola, a technical software using the Modelica language for the dynamic analysis of complex systems. The model is based on the hybrid plant concept, 
-which combines two 177 $MW_e$ Small Modular Reactors (SMR) with a hydrogen production plant and a methanation reactor producing $CO_2$-neutral syngas for a gas turbine. 
-The TANDEM project library (reference) was widely used to model the enritre plant, with the exception of the methanation reactor, which was modeled from scratch in Dymola.
+The whole plant was modeled in Dymola, a technical software using the Modelica language for the dynamic analysis of complex systems. To meet the overall energy demand of the target region, 
+the plant design combines two 177 $MW_e$ Small Modular Reactors (SMRs) with fifteen High Temperature Steam Electrolyzers (HTSEs) and a Methanation Reactor producing almost
+$CO_2$-neutral syngas for a small Gas Turbine (47 $MW_e$). 
+The TANDEM project library ~\cite{TANDEM} was widely used to model the enritre plant, with the exception of the methanation reactor, which was modeled from scratch in Dymola.
 
 \begin{figure}[h!]
     \centering
@@ -12,19 +13,37 @@ The TANDEM project library (reference) was widely used to model the enritre plan
 
 
 \subsection{Main assumptions and plant layout}
-To meet the overall energy demand of the target region, the plant design combines two 177 $MW_e$ Small Modular Reactors (SMRs) with fifteen
-High Temperature Steam Electrolyzers (HTSEs), a Methanation Reactor and a small Gas Turbine (47 $MW_e$). However, to reduce the computational burden of the simulation in Dymola, 
-the system is modeled using a single SMR and a single HTSE module. The actual electricity output from the SMR and hydrogen production from the HTSE are then scaled
-by multiplying the simulated values by the respective number of units within the model. These scaled values are used to evaluate the overall energy balance and to feed 
-the syngas production module.
+The number of reactors and HTSE modules is based on the following considerations:
 
-The SMR supplies electricity to the grid, as well as both electricity and the required heat to the hydrogen production unit.
-The HTSE generates hydrogen from water using the thermal and electrical energy provided by the SMR. 
+\begin{itemize}
+  \item The minimum number of installed HTSE modules required has to sustain the Gas Turbine operation at the nominal power.
+  \item The maximum number of installed HTSE modules depends on the overall energy excess of the system in the least demanding hour of the year.
+  \item The overll energy excess of the system depends on the number of SMRs.
+\end{itemize}
+
+In order to find the optimal number of SMRs and HTSE modules which would minimize the overall cost of the plant, while meeting the energy demand, an optimization problem would be required.
+For the purpose of this study the optimization is not performed.
+
+The choice was then made on the number of HTSE modules, simply considering the average between the minimum number of modules required (12) and the maximum allowed (18, with two SMRs).
+This results in a total of 15 HTSE modules. Accordingly, as the HTSE modules require a significant amount of electricity to operate, the number od SMRs was set to two.
+This allows for an efficient operation of the whole plant (i.e. not having to widely and frequently import electricity from the grid).
+
+However, to reduce the computational burden of the simulation in Dymola, the system is modeled using a single SMR and a single HTSE module. 
+The actual electricity output from the SMR and hydrogen production from the HTSE are then scaled by multiplying the simulated values by the respective number of units within the model. 
+These scaled values are used to evaluate the overall energy balance and to feed the syngas production module.
+
+The SMRs supply electricity to the grid, as well as both electricity and the required heat to the hydrogen production unit.
+The HTSEs generate hydrogen from water using the thermal and electrical energy provided by the SMRs. 
+
 At each time step, 10\% of the produced hydrogen is assumed to be stored temporarily in a buffer for future sale. 
-The remaining 90\% is sent to a methanation reactor, where it reacts with carbon dioxide to produce methane.
+The remaining 90\% is sent to the methanation reactor, where it reacts with carbon dioxide to produce methane.
 
-The resulting syngas is used as fuel in the gas turbine, while any surplus is stored in a buffer tank. This stored syngas can later be used to cover the 
-residual fossil fuel demand of the region (i.e., the remaining heat demand not met by other sources).
+The profile and magnitude of the future hydrogen demand is not known: the only purpose of this simplified assumption is to allow the technical evaluation of the plant's operation,
+while considering a reasonable amount of hydrogen to be stored and sold. 
+An excessive hydrogen storage would not be feasible in a real-world scenario, as it would require significant investments in storage infrastructure.
+
+The syngas produced by the methanation reactor is ultimately used as fuel in the gas turbine, while any surplus is stored in a buffer tank. The stored syngas can later be used to cover the 
+residual fossil fuel demand of the region (i.e., the remaining heat demand not met by other sources), substantially contributing to the decarbonization of the energy mix.
 
 
 \subsubsection{SMR}
@@ -43,7 +62,7 @@ In the present configuration, the heat required for the HTSE is extracted via th
 The HP and LP extraction lines are disabled and manually set to zero, as they are not utilized in this setup.
 
 For the purpose of this study, the detailed modeling of the primary loop is not discussed, as the focus is on the secondary loop and its interaction with the HTSE modules.
-However, the detailed explanation of the reactor's core and primary loop modeling can be found in the TANDEM library documentation~\cite{tandem_documentation}.
+However, the detailed explanation of the reactor's core and primary loop modelling can be found in the TANDEM library documentation~\cite{tandem_documentation}.
 
 Some useful specifics of the SMR model are:
 
@@ -74,26 +93,38 @@ Some useful specifics of the SMR model are:
 
 
 \subsubsection{H2 Plant}
-The hydrogen production plant is modeled using the TANDEM library~\cite{TANDEM}, which provides a detailed representation of a High Temperature Steam Electrolyzer (HTSE) 
+The hydrogen production plant is also modeled using the TANDEM library~\cite{TANDEM}, which provides a detailed representation of a High Temperature Steam Electrolyzer (HTSE) 
 based on the ThermoSysPro library.
-The Solid Oxide Electrolyser Cell operates at high temperature, and is designed to produce hydrogen from water by utilizing both thermal and electrical energy supplied 
+This Solid Oxide Electrolyser Cell operates at high temperature, and is designed to produce hydrogen from water by utilizing both thermal and electrical energy supplied 
 by the SMR.
 The model captures the dynamic behavior of the HTSE and simulates the hydrogen production process accordingly.
 
-Water goes through several heat-exchangers to reach the target temperature of 750 $^{\circ}$C:
+Water goes through several heat-exchangers to reach the target temperature of 750 $^{\circ}$C as steam:
 \begin{itemize}
   \item A pre-heater.
-  \item A boiler, fed by the tap-steam extracted from the SMR BOP (@ 150 $^{\circ}$C).
+  \item A boiler, fed by the tap-steam extracted from the SMR BOP (at 150 $^{\circ}$C).
   \item A second pre-heater, fed by the recovery heat from unconverted steam.
   \item An electrical heater.
 \end{itemize}
 
-The model receives as input a target hydrogen production rate - further defined in the demand section - electricity and the thermal energy extracted from the SMR's 
+Each electrolyser's stack then uses electricity to act on the high temperature steam and produce hydrogen.
+
+The model receives as input a target hydrogen production rate - further defined in the demand section - and the thermal energy extracted from the SMR's 
 steam tapping point.
-The electricity consumption is related to the hydrogen production rate, according to the relationship $\dot{m_{H2}} = \frac{P_{e, available}}{214} + 0.197775$, which
+
+The electricity consumption is instead related to the hydrogen production rate, according to the relationship $\dot{m_{H2}} = \frac{P_{e, available}}{214} + 0.197775$, which
 was found by running a sweep simulation of the HTSE model in Dymola.
+
 A key modeling assumption is that the heat input to the HTSE corresponds to the \texttt{Real} value of the heat exchanged in the ideal Heat Exchanger of the
 Intermediate Pressure (IP) tap loop, once the tap-steam flowrate is defined.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
+    \caption{Simple schematic of the Intermediate Pressure (IP) tap loop.}
+    \label{fig:plant_schematic}
+\end{figure}
+
 The tap-steam flowrate is defined in the Control Room section, where the setpoint for the steam extraction is computed based on the target $H_2$ production.
 Again, the relationship between the tap-steam flowrate and the hydrogen production rate is defined by running a sweep simulation of the HTSE model in Dymola.
 
@@ -122,6 +153,7 @@ The $H_2$ plant is equipped with a buffer tank used to temporarily store the por
 
 As the model is designed to simulate the operation of a single HTSE module, the target hydrogen production rate (and the effective output production rate) is obtained 
 by dividing (and multiplying) the total input (and output) value by the number of modules (15), through a simple "Gain" component.
+
 
 \subsubsection{Methanation Reactor Modeling Approach}
 
@@ -160,10 +192,12 @@ The model is reported in the appendix, along with the other components developed
 \subsubsection{$H_2$ and $CH_4$ buffers}
 The $H_2$ and $CH_4$ buffers are designed to temporarily store the produced hydrogen and methane, respectively.
 These two components are modelled in a very simple way, defining a mass balance equation.
-The $H_2$ buffer receives as input the mass flow rate of the produced hydrogen from the HTSE and sends as output the 90\% of the produced hydrogen to 
-the methanation reactor.
-The $CH_4$ buffer receives as input both the mass flow rate of the produced syngas from the methanation reactor and the mass flow rate requested by the gas turbine 
-to guarantee its setpoint load, computed by the Control Room.
+
+\begin{itemize}
+  \item The $H_2$ buffer receives as input the mass flow rate of the produced hydrogen from the HTSE and sends as output the 90\% of the produced hydrogen to the methanation reactor.
+  \item The $CH_4$ buffer receives as input both the mass flow rate of the produced syngas from the methanation reactor and the mass flow rate required by the gas turbine to guarantee 
+  its setpoint load. The turbine's requested mass flow rate is an output of the turbine's model itself.
+\end{itemize}
 
 The instantaneous content of each buffer is then computed through a mass balance equation:
 
@@ -181,7 +215,7 @@ The $CH_4$ buffer is used to store the syngas produced by the methanation reacto
     \label{fig:plant_schematic}
 \end{figure}
 
-\subsection{Control Room}
+\subsubsection{Control Room}
 The Control Room is the central component of the plant model, responsible for managing the overall operation of the system.
 It defines the interconnections between the various components, such as the SMR, HTSE, Methanation Reactor, and Gas Turbine.
 
