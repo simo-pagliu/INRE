@@ -1,1 +1,31 @@
-\section{Economic Study}
+\section{Methodology}
+
+
+\subsection{Demand Definition}
+To run the model we decided to compute a priori the daily setpoint for:
+\begin{itemize}
+  \item Turbine load, limited between $35\%$ and $100\%$ of the maximum load
+  \item HTSE load, limited between $60\%$ and $100\%$ of the maximum load
+  \item Steam tap flow from the intermediate pressure of the SMR.
+\end{itemize} 
+
+We first evaluated the electricity available for the H$_2$ plant, from which we determined the load that the H$_2$ plant can take.
+
+\begin{equation}
+  P_{e, \mathrm{available}} = P_{e, \mathrm{SMR}} + P_{\mathrm{turbogas}}(35\%) - P_{e, \mathrm{grid}}
+\end{equation}
+\begin{equation}
+  \mathrm{load}_{H_2} = \left( \frac{P_{e, \mathrm{available}}}{214} + 0.197775 \right) \cdot \frac{1}{N_{\mathrm{HTSE}} \cdot 0.1}
+\end{equation}
+Where the relationship $\dot{m}_{H_2} = \frac{P_{e, \mathrm{available}}}{214} + 0.197775$ was found by running a sweep simulation of the HTSE model in Dymola.
+The mass flow rate of hydrogen produced, $\dot{m}_{H_2}$, is then divided by the nominal mass flow rate produced by one module ($0.1\,\mathrm{kg/s}$) multiplied by the number of modules $N_{\mathrm{HTSE}}$.
+This load then had to be clipped for values between $60\%$ and $100\%$, where $60\%$ is the lower operational limit.
+
+Thereafter we estimated the syngas production rate which from the first simulation appeared to be
+\subsubsection{Dati che diamo in input}
+a
+\subsubsection{Rate limiting}
+a
+
+\subsubsection{Clusters}
+Spiega che facciamo i clusters e cita che usiamo dei profili di alcuni giorni particolari per vedere la risposta del sistema.

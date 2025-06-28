@@ -4,7 +4,7 @@ the plant design combines two 177 $MW_e$ Small Modular Reactors (SMRs) with fift
 $CO_2$-neutral syngas for a small Gas Turbine (47 $MW_e$). 
 The TANDEM project library ~\cite{TANDEM} was widely used to model the enritre plant, with the exception of the methanation reactor, which was modeled from scratch in Dymola.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Simple schematic of the proposed hybrid plant in Dymola.}
@@ -47,16 +47,16 @@ residual fossil fuel demand of the region (i.e., the remaining heat demand not m
 
 
 \subsubsection{SMR}
-The TANDEM library~\cite{TANDEM} was used to model the SMR, employing a simplified representation of a Small Modular Reactor.
+The TANDEM library \cite{TANDEM} was used to model the SMR, employing a simplified representation of a Small Modular Reactor.
 Despite being a simplified model, the overall system is quite detailed and includes various components, allowing for a realistic simulation of the reactor's behavior. 
 It captures the dynamics of the primary and secondary loops, the turbines, the condenser, and the associated control systems. 
 
-The selected model is part of the POLIMI section of the SMR branch in the TANDEM library. Specifically, the "Test_BOPfluid_NSSS" ~\cite{TANDEM} is a test model of the 
-177 $MW_e$ light-water cooled Small Modular Reactor (SMR), based on the European SMR (E-SMR) design as proposed by the Euratom ELSMOR project. ~\cite{tandem_documentation}
-The model is based on elementary components taken from the ThermoPower library~\cite{TANDEM}.
+The selected model is part of the POLIMI section of the SMR branch in the TANDEM library. Specifically, the "Test\_BOPfluid\_NSSS" \cite{TANDEM} is a test model of the 
+177~MW$_e$ light-water cooled Small Modular Reactor (SMR), based on the European SMR (E-SMR) design as proposed by the Euratom ELSMOR project~\cite{tandem_documentation}.
+The model is based on elementary components taken from the ThermoPower library \cite{TANDEM}.
 
-The emoloyed test model was originally designed for cogeneration, providing both electricity and thermal energy. 
-To support this dual purpose, the Balance Of Plant features three steam extraction points — High Pressure (HP), Intermediate Pressure (IP), and Low Pressure (LP) —
+The employed test model was originally designed for cogeneration, providing both electricity and thermal energy. 
+To support this dual purpose, the Balance Of Plant features three steam extraction points---High Pressure (HP), Intermediate Pressure (IP), and Low Pressure (LP)---
 which allow heat to be drawn from different stages of the turbine.
 In the present configuration, the heat required for the HTSE is extracted via the IP tap, immediately downstream of the HP turbine stages.
 The HP and LP extraction lines are disabled and manually set to zero, as they are not utilized in this setup.
@@ -66,25 +66,29 @@ However, the detailed explanation of the reactor's core and primary loop modelli
 
 Some useful specifics of the SMR model are:
 
-\begin{itemize}
-  \item Core Thermal Power: 540 $MW_{th}$
-  \item Core Inlet Temperature: 300 $^{\circ}$C
-  \item Core Outlet Temperature: 324.5 $^{\circ}$C
-  \item Primary Loop Pressure: 150 bar
-  \item Nominal Coolant Mass Flow Rate: 3700 $kg/s$
-  \item Thermodynamic Efficiency: 0.33
-  \item Electrical Power Output: 177 $MW_{e}$
-  \item Secondary loop: Rankine cycle with multiple turbine stages 
-  \item Steam extraction points pressure and temperature: ~\cite{tandem_documentation}
+\begin{tcolorbox}[boxstyle, title=SMR specifics]
+  \begin{itemize}
+    \item Core Thermal Power: 540 $MW_{th}$
+    \item Core Inlet Temperature: 300 $^{\circ}$C
+    \item Core Outlet Temperature: 324.5 $^{\circ}$C
+    \item Primary Loop Pressure: 150 bar
+    \item Nominal Coolant Mass Flow Rate: 3700 $kg/s$
+    \item Thermodynamic Efficiency: 0.33
+    \item Electrical Power Output: 177 $MW_{e}$
+    \item Secondary loop: Rankine cycle with multiple turbine stages 
+    \item Steam extraction points pressure and temperature~\cite{tandem_documentation}:
     \begin{itemize}
-      \item HP: 45 bar, 240 $^{\circ}$C
-      \item IP: 7.5 bar, 150 $^{\circ}$C
-      \item LP: 0.8 bar, 80 $^{\circ}$C
-    \end{itemize} 
-\end{itemize}
+      \item HP: 45~bar, 240~$^\circ$C
+      \item IP: 7.5~bar, 150~$^\circ$C
+      \item LP: 0.8~bar, 80~$^\circ$C
+    \end{itemize}
+  \end{itemize}
+\end{tcolorbox}
 
 
-\begin{figure}[h!]
+
+
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Simple schematic of the selected SMR model in Dymola.}
@@ -144,7 +148,7 @@ Some key characteristics of the HTSE include:
 
 The $H_2$ plant is equipped with a buffer tank used to temporarily store the portion of hydrogen intended for sale, while the remainder is sent directly to the methanation reactor.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Simple schematic of the $H_2$ plant model in Dymola.}
@@ -164,21 +168,36 @@ the Sabatier reaction:
 \end{equation}
 
 To estimate the amount of $CH_4$ produced from a given reactant feed, a dimensionless parameter, $conversionEfficiency$, was introduced.
-This parameter (default value: 0.78) represents the maximum chemical efficiency of catalytic methanation, as reported by Götz et al.~\cite{Gotz2016}.
+This parameter (default value: 0.78) represents the maximum chemical efficiency of catalytic methanation, as reported by Götz et al. \cite{Gotz2016}.
 It defines the fraction of the limiting reactant (either $CO_{2}$ or $H_{2}$) that is effectively converted into $CH_{4}$, accounting for real-world inefficiencies
 and the incomplete conversion typical under practical temperature and pressure conditions.
 
 The molar output flows are then determined based on reaction stoichiometry:
 \begin{align*}
-\dot{n}{\mathrm{CH}4} &= \dot{n}{\text{lim}} \cdot \eta \
-\dot{n}{\mathrm{H}2O} &= 2 \cdot \dot{n}{\mathrm{CH}4} \
-\dot{n}{\mathrm{H}2} &= \dot{n}{\mathrm{H}2,\text{in}} - 4 \cdot \dot{n}{\mathrm{CH}4} \
-\dot{n}{\mathrm{CO}2} &= \dot{n}{\mathrm{CO}2,\text{in}} - \dot{n}{\mathrm{CH}_4}
+\dot{n}_{\mathrm{CH}_4} &= \dot{n}_{\text{lim}} \cdot \eta \\
+\dot{n}_{\mathrm{H}_2O} &= 2 \cdot \dot{n}_{\mathrm{CH}_4} \\
+\dot{n}_{\mathrm{H}_2} &= \dot{n}_{\mathrm{H}_2,\text{in}} - 4 \cdot \dot{n}_{\mathrm{CH}_4} \\
+\dot{n}_{\mathrm{CO}_2} &= \dot{n}_{\mathrm{CO}_2,\text{in}} - \dot{n}_{\mathrm{CH}_4}
 \end{align*}
 
 The model is reported in the appendix, along with the other components developed from scratch in Dymola. %put reference to appendix
 
-\begin{figure}[h!]
+\paragraph{Stechiometry and Output Mixture}
+Given that the reaction is not ideal if we respect the Stechiometry (1:4) the output mixture would result in a lower LHV then the one of natural gas.
+To improve the energetic and economic value of our product, we decided to run an over-stechiometric reaction, specifically 1:8 parts of $CO_2$ and $H_2$.
+This means that the output mixture will be:
+\begin{itemize}
+  \item 41.1 CH4
+  \item 30.7 H2
+  \item 28.2 CO2
+\end{itemize}
+We obviously assume all water is discarded from the product. The resulting LHV is 57.4359.
+
+\paragraph{$CO_2$ Usage}
+Based on our mixture we obtain a mass flow rate of syntetich gas of 2.6325, given the stechiometry the inpyt of CO2 is 3.7 therefor we can deduct that to produce a kg of SG we need 1.41 kg of CO2.
+
+
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Simple schematic of the Methanation Reactor model in Dymola.}
@@ -194,7 +213,7 @@ The $H_2$ and $CH_4$ buffers are designed to temporarily store the produced hydr
 These two components are modelled in a very simple way, defining a mass balance equation.
 
 \begin{itemize}
-  \item The $H_2$ buffer receives as input the mass flow rate of the produced hydrogen from the HTSE and sends as output the 90\% of the produced hydrogen to the methanation reactor.
+  \item The $H_2$ buffer receives as input the mass flow rate of the produced hydrogen from the HTSE and sends as output the $90\%$ of the produced hydrogen to the methanation reactor.
   \item The $CH_4$ buffer receives as input both the mass flow rate of the produced syngas from the methanation reactor and the mass flow rate required by the gas turbine to guarantee 
   its setpoint load. The turbine's requested mass flow rate is an output of the turbine's model itself.
 \end{itemize}
@@ -202,13 +221,13 @@ These two components are modelled in a very simple way, defining a mass balance 
 The instantaneous content of each buffer is then computed through a mass balance equation:
 
 \begin{equation}
-  der(Content) = mflow_{in} - mflow_{out}
-\end{equation}  
+  \frac{d}{dt}\mathrm{Content} = \dot{m}_{\mathrm{in}} - \dot{m}_{\mathrm{out}}
+\end{equation}
 
 As stated previously, the $H_2$ buffer is used to store the $10\%$ of the produced hydrogen, which is then sold.
 The $CH_4$ buffer is used to store the syngas produced by the methanation reactor, which can later be used to cover the residual fossil fuel demand of the region.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Simple schematic of the $H_2$ and $CH_4$ buffers in Dymola.}
@@ -231,9 +250,9 @@ The Control Room takes as inputs:
 Within the Control Room, the setpoints for the various components are imported as .csv files. Setpoints are generated beforehand by a Python script 
 focused on the analysis of a single day demand profiles, as described in the next section.
 
-The Control Room is also resposible for computing the Energy Balance of the system, defined as: 
+The Control Room is also responsible for computing the Energy Balance of the system, defined as:
 \begin{equation}
-  EnergyExcess = n_reactors * P_{nuc} + P_{turbine} - P_{HTSE} * n_HTSE - Demand [MW] 
+  \mathrm{EnergyExcess} = n_{\mathrm{reactors}} \cdot P_{\mathrm{nuc}} + P_{\mathrm{turbine}} - P_{\mathrm{HTSE}} \cdot n_{\mathrm{HTSE}} - \mathrm{Demand} \quad [\mathrm{MW}]
 \end{equation}
 
 The outputs of the Control Room are:
@@ -245,38 +264,9 @@ The outputs of the Control Room are:
 
 The Control Room also computes the instantaneous enegry excess based on the Energy Balance Equation, which will then be useful for the economic assessment.
 
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Control Room modelling in Dymola.}
     \label{fig:control_room}
 \end{figure}
-
-\subsection{Demand Definition}
-To run the model we decided to compute a priori the daily setpoint for:
-\begin{itemize}
-  \item Turbine load, limited between $35\%$ and $100\%$ of the maximum load
-  \item HTSE load, limited between $60\%$ and $100\%$ of the maximum load
-  \item Steam tap flow from the intermediate pressure of the SMR.
-\end{itemize} 
-
-We first of all evaluated the electricity available for the H2 plant, from which we determined the load of that the H2 plant can take.
-
-\begin{equation}
-  P_{e, available} = P_{e, SMR} + P_{turbogas}(35\%) - P_{e, grid}
-\end{equation}
-\begin{equation}
-  load_{H2} = \left( \frac{P_{e, available}}{214} + 0.197775 \right) \cdot \frac{1}{N_{HTSE} \cdot 0.1}
-\end{equation}
-Where the relationship $\dot{m_{H2}} = \frac{P_{e, available}}{214} + 0.197775$ was found by running a sweep simulation of the HTSE model in Dymola.
-The mass flow rate of hydrogen produced $\dot{m_{H2}}$ is then divided by the nominal mass flow rate produced by one module $0.1\,kg/s$ multiplied by the number of modules $N_{HTSE}$.
-This load had then to be clipped for values between $60\%$ and $100\%$, where $60\%$ is the lower operational limit.
-
-Thereafter we estimated the syngas production rate which from the first simulation appeared to be
-\subsubsection{Dati che diamo in input}
-a
-\subsubsection{Rate limiting}
-a
-
-\subsubsection{Clusters}
-spiega che famo i clusters + cita che usiamo dei profili di alcuni gioni particolari per vedere rispospta del sistema

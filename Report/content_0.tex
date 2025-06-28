@@ -35,40 +35,42 @@ The containment was oversized due to the particular use case of the ESSOR reacto
 The secondary plant is designed for dual-purpose hydrogen utilization. Its primary function is to produce hydrogen through high-temperature steam electrolysis (HTSE), with a constant output allocated for market supply. Additionally, the plant uses the remaining hydrogen to produce synthetic gas via CO2 methanation. This synthetic gas production serves two main purposes: it fuels the gas turbine and creates a surplus that can be stored to reduce the region's dependence on fossil fuels, thereby supporting decarbonization efforts.
 
 \subsection{Objectives}
-This study aims to evaluate both the technical and economic feasibility of the proposed installation.
+The study aims to evaluate both the technical and economic feasibility of the proposed installation.
 
 From a technical perspective, the system's capacity to meet energy demands and adapt to transient conditions will be assessed. From an economic standpoint, the total plant costs will be analyzed to determine the conditions required for achieving a positive net present value (NPV) within a reasonable timeframe.
 
-The evaluation will consider four distinct scenarios:
+The evaluation will consider the entire plant operating over a time span of 60 years. The evolution of residential energy and building performance is simplified into four scenarios, each representative of a 15-year period:
+
 \begin{itemize}
-    \item Baseline Scenario: Current state of the residential sector in the area
-    \item Optimistic Scenario: Residential sector is mostly electrified with highly efficient homes
-    \item Pessimistic Scenario: There is still a significant share of fossil fuel heating systems in the residential sector
-    \item Middle Ground Scenario: A middle ground between the optimistic and pessimistic scenarios, with a balanced mix of electrification and fossil fuel systems
+    \item Years 1-15: Current state of the residential sector in the area
+    \item Years 16-30: There is still a significant share of fossil fuel heating systems in the residential sector
+    \item Years 31-45: A middle ground between the optimistic and pessimistic scenarios, with a balanced mix of electrification and fossil fuel systems
+    \item Years 46-60: Residential sector is mostly electrified with highly efficient homes
 \end{itemize}
-These scenarios will be represented as different distributions of energy classes within the residential sector.
+
+Given the constraints of the available data, the assessment will consider the plant to be operational as of the current year (2025). At the conclusion of the study, considerations will be made regarding a more realistic starting time. The plan is to abstract from a specific starting time by considering capital and operational costs relative to each other.
 
 \begin{figure}[h!]
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/placeholder.png}
-        \caption*{(a) Baseline Scenario}
+        \caption*{(a) 1-15 Years Scenario}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/placeholder.png}
-        \caption*{(b) Optimistic Scenario}
+        \caption*{(b) 16-30 Years Scenario}
     \end{minipage}\\[1ex]
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/placeholder.png}
-        \caption*{(c) Pessimistic Scenario}
+        \caption*{(c) 31-45 Years Scenario}
     \end{minipage}\hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/placeholder.png}
-        \caption*{(d) Middle Ground Scenario}
+        \caption*{(d) 46-60 Years Scenario}
     \end{minipage}
     \caption{Distribution of energy classes in the residential sector for the four scenarios.}
     \label{fig:energy_classes_distribution}
@@ -78,11 +80,12 @@ The effectiveness of the hybrid system is evaluated with respect to the followin
 \begin{itemize}
     \item The investment cost to make the plant profitable
     \item The decarbonization impact
-    \item The adequacy of the system's response to sharp transient conditions
+    \item The effectiveness of integration of the several components of the plant
 \end{itemize}
 
 \subsubsection{Decarbonization Impact}
-The decarbonization impact will be assessed through an analysis of $CO_2$ emission reductions achieved by implementing the hybrid system. A comparative approach will be adopted, examining emissions from both the current residential sector energy mix and those projected for the proposed system across various scenarios.
+The decarbonization impact will be assessed through an analysis of $CO_2$ emission reductions achieved by implementing the hybrid system. 
+A comparative approach will be adopted, examining emissions from both the current residential sector energy mix and those projected for the proposed system across various scenarios.
 
 The reduction will be quantified based on two primary factors:
 \begin{itemize}
@@ -90,4 +93,5 @@ The reduction will be quantified based on two primary factors:
     \item Changes in the overall energy mix composition
 \end{itemize}
 
-Both aspects will be evaluated using grams of $CO_2$-equivalent per kilowatt-hour ($\frac{gCO_2-eq}{kWh}$) as the measurement unit. The decarbonization impact will ultimately be expressed as a percentage variation from the current state of the energy mix.
+Both aspects will be evaluated using grams of $CO_2$-equivalent per kilowatt-hour ($\frac{gCO_2-eq}{kWh}$) as the measurement unit. 
+The decarbonization impact will ultimately be expressed as a percentage variation from the current state of the energy mix.
