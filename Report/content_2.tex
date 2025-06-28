@@ -1,7 +1,7 @@
 \section{Technical Plant Modelling}
 The whole plant was modeled in Dymola, a technical software using the Modelica language for the dynamic analysis of complex systems. The model is based on the hybrid plant concept, 
-which combines two 177 $MW_e$ Small Modular Reactors (SMR) with a hydrogen production plant and a methanation reactor producing $CO_2$-neutral syngas for a gas turbine. 
-The TANDEM project library (reference) was widely used to model the enritre plant, with the exception of the methanation reactor, which was modeled from scratch in Dymola.
+which combines two 177 $MW_e$ Small Modular Reactors (SMR) with a hydrogen production plant and a methanation reactor producing $CO_{2}$-neutral syngas for a gas turbine. 
+The TANDEM project library (reference) was widely used to model the entire plant, with the exception of the methanation reactor, which was modeled from scratch in Dymola.
 
 \begin{figure}[h!]
     \centering
@@ -34,7 +34,7 @@ It captures the dynamics of the primary and secondary loops, the turbines, the c
 
 The selected model is part of the POLIMI section of the SMR branch in the TANDEM library. Specifically, the "Test_BOPfluid_NSSS" ~\cite{TANDEM} is a test model of the 
 177 $MW_e$ light-water cooled Small Modular Reactor (SMR), based on the European SMR (E-SMR) design as proposed by the Euratom ELSMOR project. ~\cite{tandem_documentation}
-The model is based on elementary components taken frome the ThermoPower library~\cite{TANDEM}.
+The model is based on elementary components taken from the ThermoPower library~\cite{TANDEM}.
 
 The emoloyed test model was originally designed for cogeneration, providing both electricity and thermal energy. 
 To support this dual purpose, the Balance Of Plant features three steam extraction points — High Pressure (HP), Intermediate Pressure (IP), and Low Pressure (LP) —
@@ -83,7 +83,7 @@ The model captures the dynamic behavior of the HTSE and simulates the hydrogen p
 Water goes through several heat-exchangers to reach the target temperature of 750 $^{\circ}$C:
 \begin{itemize}
   \item A pre-heater.
-  \item A boiler, fed by the tap-steam extracted from the SMR BOP (@ 150 $^{\circ}$C).
+  \item A boiler, fed by the tap-steam extracted from the SMR BOP (at 150 $^{\circ}$C).
   \item A second pre-heater, fed by the recovery heat from unconverted steam.
   \item An electrical heater.
 \end{itemize}
@@ -128,7 +128,7 @@ by dividing (and multiplying) the total input (and output) value by the number o
 The methanation reactor was modeled to simulate the conversion of hydrogen ($H_{2}$) and carbon dioxide ($CO_{2}$) into methane ($CH_{4}$) and water (H$_{2}$O) through
 the Sabatier reaction:
 \begin{equation}
-\mathrm{CO_2 + 4H_2 \rightarrow CH_4 + 2H_2O} \qquad \Delta H = -165.1\ \text{kJ/mol}
+\mathrm{CO_{2} + 4H_{2} \rightarrow CH_{4} + 2H_{2}O} \qquad \Delta H = -165.1\ \text{kJ/mol}
 \end{equation}
 
 To estimate the amount of $CH_4$ produced from a given reactant feed, a dimensionless parameter, $conversionEfficiency$, was introduced.
@@ -171,7 +171,7 @@ The instantaneous content of each buffer is then computed through a mass balance
   der(Content) = mflow_{in} - mflow_{out}
 \end{equation}  
 
-As stated previously, the $H_2$ buffer is used to store the 10\% of the produced hydrogen, which is then sold.
+As stated previously, the $H_2$ buffer is used to store the $10\%$ of the produced hydrogen, which is then sold.
 The $CH_4$ buffer is used to store the syngas produced by the methanation reactor, which can later be used to cover the residual fossil fuel demand of the region.
 
 \begin{figure}[h!]
@@ -215,7 +215,7 @@ The Control Room also computes the instantaneous enegry excess based on the Ener
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Control Room modelling in Dymola.}
-    \label{fig:plant_schematic}
+    \label{fig:control_room}
 \end{figure}
 
 \subsection{Demand Definition}
@@ -230,10 +230,12 @@ We first of all evaluated the electricity available for the H2 plant, from which
 
 \begin{equation}
   P_{e, available} = P_{e, SMR} + P_{turbogas}(35\%) - P_{e, grid}
+\end{equation}
+\begin{equation}
   load_{H2} = \left( \frac{P_{e, available}}{214} + 0.197775 \right) \cdot \frac{1}{N_{HTSE} \cdot 0.1}
 \end{equation}
 Where the relationship $\dot{m_{H2}} = \frac{P_{e, available}}{214} + 0.197775$ was found by running a sweep simulation of the HTSE model in Dymola.
-The mass flow rate of hydrogen produced $\dot{m_{H2}}$ is the divided by the nominal mass flow rate produced by one module $0.1kg/s$ multiplied by the number of modules $N_{HTSE}$.
+The mass flow rate of hydrogen produced $\dot{m_{H2}}$ is then divided by the nominal mass flow rate produced by one module $0.1\,kg/s$ multiplied by the number of modules $N_{HTSE}$.
 This load had then to be clipped for values between $60\%$ and $100\%$, where $60\%$ is the lower operational limit.
 
 Thereafter we estimated the syngas production rate which from the first simulation appeared to be
