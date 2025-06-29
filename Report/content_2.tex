@@ -16,9 +16,9 @@ The TANDEM project library ~\cite{TANDEM} was widely used to model the enritre p
 The number of reactors and HTSE modules is based on the following considerations:
 
 \begin{itemize}
-  \item The minimum number of installed HTSE modules required has to sustain the Gas Turbine operation at the nominal power.
+  \item The minimum number of installed HTSE modules required has to sustain the Gas Turbine operation at the nominal power, guaranteeing a sufficient methane production.
   \item The maximum number of installed HTSE modules depends on the overall energy excess of the system in the least demanding hour of the year.
-  \item The overll energy excess of the system depends on the number of SMRs.
+  \item The overall energy excess of the system depends on the number of SMRs.
 \end{itemize}
 
 In order to find the optimal number of SMRs and HTSE modules which would minimize the overall cost of the plant, while meeting the energy demand, an optimization problem would be required.
@@ -26,7 +26,7 @@ For the purpose of this study the optimization is not performed.
 
 The choice was then made on the number of HTSE modules, simply considering the average between the minimum number of modules required (12) and the maximum allowed (18, with two SMRs).
 This results in a total of 15 HTSE modules. Accordingly, as the HTSE modules require a significant amount of electricity to operate, the number od SMRs was set to two.
-This allows for an efficient operation of the whole plant (i.e. not having to widely and frequently import electricity from the grid).
+This allows for an efficient operation of the whole plant, with the need to import electricity just in less than 10\% of the hours in a year.
 
 However, to reduce the computational burden of the simulation in Dymola, the system is modeled using a single SMR and a single HTSE module. 
 The actual electricity output from the SMR and hydrogen production from the HTSE are then scaled by multiplying the simulated values by the respective number of units within the model. 
@@ -247,10 +247,7 @@ The Control Room takes as inputs:
   \item $P_{HTSE}$: the hourly electrical power consumed by the HTSE modules.
 \end{itemize}
 
-Within the Control Room, the setpoints for the various components are imported as .csv files. Setpoints are generated beforehand by a Python script 
-focused on the analysis of a single day demand profiles, as described in the next section.
-
-The Control Room is also responsible for computing the Energy Balance of the system, defined as:
+The Control Room is responsible for computing the Energy Balance of the system, defined as:
 \begin{equation}
   \mathrm{EnergyExcess} = n_{\mathrm{reactors}} \cdot P_{\mathrm{nuc}} + P_{\mathrm{turbine}} - P_{\mathrm{HTSE}} \cdot n_{\mathrm{HTSE}} - \mathrm{Demand} \quad [\mathrm{MW}]
 \end{equation}
@@ -262,6 +259,8 @@ The outputs of the Control Room are:
   \item $mflow_tapSteam$: the setpoint for the mass flow rate of steam extracted from the SMR's intermediate pressure tap.
 \end{itemize}
 
+Within the Control Room, the setpoints for the various components are imported as .csv files. Setpoints are generated beforehand by a Python script 
+focused on the analysis of a single day demand profiles, as described in the next section.
 The Control Room also computes the instantaneous enegry excess based on the Energy Balance Equation, which will then be useful for the economic assessment.
 
 \begin{figure}[ht]

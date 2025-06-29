@@ -1,31 +1,179 @@
 \section{Methodology}
 
+Using the Dassault Systèmes Dymola software~\cite{DYMOLA}, a production model was developed based on the object-oriented Modelica language.
 
-\subsection{Demand Definition}
-To run the model we decided to compute a priori the daily setpoint for:
+Four representative scenarios were evaluated, as described in Section~\ref{section:Introduction}, each representing a 15-year operational phase of the plant, for a total time span of 60 years. 
+The system is assumed to begin operation in 2025 and continue until 2085.
+
+The optimal time horizon for dynamic simulation in this framework is set to 24 hours, in order to capture the daily variations in energy demand and the system’s response to them.
+
+The simulation methodology follows the steps outlined below:
+
+
+\begin{enumerate}
+  \item For each scenario, an annual net electricity demand profile for the regional grid was 
+  derived through the data analysis developed in section 2 \ref{section:Data Collection}.
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
+      \caption{Example of annual net electricity demand profile for the regional grid.}
+      \label{fig:plant_schematic}
+    \end{figure}
+
+  \item The annual profile was then clustered into five groups of days with similar load 
+  characteristics. These representative days were then dynamically simulated with Dymola. 
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
+      \caption{Example of clusters for an annual demand profile.}
+      \label{fig:plant_schematic}
+    \end{figure} 
+
+  \item A Python-based algorithm reconstructed the full annual profile by substituting actual days 
+  with the corresponding simulated cluster days.
+
+  \item Monthly energy balances — including electricity sold to the community, surplus energy 
+  exported to the market, energy deficits covered by purchases from the market — 
+  were then extracted and used as input for the economic analysis of the plant.
+
+  \item The yearly hydrogen and syngas production was also extracted from the simulation results, 
+  and added as input for the economic analysis.
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
+      \caption{Example of final output results for 1-year operation.}
+      \label{fig:plant_schematic}
+    \end{figure} 
+
+\end{enumerate}
+
+
+\subsection{Dymola simulation features}
+The Dymola model simulates the dynamic behaviour of the plant over a 24-hour period, but requires pre-processed input data to accurately account for all the relevant phenomena. 
+The pre-processing methodology described below is based on the single-day demand profiles of the clusters previously obtained.
+
+\subsubsection{Model inputs}
+As highlighted in the Control Room subsection~\ref{subsubsectionsection:Control Room}, 
+the model requires, in addition to the hourly net grid demand (i.e., one of the cluster profiles), 
+a set of daily setpoints for the following variables:
+
 \begin{itemize}
-  \item Turbine load, limited between $35\%$ and $100\%$ of the maximum load
-  \item HTSE load, limited between $60\%$ and $100\%$ of the maximum load
-  \item Steam tap flow from the intermediate pressure of the SMR.
-\end{itemize} 
+  \item Turbine load, constrained between $35\%$ and $100\%$ of the maximum load.
+  \item HTSE load, constrained between $60\%$ and $100\%$ of the maximum load.
+  \item Steam tap flow from the intermediate pressure stage of the SMR.
+\end{itemize}
 
-We first evaluated the electricity available for the H$_2$ plant, from which we determined the load that the H$_2$ plant can take.
+Both the turbine and HTSE loads are subject to lower operational limits to avoid the risk of 
+damaging the components when operated below their minimum thresholds.
+
+\subsubsubsection{Turbine and HTSE load setpoints}
+To evaluate the turbine and HTSE load setpoints, the proposed data pre-processing model first computes the electricity available for the hydrogen plant. 
+This is done under the assumption that the SMRs operate continuously at their nominal power output, and that the gas turbine operates at its minimum load of $35\%$, 
+ensuring it never runs below its allowed operational limit.
+
 
 \begin{equation}
   P_{e, \mathrm{available}} = P_{e, \mathrm{SMR}} + P_{\mathrm{turbogas}}(35\%) - P_{e, \mathrm{grid}}
 \end{equation}
+
+This calculation helps determining the load profile of the H$_2$ plant, based on the load vs. electric power relationship described in the previous section, 
+which was obtained by performing a sweep simulation of the HTSE model in Dymola.
+
 \begin{equation}
   \mathrm{load}_{H_2} = \left( \frac{P_{e, \mathrm{available}}}{214} + 0.197775 \right) \cdot \frac{1}{N_{\mathrm{HTSE}} \cdot 0.1}
 \end{equation}
-Where the relationship $\dot{m}_{H_2} = \frac{P_{e, \mathrm{available}}}{214} + 0.197775$ was found by running a sweep simulation of the HTSE model in Dymola.
-The mass flow rate of hydrogen produced, $\dot{m}_{H_2}$, is then divided by the nominal mass flow rate produced by one module ($0.1\,\mathrm{kg/s}$) multiplied by the number of modules $N_{\mathrm{HTSE}}$.
-This load then had to be clipped for values between $60\%$ and $100\%$, where $60\%$ is the lower operational limit.
 
-Thereafter we estimated the syngas production rate which from the first simulation appeared to be
-\subsubsection{Dati che diamo in input}
-a
-\subsubsection{Rate limiting}
-a
+Where the mass flow rate of hydrogen produced, 
+$\dot{m}_{H_2} = \frac{P_{e, \mathrm{available}}}{214} + 0.197775$, is divided by the nominal mass flow rate produced by one module ($0.1\,\mathrm{kg/s}$) 
+multiplied by the number of modules $N_{\mathrm{HTSE}}$.
 
-\subsubsection{Clusters}
-Spiega che facciamo i clusters e cita che usiamo dei profili di alcuni giorni particolari per vedere la risposta del sistema.
+The HTSE load profile is then clipped to remain within the operational range of $60\%$ to $100\%$, where $60\%$ represents the lower operational limit.
+
+This clipped HTSE load profile subsequently defines the actual electricity consumption of the H$_2$ plant.
+
+Based on the updated system energy balance, the turbine load profile is then determined as follows:
+
+\begin{equation}
+  \mathrm{load}_{turbine} + P_{e, \mathrm{SMR}} = HTSE_{\mathrm{consumption}} + P_{e, \mathrm{grid}}
+\end{equation}
+
+The turbine load must also be clipped. In this case, the lower limit was set to $60\%$ instead of the physical minimum of $35\%$, in order to:
+
+\begin{itemize}
+  \item Increase the overall electricity production available for sale.
+  \item Avoid the more emission-intensive operation associated with lower load levels.
+\end{itemize}
+
+The resulting clipped turbine load profile, together with the actual consumption of the HTSE modules, determines the final electricity balance of the integrated plant.
+
+The calculations show that, depending on the specific scenario, the system needs to import electricity from the grid in only 4\% to 7\% of the hours in a year, 
+enabling highly efficient operation of the entire plant.
+
+\subsubsubsection{Rate limiting}
+Ramping up and ramping down rates for both the turbine and the HTSE were taken into account in the calculations.
+
+According to the technical documentation of the selected gas turbine model, the ramping rates for the turbine are essentially unrestricted, as it can quickly reach its nominal power output.
+
+In contrast, the HTSE module is subject to a ramping rate limit of $1\%$ per hour. 
+This constraint allows the model to reflect the physical limitations of the component, which cannot instantaneously adjust its load as the initial computed profile might suggest.
+
+A Python function handles the ramping behaviour of both the turbine and HTSE loads, updating the previously calculated load profiles and corresponding energy balances accordingly.
+ %put reference to appendix
+
+    \begin{figure}[h!]
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
+      \caption{Example of 1-day load profiles for HTSE and gas turbine.}
+      \label{fig:plant_schematic}
+    \end{figure} 
+
+
+\subsubsubsection{Steam Tap Flow Setpoint}
+The steam tap flow setpoint is determined based on the HTSE load profile, computed as described above.
+
+The relationship between the tap steam flowrate and the hydrogen production rate is established by performing a sweep simulation of the HTSE model in Dymola.
+
+\subsection{Results Post-Processing}
+The results of the Dymola simulation are post-processed to extract the monthly energy balances of the plant, which are then used for the economic analysis.
+
+First, a \texttt{.csv} file containing the hourly simulation results is generated, and the full year is reconstructed as outlined in the previous section.
+
+\subsubsection{Energy Balances}
+Each annual electricity balance includes: 
+\begin{itemize}
+  \item Electricity sold to the community.
+  \item Surplus energy exported to the market.
+  \item Energy deficits covered by purchases from the market.
+  \item Energy acquired from the community's photovoltaic excess production.
+\end{itemize}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
+  \caption{Example of 1-year energy balance values.}
+  \label{fig:plant_schematic}
+\end{figure} 
+
+As the different scenarios progress over the plant's lifetime, a substantial increase is observed in the energy acquired from the community's photovoltaic excess production. 
+This trend reflects the growing share of renewable energy sources in the region.
+
+Monthly aggregate balances were then cumulatively computed to serve as input for the financial analysis.
+
+
+\subsubsection{Hydrogen and Syngas production}
+Hydrogen and syngas production data are also extracted from the simulation results and used to calculate the annual product balances.
+
+Focusing on yearly balances simplifies the economic evaluation, as it assumes a stable selling price for these products throughout the year.
+
+\subsubsubsection{Hydrogen production}
+The yearly hydrogen production is calculated by summing the daily production values over the entire year.
+
+The total hydrogen production is expressed in energy terms (MWh), using the lower heating value (LHV) of hydrogen, which is approximately $36.11\,\mathrm{kWh/kg}$.
+
+\subsubsubsection{Syngas production}
+The stored syngas is assumed to contribute towards meeting the community’s remaining fossil fuel demand, thereby supporting the region’s decarbonization efforts.
+
+Accordingly, the yearly syngas production is converted into energy units (MWh) using the lower heating value (LHV) of the produced gas, which is approximately $57.4539\,\mathrm{MJ/kg}$.
