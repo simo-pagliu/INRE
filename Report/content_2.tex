@@ -165,16 +165,15 @@ by dividing (and multiplying) the total input (and output) value by the number o
 
 \subsubsection{Methanation Reactor Modeling Approach}
 
-The methanation reactor was modeled to simulate the conversion of hydrogen ($H_{2}$) and carbon dioxide ($CO_{2}$) into methane ($CH_{4}$) and water (H$_{2}$O) through
-the Sabatier reaction:
+The methanation reactor was modeled to simulate the conversion of hydrogen ($H_{2}$) and carbon dioxide ($CO_{2}$) into methane ($CH_{4}$) and water (H$_{2}$O) through the Sabatier reaction:
 \begin{equation}
 \mathrm{CO_{2} + 4H_{2} \rightarrow CH_{4} + 2H_{2}O} \qquad \Delta H = -165.1\ \text{kJ/mol}
 \end{equation}
 
-To estimate the amount of $CH_4$ produced from a given reactant feed, a dimensionless parameter, $conversionEfficiency$, was introduced.
-This parameter (default value: 0.78) represents the maximum chemical efficiency of catalytic methanation, as reported by Götz et al. \cite{Gotz2016}.
-It defines the fraction of the limiting reactant (either $CO_{2}$ or $H_{2}$) that is effectively converted into $CH_{4}$, accounting for real-world inefficiencies
-and the incomplete conversion typical under practical temperature and pressure conditions.
+To estimate the amount of $CH_4$ produced from a given reactant feed, a dimensionless parameter, $conversionEfficiency$, was introduced.  
+This parameter (default value: 0.78) represents the maximum chemical conversion efficiency of catalytic methanation, as reported by Götz et al. \cite{Gotz2016}.  
+It defines the fraction of the limiting reactant (either $CO_{2}$ or $H_{2}$) that is effectively converted into $CH_{4}$, accounting for real-world inefficiencies and the incomplete conversion 
+typical under practical temperature and pressure conditions.
 
 The molar output flows are then determined based on reaction stoichiometry:
 \begin{align*}
@@ -184,22 +183,24 @@ The molar output flows are then determined based on reaction stoichiometry:
 \dot{n}_{\mathrm{CO}_2} &= \dot{n}_{\mathrm{CO}_2,\text{in}} - \dot{n}_{\mathrm{CH}_4}
 \end{align*}
 
-The model is reported in the appendix, along with the other components developed from scratch in Dymola. %put reference to appendix
+The model is reported in the appendix, along with the other components developed from scratch in Dymola.
 
-\paragraph{Stechiometry and Output Mixture}
-Given that the reaction is not ideal if we respect the Stechiometry (1:4) the output mixture would result in a lower LHV then the one of natural gas.
-To improve the energetic and economic value of our product, we decided to run an over-stechiometric reaction, specifically 1:8 parts of $CO_2$ and $H_2$.
-This means that the output mixture will be:
+\paragraph{Stoichiometry and Output Mixture}
+Given that the reaction is not ideal, if we respect the stoichiometric ratio (1:4), the resulting gas mixture would have a lower lower heating value (LHV) than that of natural gas.  
+To improve the energetic and economic value of our product, we decided to operate with an excess of hydrogen, specifically using a molar ratio of 1:8 between $CO_2$ and $H_2$.  
+This results in an output gas mixture (on a molar basis) approximately composed of:
 \begin{itemize}
-  \item 41.1 CH4
-  \item 30.7 H2
-  \item 28.2 CO2
+  \item 41.1\% $CH_4$
+  \item 30.7\% $H_2$
+  \item 28.2\% $CO_2$
 \end{itemize}
-We obviously assume all water is discarded from the product. The resulting LHV is 57.4359.
+Water is assumed to be completely removed from the product stream.  
+The resulting lower heating value (LHV) of the dry gas mixture is 57.4359 MJ/kg.
 
 \paragraph{$CO_2$ Usage}
-Based on our mixture we obtain a mass flow rate of syntetich gas of 2.6325, given the stechiometry the inpyt of CO2 is 3.7 therefor we can deduct that to produce a kg of SG we need 1.41 kg of CO2.
-
+Based on the product gas composition, we obtain a synthetic gas mass flow rate of 2.6325 kg (reference case).  
+Given the process stoichiometry and conversion efficiency, the corresponding input of $CO_2$ is 3.7 kg.  
+From this, we deduce that producing 1 kg of synthetic gas requires approximately 1.41 kg of $CO_2$.
 
 \begin{figure}[ht]
     \centering
@@ -211,6 +212,45 @@ Based on our mixture we obtain a mass flow rate of syntetich gas of 2.6325, give
 
 
 \subsubsection{Gas Turbine}
+The gas turbine is chosen to be a GE LM6000, an aeroderivative machine able to burn fuel with high hydrongen fractions and change power output quite fast, making it a valuable element for hybrid
+energy systems with high renewable penetration. This component is modeled through the modification of the ''''GasTurbineSimplified''' present in the thermopower section of the TANDEM library~\cite{TANDEM}. 
+The original thermopower model is a generic gas turbine model, which was adapted to represent the GE LM6000 by adjusting the relevant parameters by a factor of 1/5 to match the LM6000 nominal 
+specifications reported below. The thermopower model has a power level input only, so it is then given additional inputs and outputs to accomplish its role in the Sette Laghi model.
+
+\begin{tcolorbox}[boxstyle, title=GE LM6000 specifics]
+  \begin{itemize}
+    \item Nominal Power: 47 $MW_e$
+    \item Efficiency: 0.4
+    \item Fuel: Syngas (Methane and Hydrogen)
+    \item Mass Flow Rate of Syngas: 2.42 $kg/s$
+    \item Maximum Ramp Rate : 30 MW/min
+    \item Minimum Load: 30\% of the nominal power
+  \end{itemize}
+\end{tcolorbox}
+
+The turbine takes as input the fuel heating values and the power load setpoint - which is computed in the Control Room - to calculate the required mass flow rate of syngas, that is then comunicated to the 
+Syngas Buffer. Since we are not interested in the detailed modeling of the combustion process, the model is simplified to focus on the mass flow rate of syngas required to meet the setpoint load.
+Even though they hold a valuable energy content, the flue gases are not modeled - as the main focus is on the syngas production.
+
+The inputs of the Gas Turbine are:
+\begin{itemize}
+  \item $turbine_load$: the setpoint for the power level (normalized).
+  \item $LHV$: the lower heating value of the syngas.
+  \item $HHV$: the higher heating value of the syngas.
+\end{itemize}
+The only output of the Gas Turbine is:
+\begin{itemize}
+  \item $fuelFlowRateOut$: the mass flow rate of syngas required to meet the setpoint load
+\end{itemize}
+.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
+    \caption{Simple schematic of the Gas Turbine model in Dymola.}
+    \label{fig:plant_schematic}
+\end{figure}
+
 
 \subsubsection{$H_2$ and $CH_4$ buffers}
 The $H_2$ and $CH_4$ buffers are designed to temporarily store the produced hydrogen and methane, respectively.
