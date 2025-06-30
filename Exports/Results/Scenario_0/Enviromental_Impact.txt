@@ -1,0 +1,16 @@
+Fossil Fuel Emissions pre project 7L: 550.00 gCO2eq/kWh
+Fossil Fuel Emissions post project 7L: 464.99 gCO2eq/kWh
+Syngas Fossil fuel coverage: 17.81%
+
+CO2 equivalent emissions pre project Lombardy: 389.27 gCO2eq/kWh
+CO2 equivalent emissions post project Lombardy: 376.76 gCO2eq/kWh
+
+CO2 equivalent emissions post-project 7L: 13.73 gCO2eq/kWh
+Energy Mix of the 7L region: 96.07% Nuclear, 3.93% PV, 0.00% Import
+
+CO2 equivalent of road transportation pre project: 264.75 gCO2eq/kWh
+CO2 equivalent of road transportation post project: 249.57 gCO2eq/kWh
+Share of Hydrogen in road transportation: 6.19%
+
+Fossil Fuel Demand in the year 2342.50 GWh 
+Electricity Demand in the year: 369.26 GWh 
