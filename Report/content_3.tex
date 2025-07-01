@@ -16,9 +16,9 @@ The simulation methodology follows the steps outlined below:
 
     \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-      \caption{Example of annual net electricity demand profile for the regional grid.}
-      \label{fig:plant_schematic}
+      \includegraphics[width=0.8\textwidth]{figures/3_daily_avg_demand.png}
+      \caption{Example of daily average electricity demand profile for the regional grid.}
+      \label{fig:daily_avg_demand}
     \end{figure}
 
   \item The annual profile was then clustered into five groups of days with similar load 
@@ -26,9 +26,9 @@ The simulation methodology follows the steps outlined below:
 
     \begin{figure}[ht]
       \centering
-      \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
+      \includegraphics[width=0.8\textwidth]{figures/3_clusters.png}
       \caption{Example of clusters for an annual demand profile.}
-      \label{fig:plant_schematic}
+      \label{fig:clusters}
     \end{figure} 
 
   \item A Python-based algorithm reconstructed the full annual profile by substituting actual days 
@@ -122,13 +122,22 @@ This constraint allows the model to reflect the physical limitations of the comp
 
 A Python function handles the ramping behaviour of both the turbine and HTSE loads, updating the previously calculated load profiles and corresponding energy balances accordingly.
  %put reference to appendix
-
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-      \caption{Example of 1-day load profiles for HTSE and gas turbine.} %esempio su 24 ore 
-      \label{fig:plant_schematic}
-    \end{figure} 
+\begin{figure}[ht]
+  \centering
+  \begin{minipage}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/3_HTSE_Load.png}
+    \caption{Example of 1-day load profile for HTSE.}
+    \label{fig:htse_profile}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/3_Turbogas_Load.png}
+    \caption{Example of 1-day load profile for gas turbine.}
+    \label{fig:turbine_profile}
+  \end{minipage}
+\end{figure}
 
 
 \subsubsection{Steam Tap Flow Setpoint}
@@ -152,9 +161,9 @@ Each annual electricity balance includes:
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-  \caption{Example of 1-year energy balance values.} %profilo annuale grafico a figa
-  \label{fig:plant_schematic}
+  \includegraphics[width=0.8\textwidth]{figures/3_Energy_Results.png}
+  \caption{1-year energy balance for the last simulated period (year 45 to 60).}
+  \label{fig:energy_results}
 \end{figure} 
 
 As the different scenarios progress over the plant's lifetime, a substantial increase is observed in the energy acquired from the community's photovoltaic excess production. 
