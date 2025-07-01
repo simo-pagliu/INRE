@@ -1,83 +1,85 @@
-\section{Results}
-\subsection{Environmental Impact}
-The environmental impact of the plant is assessed based on the following indicators
-
-\begin{itemize}
-    \item GHG emissions
-    \item Water usage
-    \item Land use
-\end{itemize}
+\section{Environmental Impact}
+The environmental impact of the plant is assessed based on the following indicators: GHG emissions intensity, water usage, and land use.
 
 The assessment is conducted on the optimized operational scenario in which, for the first 20 years, both reactors are dedicated exclusively to electricity production and sale. After year 20, the secondary section of the plant—comprising High Temperature Steam Electrolyzer (HTSE) units and a methanation system coupled with a turbine—is introduced.
 
-As a result, a higher impact on GHG emissions is expected in the early years, primarily due to the exclusive focus on electricity generation.
+As a result, a higher impact on GHG emissions intensity is expected in the early years, primarily due to the exclusive focus on electricity generation.
 
-\subsubsection{GHG Emissions assessment}
+\subsection{GHG emissions intensity assessment}
 
-\paragraph{Assumptions and Methodology}
-GHG emissions are evaluated considering:
+\subsubsection{Assumptions and Methodology}
+GHG emissions intensity are evaluated considering:
 
 \begin{itemize}
-    \item The impact on the regional energy mix (Lombardy), which is expected to be minor due to the localized nature of the plant.
-    \item The impact on the local mix within the "Regione dei 7 Laghi", where the plant has a significantly more noticeable influence.
+    \item The impact on the regional energy mix (Lombardy), which is expected to be minor.
+    \item The impact on the local mix within the Seven Lakes Region, where the plant has a significantly more noticeable influence.
     \item Emissions related to residual fossil fuel demand for building heating.
     \item Emissions from the transportation sector, expected to decrease due to the hydrogen supplied by the plant directly to this sector.
 \end{itemize}
 
-For each of these, it is assumed that for the first 20 years the plant 
-operates solely as an electricity provider. Starting from year 20, 
-the hydrogen and methane production facilities come online, affecting 
-the transportation and heating sectors respectively.
-
-\paragraph{GHG emissions Data}
-The data for the current (2023) Lombardy energy mix were sourced from Terna, including imported energy shares. Greenhouse gas (GHG) emissions per energy source are based on median values reported in Daniel Weisser's (2007) article: “A guide to life-cycle greenhouse gas (GHG) emissions from electric supply technologies.” ~\cite{weisser} Specifically, solar photovoltaic (PV) was considered for the "Renewable" share, as it is the most prevalent renewable source and the one of major interest for this study.
+\subsubsection{Data Sources}
+\paragraph{GHG emissions intensities}
+The data for the current (2023) Lombardy energy mix were sourced from Terna, including imported energy shares. GHG emissions intensity per energy source are based on mean values ~\cite{weisser2007guide}. Specifically, solar photovoltaic (PV) was considered for the "Renewable" share, as it is the most prevalent renewable source and the one of major interest for this study.
 
 The values used are:
 
-\begin{itemize}
-    \item \textbf{Coal}: 996 gCO2eq/kWh
-    \item \textbf{Natural Gas}: 550 gCO2eq/kWh
-    \item \textbf{Oil}: 780 gCO2eq/kWh
-    \item \textbf{Nuclear}: 12 gCO2eq/kWh
-    \item \textbf{Renewables}: 56 gCO2eq/kWh
-\end{itemize}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lc}
+        \toprule
+        \textbf{Energy Source} & \textbf{GHG Intensity (gCO$_2$eq/kWh)} \\
+        \midrule
+        Coal        & 996 \\
+        Natural Gas & 550 \\
+        Oil         & 780 \\
+        Nuclear     & 12 \\
+        Renewables  & 56 \\
+        \bottomrule
+    \end{tabular}
+    \caption{GHG emissions intensities by energy source.}
+    \label{tab:ghg_intensity_sources}
+\end{table}
 
-For nuclear power, other sources support values around 12 $gCO_{2}eq/kWh$, including: “Life cycle analysis of a network of small modular reactors” by Carlo L. Vinoya ~\cite{Vinoya}and “A comparative life-cycle assessment of hydro, nuclear and wind power: A China study” by Wang et al.~\cite{Wang}.
+For nuclear power, other sources support values around 12 $gCO_{2}eq/kWh$ ~\cite{vinoya2024life} and ~\cite{wang2019comparative}.
 
-Equivalent GHG emissions for plant products are:
+Equivalent GHG emissions intensity for plant products are:
 
-\begin{itemize}
-    \item \textbf{Hydrogen}: $19.39 gCO_{2}eq/kWh$, assuming electricity for HTSE is fully supplied by the two SMRs and using its LHV for evaluating the energy equivalent of hydrogen produced.
-    \item \textbf{Syngas}: $72.76 gCO_{2}eq/kWh$, assuming all the hydrogen not stored for selling (produced with nuclear-provided electricity) is converted to syngas.
-\end{itemize}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lc}
+        \toprule
+        \textbf{Product} & \textbf{GHG Intensity (gCO$_2$eq/kWh)} \\
+        \midrule
+        Hydrogen & 19.39 \\
+        Syngas   & 72.76 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Equivalent GHG emissions intensity for plant products}
+    \label{tab:plant_products_ghg}
+\end{table}
+
+Hydrogen carbon intensity assumes electricity for HTSE is fully supplied by the two SMRs and uses its LHV for evaluating the energy equivalent of hydrogen produced. Syngas is produced with that same hydrogen, produced with nuclear-provided electricity. The $CO_2$ is not considered in the GHG intensity of syngas, as it was explained in the economic section.
 
 \paragraph{Energy consumption Data}
 The baseline energy data prior to year 0 are derived from current statistics, with total electricity consumption and imports for Lombardy taken from Terna. Values are computed every 15 years to reflect assumed changes in building energy classifications and related energy demands. An exception is made for year 20 to account for the plant's secondary section's commissioning.
 
 A key assumption is that the electricity produced by the proposed plant displaces imported electricity—an economically rational choice. The renewable share varies across scenarios, reflecting the increasing photovoltaic (PV) penetration over time.
 
+\subsubsection{Calculations}
 \paragraph{Regional Energy Mix}
-The regional impact is assessed in terms of how the plant alters Lombardy's energy mix, which is expected to be minimal due to its limited size (maximum output of 3 TWh/year vs. 65 TWh/year of regional consumption). Nevertheless, the impact is more significant in the first 20 years when the plant contributes only electricity.
+The regional impact is assessed in terms of how the plant alters Lombardy's energy mix, which is expected to be minimal due to its limited size (maximum output of 3 TWh/year vs. 65 TWh/year of yearly regional consumption \cite{terna_consumi}). Nevertheless, the impact is more significant in the first 20 years when the plant contributes only electricity.
 
-The regional mix greenhouse gas (GHG) intensity is calculated as:
+The regional mix GHG intensity is calculated as:
 
 \begin{equation}
-    \text{gCO2eq/kWh}_{mix} = \sum_{i} \left( \text{gCO2eq/kWh}_{i} \cdot \text{share}_{i} \right)
+    \left(\frac{gCO2eq}{kWh}\right)_{mix} = \sum_{i} \left( \left(\frac{gCO2eq}{kWh}\right)_{i} \cdot \chi_{i} \right)
 \end{equation}
 
-where $i$ indexes each energy source and each energy source's share is taken into account.
+where $i$ indexes each energy source and each energy source's share $\chi_{i}$ is taken into account.
 
 
 \paragraph{Local Energy Mix}
-Using a methodology analogous to the one applied at the regional level, the electricity consumption of the Seven Lakes Region is estimated based on monthly energy balances and photovoltaic production data gathered during this study. The local energy mix is reconstructed using three main components: Nuclear, Renewables, and Imported electricity. The evolution of this mix over time, and its impact on greenhouse gas (GHG) emissions, is evaluated using the following approach:
-
-\begin{equation}
-    \text{gCO2eq/kWh}_{local-mix} = \sum_{i} \left( \text{gCO2eq/kWh}_{i} \cdot \text{share}_{i} \right)
-\end{equation}
-
-where $i$ indexes all considered energy sources.
-
-For the imported share, the same $gCO_{2}eq/kWh$ intensity as the Lombardy regional mix is assumed.
+Using a methodology analogous to the one applied at the regional level, the electricity consumption of the Seven Lakes Region is estimated based on monthly energy balances and photovoltaic production data previously gathered. The local energy mix is reconstructed using three main components: Nuclear, Renewables, and Fossil. The evolution of this mix over time, and its impact on GHG emissions intensity, is evaluated using the previous approach.
 
 \begin{figure}[H]
     \centering
@@ -87,23 +89,32 @@ For the imported share, the same $gCO_{2}eq/kWh$ intensity as the Lombardy regio
 \end{figure}
 
 \paragraph{Residual Fossil Fuel Consumption}
-The greenhouse gas (GHG) emissions associated with the residual fossil fuel demand for residential heating are estimated using building demand data processed earlier in the study, alongside the amount of syngas produced and not consumed by the turbine.
+The GHG emissions intensity associated with the residual fossil fuel demand for residential heating are estimated using the processed data, alongside the amount of syngas exported to the market.
 
 The $gCO_{2}eq/kWh$ intensity for this sector is calculated by weighting:
-\begin{itemize}
-    \item the share of demand covered by syngas ($72.76 gCO_{2}eq/kWh$),
-    \item the share covered by natural gas ($550 gCO_{2}eq/kWh$).
-\end{itemize}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lc}
+        \toprule
+        \textbf{Fuel Type} & \textbf{GHG Intensity (gCO$_2$eq/kWh)} \\
+        \midrule
+        Syngas      & 72.76 \\
+        Natural Gas & 550 \\
+        \bottomrule
+    \end{tabular}
+    \caption{GHG intensities for syngas and natural gas in the residential heating sector.}
+    \label{tab:residential_heating_ghg}
+\end{table}
 
-This impact is zero in the first 20 years of operation, as the plant only provides electricity. After year 20, the introduction of syngas production leads to a growing influence on this sector.
+This impact is zero in the first 20 years of operation, as the plant only provides electricity. From year 21, the introduction of syngas production leads to a growing influence on this sector.
 
-While fossil fuel demand is projected to decrease over time due to improved building energy performance and increased photovoltaic (PV) penetration, syngas production remains constant—resulting in a gradually increasing relative contribution to GHG mitigation.
+Fossil fuel demand is projected to decrease over time due to improved building energy performance and increased photovoltaic (PV) penetration, while syngas production remains constant — resulting in a gradually increasing contribution to GHG mitigation.
 
 
 \paragraph{Transportation Sector}
-Transport energy consumption data for the region were estimated by scaling national figures according to the population share of the Seven Lakes Region. The national data were retrieved from \cite{transportation}.
+Transport energy consumption data for the region were estimated by scaling national data \cite{eurostat_sankey_2023} according to the population share of the Seven Lakes Region with respect to the national total \cite{istat2023}.
 
-Greenhouse gas (GHG) intensities for diesel and gasoline (currently dominant in ground transport) were sourced from \cite{transportation_emissions}:
+GHG intensities for diesel and gasoline (currently dominant in ground transport) were sourced from \cite{quaschning_co2spec_2025}:
 \begin{table}[H]
     \centering
     \begin{tabular}{lcc}
@@ -136,18 +147,18 @@ The impact of the hydrogen produced by the plant is assessed by assuming that it
 
 Beyond the GHG reduction, it is worth highlighting that hydrogen substitution would also positively affect local air quality due to the elimination of particulate matter emissions typically associated with diesel and gasoline combustion. However, this benefit is not quantified within this study.
 
-\paragraph{Overall GHG Emissions}
-All results are summarized in the following figures, which illustrate the evolution of greenhouse gas (GHG) emissions over time, in parallel with changes in electricity and fossil fuel demand.
+\subsubsection{Results}
+All results are summarized in the following plots, which illustrate the evolution of GHG emission intensities over time, along with changes in electricity and fossil fuel demand.
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.48\textwidth}
+    \begin{minipage}{0.6\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/5_GHG_emissions_over_time.png}
-        \caption{GHG emissions over time.}
+        \caption{GHG emissions intensity over time.}
         \label{fig:ghg_emissions}
     \end{minipage}\hfill
-    \begin{minipage}{0.48\textwidth}
+    \begin{minipage}{0.6\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/placeholder.png}
         \caption{Local Net Electricity and Fossil Demand evolution over time.}
@@ -168,28 +179,32 @@ The impact on water resources, primarily required for reactor and Balance of Pla
 
 \subsubsection{Land Use}
 One of the key advantages of the proposed project is its minimal land use impact. The compact scale of the facility, combined with its placement in an area already approved for nuclear activities, ensures efficient use of space. The site is located within the Joint Research Centre (JRC) complex, which already hosts research reactors (ESSOR and Ispra-1) and associated nuclear infrastructure. Notably, a containment building is available on-site and is deemed suitable to house at least one of the two planned Small Modular Reactors (SMRs), greatly reducing the need for new construction and environmental disturbance.
-%%% qui spiegare meglio e approfondire un pelo di più la questione degli edifici
 
 \section{Possible Improvements}
 \subsection{On the Data Collection}
-It is definitely possible and could yield better results if the data for each class were obtained from a set of real buildings in the region instead of just one. Ideally, one would use a statistically significant set of buildings and vary the utilization profile as well. Moreover, it would be beneficial to weight the simulation data on the real energy requirements of those same buildings. This is a much more complex task since it would require extensive data acquisition throughout the year.
+If the data for each class were obtained from a set of real buildings in the region instead of just one, it would yield better results. Ideally, a statistically significant set of buildings and variable utilization profile could be used. Moreover, it would be beneficial to weigh the simulation data on the real energy requirements of those buildings. This is a much more complex task since it would require extensive data acquisition throughout the year.
 
-While this is feasible for electrical demand (as most operators provide customers with a detailed bill showing hourly consumption), it is much more difficult to obtain the same data for fossil fuel consumption. Additionally, the normalization has been done with the heated area and not with the volume (which is much more indicative of the energy requirement of a building). This is based on the on-field knowledge that the volume is usually approximately obtained by multiplying the heated area by a factor of 2.7 or 3 in most cases.
+From the simulation, humidification and dehumidification electricity needs are neglected since these plants are rarely installed today. A better evaluation would consider the possible future share of air treatment plants in the residential sector. For the purpose of this study, the share of installed air conditioning systems for cooling was assumed constant throughout the years, but it might increase in the future.
 
-From the simulation, we have neglected humidification and dehumidification electricity needs since these plants are rarely installed today. A better evaluation would consider the possible future share of air treatment plants in the residential sector. The share of installed air conditioning systems for cooling might increase in the future but for the purpose of this study it was assumed constant over the years.
+\subsubsection{Renewable Energy Sources}
+Solar-thermal systems were neglected since they are considered not very impactful and complex to evaluate.
 
-\paragraph{Renewable Energy Sources}
-We have neglected any solar-thermal systems installed since they are considered not very impactful and their impact is complex to evaluate.
+\subsubsection{Conversion to Primary Energy}
+Time-dependent efficiency for heat pumps, taking into account the ambient temperature could improve the model.
 
-\paragraph{Conversion to Primary Energy}
-Using time-dependent efficiency for heat pumps that take into account the ambient temperature could improve the model. This could be accomplished considering that our code uses hourly data.
+\subsubsection{Other Electricity Demand}
+This is the most complex contribution to evaluate, especially considering that it is not easy to forecast how electricity consumption will evolve in 60 years. Collecting a statistically significant number of data from the region regarding the type of appliances installed and their consumption would improve the simulation.
+For the purpose of this study the appliances demand was assumed constant throughout the years.
 
-\paragraph{Other Electricity Demand}
-This is without a doubt the most complex contribution to evaluate, especially considering that it is not easy to imagine how electricity consumption will evolve in 25 years. It could be improved by collecting a statistically significant number of examples from the region on the type of appliances installed and their consumption.
+\subsection{On the Plant Modelling and Simulation}
+The Modelica model could be utilized to analyze the dynamic response of the plant to transient conditions, thereby evaluating the system's adequacy and frequency control capabilities. This analysis could focus on critical periods, such as specific days of the year characterized by significant demand oscillations.
 
-The methodology of using class distribution as a way of evaluating energy demand is considered a good approach. For the best results, we should gather consumption data for both electric and fossil fuels for a statistically significant number of buildings for each energy class.
+Additionally, buffers with limited capacity could be modeled to further understand their impact on system dynamics. The hydrogen plant could be simulated to partially shut down some HTSE units, allowing for better adaptation to demand variations.
 
-\subsection{On the Plant Modelling}
+Incorporating chemical kinetics into the methanation model could enhance the simulation of the plant's dynamic response to transient conditions. Furthermore, the optimization of hydrogen tapped for market consumption could be based on a detailed analysis of the transportation sector.
+
+Lastly, the sizing of the entire plant should be optimized based on a comprehensive economic assessment.
+
 \subsection{On the Economic Study}
 
 \section{Conclusion}
