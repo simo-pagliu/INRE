@@ -1,9 +1,8 @@
 \section{Environmental Impact}
 The environmental impact of the plant is assessed based on the following indicators: GHG emissions intensity, water usage, and land use.
 
-The assessment is conducted on the optimized operational scenario in which, for the first 20 years, both reactors are dedicated exclusively to electricity production and sale. After year 20, the secondary section of the plant—comprising High Temperature Steam Electrolyzer (HTSE) units and a methanation system coupled with a turbine—is introduced.
+The assessment is conducted on the optimized operational scenario (previously named "Middle of the Road") in which, for the first 20 years, both reactors are dedicated exclusively to electricity production and sale.
 
-As a result, a higher impact on GHG emissions intensity is expected in the early years, primarily due to the exclusive focus on electricity generation.
 
 \subsection{GHG emissions intensity assessment}
 
@@ -42,7 +41,7 @@ The values used are:
 
 For nuclear power, other sources support values around 12 $gCO_{2}eq/kWh$ ~\cite{vinoya2024life} and ~\cite{wang2019comparative}.
 
-Equivalent GHG emissions intensity for plant products are:
+Equivalent GHG emissions intensity for the other plant products are:
 
 \begin{table}[H]
     \centering
@@ -145,7 +144,7 @@ The impact of the hydrogen produced by the plant is assessed by assuming that it
     \label{tab:transportation_h2_fossil}
 \end{table}
 
-Beyond the GHG reduction, it is worth highlighting that hydrogen substitution would also positively affect local air quality due to the elimination of particulate matter emissions typically associated with diesel and gasoline combustion. However, this benefit is not quantified within this study.
+Beyond the GHG reduction, it is worth highlighting that hydrogen substitution would also positively affect local air quality due to the elimination of non-GHG emissions typically associated with diesel and gasoline combustion. However, this benefit is not quantified within this study.
 
 \subsubsection{Results}
 All results are summarized in the following plots, which illustrate the evolution of GHG emission intensities over time, along with changes in electricity and fossil fuel demand.
@@ -177,8 +176,8 @@ The plots highlight several significant trends, including:
 \subsection{Land Use}
 One of the key advantages of the proposed project is its minimal land use impact. The compact scale of the facility, combined with its placement in an area already approved for nuclear activities, ensures efficient use of space. The site is located within the Joint Research Centre (JRC) complex, which already hosts research reactors (ESSOR and Ispra-1) and associated nuclear infrastructure. Notably, a containment building is available on-site and is deemed suitable to house at least one of the two planned Small Modular Reactors (SMRs), greatly reducing the need for new construction and environmental disturbance.
 
-\section{Possible Improvements}
-\subsection{On the Data Collection}
+\section{Limitations and Possible Improvements}
+\subsection{Data Collection}
 If the data for each class were obtained from a set of real buildings in the region instead of just one, it would yield better results. Ideally, a statistically significant set of buildings and variable utilization profile could be used. Moreover, it would be beneficial to weigh the simulation data on the real energy requirements of those buildings. This is a much more complex task since it would require extensive data acquisition throughout the year.
 
 From the simulation, humidification and dehumidification electricity needs are neglected since these plants are rarely installed today. A better evaluation would consider the possible future share of air treatment plants in the residential sector. For the purpose of this study, the share of installed air conditioning systems for cooling was assumed constant throughout the years, but it might increase in the future.
@@ -193,7 +192,7 @@ Time-dependent efficiency for heat pumps, taking into account the ambient temper
 This is the most complex contribution to evaluate, especially considering that it is not easy to forecast how electricity consumption will evolve in 60 years. Collecting a statistically significant number of data from the region regarding the type of appliances installed and their consumption would improve the simulation.
 For the purpose of this study the appliances demand was assumed constant throughout the years.
 
-\subsection{On the Plant Modelling and Simulation}
+\subsection{Plant Modelling and Simulation}
 The Modelica model could be utilized to analyze the dynamic response of the plant to transient conditions, thereby evaluating the system's adequacy and frequency control capabilities. This analysis could focus on critical periods, such as specific days of the year characterized by significant demand oscillations.
 
 Additionally, buffers with limited capacity could be modeled to further understand their impact on system dynamics. The hydrogen plant could be simulated to partially shut down some HTSE units, allowing for better adaptation to demand variations.
@@ -202,13 +201,13 @@ Incorporating chemical kinetics into the methanation model could enhance the sim
 
 Lastly, the sizing of the entire plant should be optimized based on a comprehensive economic assessment.
 
-\subsection{On the Economic Study}
+\subsection{Economic Assessment}
 
 \subsubsection{Impact of interest rates on borrowed capital}
 
 \subsubsection{Impact of water cost on HTSE OPEX}
 
-subsection{On the Environmental Impact Assessment}
+\subsection{Environmental Impact Assessment}
 
 \subsubsection{Water Usage}
 The impact on water resources, primarily required for reactor and Balance of Plant (BoP) operation as well as for the High Temperature 
