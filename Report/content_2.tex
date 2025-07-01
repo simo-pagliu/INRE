@@ -29,8 +29,8 @@ Developing and solving such a model would be computationally expensive and dispr
 
 
 The choice was then made on the number of HTSE modules, simply considering the average between the minimum number of modules required (12) and the maximum allowed (18, with two SMRs).
-This results in a total of 15 HTSE modules. Accordingly, as the HTSE modules require a significant amount of electricity to operate, the number od SMRs was set to two.
-This allows for an efficient operation of the whole plant, with the need to import electricity just in less than 10\% of the hours in a year.
+This results in a total of 15 HTSE modules. Accordingly, as the HTSE modules require a significant amount of electricity to operate, the number of SMRs was set to two.
+This allows for an efficient operation of the whole plant, with the need to import electricity just in less than $10\%$ of the hours in a year.
 
 However, to reduce the computational burden of the simulation in Dymola, the system is modeled using a single SMR and a single HTSE module. 
 The actual electricity output from the SMR and hydrogen production from the HTSE are then scaled by multiplying the simulated values by the respective number of units within the model. 
@@ -39,8 +39,8 @@ These scaled values are used to evaluate the overall energy balance and to feed 
 The SMRs supply electricity to the grid, as well as both electricity and the required heat to the hydrogen production unit.
 The HTSEs generate hydrogen from water using the thermal and electrical energy provided by the SMRs. 
 
-At each time step, 10\% of the produced hydrogen is assumed to be stored temporarily in a buffer for future sale. 
-The remaining 90\% is sent to the methanation reactor, where it reacts with carbon dioxide to produce methane.
+At each time step, $10\%$ of the produced hydrogen is assumed to be stored temporarily in a buffer for future sale. 
+The remaining $90\%$ is sent to the methanation reactor, where it reacts with carbon dioxide to produce methane.
 
 The profile and magnitude of the future hydrogen demand is not known: the only purpose of this simplified assumption is to allow the technical evaluation of the plant's operation,
 while considering a reasonable amount of hydrogen to be stored and sold. 
@@ -55,7 +55,7 @@ The TANDEM library \cite{TANDEM} was used to model the SMR, employing a simplifi
 Despite being a simplified model, the overall system is quite detailed and includes various components, allowing for a realistic simulation of the reactor's behavior. 
 It captures the dynamics of the primary and secondary loops, the turbines, the condenser, and the associated control systems. 
 
-The selected model is part of the POLIMI section of the SMR branch in the TANDEM library. Specifically, the "Test\_BOPfluid\_NSSS" \cite{TANDEM} is a test model of the 
+The selected model is part of the POLIMI section of the SMR branch in the TANDEM library. Specifically, the \verb|Test\_BOPfluid\_NSSS| \cite{TANDEM} is a test model of the 
 177~MW$_e$ light-water cooled Small Modular Reactor (SMR), based on the European SMR (E-SMR) design as proposed by the Euratom ELSMOR project~\cite{tandem_documentation}.
 The model is based on elementary components taken from the ThermoPower library \cite{TANDEM}.
 
@@ -91,12 +91,11 @@ Some useful specifics of the SMR model are:
 
 
 
-
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Simple schematic of the selected SMR model in Dymola.}
-    \label{fig:plant_schematic}
+    \label{fig:SMR_schematic}
 \end{figure}
 
 
@@ -130,7 +129,7 @@ Intermediate Pressure (IP) tap loop, once the tap-steam flowrate is defined.
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Simple schematic of the Intermediate Pressure (IP) tap loop.}
-    \label{fig:plant_schematic}
+    \label{fig:IP_tap_schematic}
 \end{figure}
 
 The tap-steam flowrate is defined in the Control Room section, where the setpoint for the steam extraction is computed based on the target $H_2$ production.
@@ -158,7 +157,7 @@ The $H_2$ plant is equipped with a buffer tank used to temporarily store the por
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Simple schematic of the $H_2$ plant model in Dymola.}
-    \label{fig:plant_schematic}
+    \label{fig:H2_plant_schematic}
 \end{figure}
 
 As the model is designed to simulate the operation of a single HTSE module, the target hydrogen production rate (and the effective output production rate) is obtained 
@@ -208,7 +207,7 @@ From this, we deduce that producing 1 kg of synthetic gas requires approximately
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Simple schematic of the Methanation Reactor model in Dymola.}
-    \label{fig:plant_schematic}
+    \label{fig:Methanation_schematic}
 \end{figure}
 
 
@@ -250,7 +249,7 @@ The only output of the Gas Turbine is:
     \centering
     \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
     \caption{Simple schematic of the Gas Turbine model in Dymola.}
-    \label{fig:plant_schematic}
+    \label{fig:GasTurbine_schematic}
 \end{figure}
 
 
@@ -272,12 +271,23 @@ The instantaneous content of each buffer is then computed through a mass balance
 
 As stated previously, the $H_2$ buffer is used to store the $10\%$ of the produced hydrogen, which is then sold.
 The $CH_4$ buffer is used to store the syngas produced by the methanation reactor, which can later be used to cover the residual fossil fuel demand of the region.
-
 \begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-    \caption{Simple schematic of the $H_2$ and $CH_4$ buffers in Dymola.}
-    \label{fig:plant_schematic}
+    \includegraphics[width=\textwidth]{figures/placeholder.png}
+    \caption{$H_2$ buffer schematic}
+    \label{fig:H2_buffer_schematic}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/placeholder.png}
+    \caption{$CH_4$ buffer schematic}
+    \label{fig:CH4_buffer_schematic}
+  \end{subfigure}
+  \caption{Simple schematics of the $H_2$ (left) and $CH_4$ (right) buffers in Dymola.}
+  \label{fig:buffers_schematic}
 \end{figure}
 
 \subsubsection{Control Room}
