@@ -4,7 +4,7 @@
 \usepackage{amsmath, amssymb}
 \usepackage{graphicx}
 \usepackage{xcolor}
-\usepackage{geometry}
+\usepackage[margin=2.5cm]{geometry}
 \usepackage{float}
 \usepackage{wrapfig}
 \usepackage{titlesec}
@@ -21,6 +21,9 @@
 \usepackage{tcolorbox}
 \usepackage{listings}
 \usepackage{booktabs}
+\usepackage{enumitem}
+\setlist[itemize]{itemsep=2pt, topsep=4pt, parsep=0pt, partopsep=0pt}
+
 
 % Restore \underbar and \underline before loading sectsty
 \let\oldunderbar\underbar
@@ -51,6 +54,12 @@
 \renewcommand{\normalsize}{\fontsize{9}{10}\selectfont}
 \renewcommand{\small}{\fontsize{8}{10}\selectfont}
 \renewcommand{\footnotesize}{\fontsize{7}{9}\selectfont}
+% Set caption font size
+\captionsetup{
+    font=small,
+    labelfont=bf,
+    textfont=it
+}
 
 % Section formatting
 \makeatletter
@@ -71,8 +80,8 @@
 \fancypagestyle{plain}{\fancyhf{}} % Default plain style
 \fancypagestyle{post-index}{
     \fancyhf{}
-    \fancyhead[LE]{\textit{Simone Pagliuca, et al.}}
-    \fancyhead[RO]{\textit{Title or whatever}}
+    \fancyhead[LE]{\textit{Alessandro Borgonovo, Gaia Larici, Riccardo Monti, Simone Pagliuca, Riccardo Ronchi}}
+    \fancyhead[RO]{\textit{Integration of Nuclear and Renewable Energy for Carbon Neutral Scenarios}}
     \fancyfoot[LE,RO]{\thepage}
     \renewcommand{\headrulewidth}{0.4pt}
     \renewcommand{\footrulewidth}{0.4pt}
@@ -96,6 +105,17 @@
     tabsize=4
 }
 \lstset{style=custombox}
+
+% Define Modelica language
+\lstdefinelanguage{Modelica}{
+  morekeywords={
+    model, equation, end, function, input, output, algorithm, if, then, else, elseif, for, while, loop, when, connect, parameter, constant, discrete, initial, final, public, protected, encapsulated, extends, redeclare, replaceable, inner, outer, import, from, class, record, type, operator, pure, impure, partial, block, connector, expandable, annotation, assert, terminal
+  },
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]{'}
+}
 
 % Box styles
 \tcbset{
@@ -134,6 +154,16 @@
 \input{content_3.tex}
 \input{content_4.tex}
 \input{content_5.tex}
+
+\newpage
+
+% Appendix
+\appendix
+\section*{Appendix}
+\addcontentsline{toc}{section}{Appendix}
+
+% Example appendix content
+\input{appendix_1.tex}
 
 \newpage
 

@@ -9,36 +9,22 @@ The simulation methodology follows these steps:
   \item For each scenario, an annual net electricity demand profile for the regional grid was 
   derived through the data analysis developed in Section~\ref{sec:data-collection}.
 
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[width=0.8\textwidth]{figures/3_daily_avg_demand.png}
-      \caption{Example of daily average electricity demand profile for the regional grid across a year.}
-      \label{fig:daily_avg_demand}
-    \end{figure}
-
   \item The annual profile was then clustered into five groups of days with similar load 
   characteristics. These representative days were then dynamically simulated with Dymola. 
-
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[width=0.8\textwidth]{figures/3_clusters.png}
-      \caption{Example of clusters for an annual demand profile.}
-      \label{fig:clusters}
-    \end{figure} 
 
   \item A Python-based algorithm reconstructs the full annual profile by substituting actual days with the corresponding simulated cluster days.
 
   \item Monthly energy balances, including electricity sold to the community, surplus energy exported to the market, and energy deficits covered by purchases from the market, are extracted and used as input for the economic analysis of the plant.
 
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-      \caption{Example of final output results for 1-year operation.} %metti tabella di energie mensili output
-      \label{fig:plant_schematic}
-    \end{figure}
-
   \item The yearly hydrogen and syngas production data are also extracted from the simulation results and added as input for the economic analysis.
 \end{enumerate}
+
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/3_clusters.png}
+    \caption{Example of clusters for an annual demand profile.}
+    \label{fig:clusters}
+  \end{figure} 
 
 
 \subsection{Dymola simulation features}

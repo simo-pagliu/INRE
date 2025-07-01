@@ -1,0 +1,204 @@
+\begin{lstlisting}[language=Modelica, caption= Methanation Reactor]
+model MethanationReactor
+  import      Modelica.Units.SI;
+  import Modelica.Blocks.Interfaces.RealInput;
+  import Modelica.Blocks.Interfaces.RealOutput;
+
+  // Parameters
+  parameter SI.Volume V = 0.01 "Reactor volume [m^3]";
+  parameter SI.Temperature T = 573.15 "Reactor temperature [K]";
+  parameter SI.Pressure p = 1e5 "Operating pressure [Pa]";
+  parameter Real A = 1e10 "Pre-exponential factor [mol/(m^3.s)]";
+  parameter Real Ea = 100000 "Activation energy [J/mol]";
+  parameter Real conversionEfficiency = 0.80 "CO2+H2 conversion efficiency";
+
+  // Inputs: molar flow rates [mol/s]
+  RealInput n_H2_in "Inlet molar flow rate of H2"
+  RealInput n_CO2_in "Inlet molar flow rate of CO2"
+
+  // Outputs
+  RealOutput PCI "Lower calorific value [MJ/kg]"
+  RealOutput m_flow_rate "Total gas mass flow rate [kg/s] (CO2+CH4+H2)"
+
+  // Constants
+  constant Real R = 8.314 "Gas constant [J/mol.K]";
+  constant Real M_CH4 = 16.0 "CH4 molar mass [g/mol]";
+  constant Real M_CO2 = 44.0 "CO2 molar mass [g/mol]";
+  constant Real M_H2  = 2.0  "H2 molar mass [g/mol]";
+  constant Real LHV_CH4 = 50.0e6 "CH4 PCI [J/kg]";
+  constant Real LHV_H2  = 120.0e6 "H2 PCI [J/kg]";
+  constant Real UHV_CH4 = 55.4e6 "CH4 PCS [J/kg]";
+  constant Real UHV_H2 = 141.8e6 "H2 PCS [J/kg]";
+
+  // Internal variables
+  Real n_CH4_out, n_H2_out, n_CO2_out;
+  Real m_CH4_out, m_H2_out, m_CO2_out;
+
+  // Temporary variable
+  Real CH4_formed;
+
+  RealOutput PCS "Upper calorific value [MJ/kg]"
+algorithm 
+  // Conversion based on limiting reagent
+  CH4_formed := min(n_CO2_in, n_H2_in / 4) * conversionEfficiency;
+
+  // Molar flows after conversion
+  n_CH4_out := CH4_formed;
+  n_H2_out  := max(n_H2_in - 4 * CH4_formed, 0);
+  n_CO2_out := max(n_CO2_in - 1 * CH4_formed, 0);
+
+  // Mass flows [kg/s]
+  m_CH4_out := n_CH4_out * M_CH4 / 1000;
+  m_H2_out  := n_H2_out  * M_H2  / 1000;
+  m_CO2_out := n_CO2_out * M_CO2 / 1000;
+
+  m_flow_rate := max(m_CH4_out + m_H2_out + m_CO2_out, 1e-6); // stabilized
+
+  // Calorific value [MJ/kg]
+  PCI := max((m_CH4_out*LHV_CH4 + m_H2_out*LHV_H2) / m_flow_rate, 0);
+  PCS := max((m_CH4_out*UHV_CH4 + m_H2_out*UHV_H2) / m_flow_rate, 0);
+
+end MethanationReactor;
+
+\end{lstlisting}
+\newpage
+\begin{lstlisting}[language=Modelica, caption= Methanation Control Input]
+  model MethanationControlInput
+  import      Modelica.Units.SI;
+  import Modelica.Blocks.Interfaces.RealInput;
+  import Modelica.Blocks.Interfaces.RealOutput;
+
+  // Parameters
+  parameter Real stoichRatio = 4 "H2:CO2 molar ratio (default = 4 for stoichiometric)";
+  parameter SI.Time T = 0 "Response time for control ramp [s]";
+
+  // Constants
+  constant Real M_H2 = 2.0 "H2 molar mass [g/mol]";
+
+  // Inputs
+  RealInput m_H2_in "H2 mass flow rate [kg/s]"
+
+  // Outputs
+  RealOutput n_H2_out "H2 molar flow rate [mol/s]"
+  RealOutput n_CO2_out "CO2 molar flow rate [mol/s]"
+
+  // Internal variables (target values)
+  Real n_H2_target;
+  Real n_CO2_target;
+
+  // State variables for first-order delay
+  Real n_H2_delayed(start=0);
+  Real n_CO2_delayed(start=0);
+
+equation 
+  // Convert to molar flow
+  n_H2_target = m_H2_in * 1000 / M_H2;
+  n_CO2_target = n_H2_target / stoichRatio;
+
+  if T > 0 then
+    der(n_H2_delayed) = (n_H2_target - n_H2_delayed) / T;
+    der(n_CO2_delayed) = (n_CO2_target - n_CO2_delayed) / T;
+  else
+    n_H2_delayed = n_H2_target;
+    n_CO2_delayed = n_CO2_target;
+  end if;
+
+  // Outputs
+  n_H2_out = n_H2_delayed;
+  n_CO2_out = n_CO2_delayed;
+end MethanationControlInput;
+\
+\end{lstlisting}
+\newpage
+\begin{lstlisting}[language=Modelica, caption= H2 Buffer]
+  model H2_Buffer
+  Modelica.Blocks.Interfaces.RealInput mass_flow_in
+  Modelica.Blocks.Interfaces.RealOutput mass_flow_out
+  parameter Real stock = 0;
+
+  Real Content(start=0) "Amount of mass stored in the buffer";
+
+equation 
+    // Mass balance differential equation
+  der(Content) = mass_flow_in - mass_flow_out;
+
+  // Ensure mass_flow_out does not exceed the available content
+  mass_flow_out = if Content > 0 then min((1-stock)*mass_flow_in, Content) else 0;
+
+end H2_Buffer;
+\end{lstlisting}
+
+\begin{lstlisting}[language=Modelica, caption= CH4 Buffer]
+  model CH4_Buffer
+  Modelica.Blocks.Interfaces.RealInput mass_flow_in
+  Modelica.Blocks.Interfaces.RealInput mass_flow_out
+  Modelica.Blocks.Interfaces.RealInput mass_flow_to_grid
+
+  Real Content(start=0) "Amount of mass stored in the buffer";
+
+equation 
+  // Mass balance differential equation
+  der(Content) = mass_flow_in - mass_flow_out - mass_flow_to_grid;
+
+end CH4_Buffer;
+\end{lstlisting}
+
+\newpage
+\begin{lstlisting}[language=Modelica, caption= Control Room]
+  model Control_Room
+  import Modelica.Blocks.Types.Extrapolation;
+  import Modelica.Blocks.Sources.CombiTimeTable;
+
+  parameter Real n_HTSE = 8;
+  parameter Real manualTable[:, :] = fill(0.0, 2, 5);
+  parameter Real n_Reactors = 1;
+
+  // Inputs
+  Modelica.Blocks.Interfaces.RealInput P_nuc(start=100e6);
+  Modelica.Blocks.Interfaces.RealInput P_turbine(start = 10e6);
+  Modelica.Blocks.Interfaces.RealInput P_HTSE( start =1e6);
+
+  // Outputs
+  Modelica.Blocks.Interfaces.RealOutput setpoint_H2;
+  Modelica.Blocks.Interfaces.RealOutput mflow_tapSteam;
+  Modelica.Blocks.Interfaces.RealOutput turbine_load;
+  Modelica.Blocks.Interfaces.RealOutput fossil_fuel_demand;
+
+  // Variables
+  Real Energy_Excess(start=0);
+  Real tap_Setpoint(start=0);
+  Real ramped_HTSE;
+  Real ramped_turbogas;
+  Real total_fossil_fuel_demand;
+  Real Demand;
+
+  // Load CSV data
+  CombiTimeTable loadProfile(
+  tableOnFile = false,
+  table = manualTable,
+  columns = {2,3,4,5},
+  timeScale = 3600,
+  tableName = "",
+  extrapolation = Modelica.Blocks.Types.Extrapolation.HoldLastPoint)
+
+equation 
+  // Output assignments from table
+  ramped_HTSE              = loadProfile.y[1];
+  ramped_turbogas          = loadProfile.y[2];
+  Demand                   = loadProfile.y[3];
+  total_fossil_fuel_demand = loadProfile.y[4];
+
+
+  // GUI-visible outputs
+  setpoint_H2          = ramped_HTSE / 10;
+  turbine_load         = ramped_turbogas;
+  fossil_fuel_demand   = total_fossil_fuel_demand;
+  tap_Setpoint         = 2 * setpoint_H2;
+  mflow_tapSteam       = max(0.001, tap_Setpoint);
+
+  // Energy balance
+  Energy_Excess        = n_Reactors * P_nuc + P_turbine - P_HTSE * n_HTSE - Demand*1e6;
+
+end Control_Room;
+
+\end{lstlisting}

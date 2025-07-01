@@ -3,8 +3,8 @@ The TANDEM project library ~\cite{TANDEM} was widely used to model the entire pl
 The entire plant was modeled using Dymola, a technical software that employs the Modelica language for the dynamic analysis of complex systems. To satisfy the overall energy demand of the target region, the plant design integrates two 177 MWe Small Modular Reactors (SMRs) with fifteen High Temperature Steam Electrolyzers (HTSEs) and a Methanation Reactor. The Methanation Reactor produces nearly $CO_2$-neutral syngas for a small Gas Turbine with a capacity of 47 MWe. The TANDEM project library \cite{TANDEM} was extensively utilized to model the entire plant, with the exception of the Methanation Reactor, which was modeled from scratch in Dymola.
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-    \caption{Simple schematic of the proposed hybrid plant in Dymola.}
+    \includegraphics[width=0.8\textwidth]{figures/2_dymola_system.png}
+    \caption{Dymola model of the proposed hybrid plant.}
     \label{fig:plant_schematic}
 \end{figure}
 
@@ -61,15 +61,6 @@ For the purpose of this study, the detailed modeling of the primary loop is not 
 \end{tcolorbox}
 
 
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-    \caption{Simple schematic of the selected SMR model in Dymola.}
-    \label{fig:SMR_schematic}
-\end{figure}
-
-
 \subsubsection{H2 Plant}
 The hydrogen production plant is modeled using the TANDEM library \cite{TANDEM}, which offers a detailed representation of a High Temperature Steam Electrolyzer (HTSE) based on the ThermoSysPro library. This Solid Oxide Electrolyser Cell operates at high temperatures and is designed to produce hydrogen from water by utilizing both thermal and electrical energy supplied by the Small Modular Reactor (SMR). The model captures the dynamic behavior of the HTSE and simulates the hydrogen production process accordingly.
 
@@ -113,9 +104,9 @@ Based on the thermal input and several operational parameters, the HTSE model ca
 
 The hydrogen ($H_2$) plant is equipped with a buffer tank used to temporarily store the portion of hydrogen intended for sale, while the remainder is sent directly to the methanation reactor.
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
+    \includegraphics[width=0.8\textwidth]{figures/2_dymola_H2.png}
     \caption{Simple schematic of the $H_2$ plant model in Dymola.}
     \label{fig:H2_plant_schematic}
 \end{figure}
@@ -162,15 +153,6 @@ Water is assumed to be completely removed from the product stream. The resulting
 \paragraph{$CO_2$ Usage}
 Based on the product gas composition, the synthetic gas mass flow rate is 2.6325 kg (reference case). Given the process stoichiometry and conversion efficiency, the corresponding input of $CO_2$ is 3.7 kg. From this, we deduce that producing 1 kg of synthetic gas requires approximately 1.41 kg of $CO_2$.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-    \caption{Simple schematic of the Methanation Reactor model in Dymola.}
-    \label{fig:Methanation_schematic}
-\end{figure}
-
-
-
 \subsubsection{Gas Turbine}
 The gas turbine selected for this system is the GE LM6000, an aeroderivative machine capable of burning fuel with high hydrogen fractions and rapidly adjusting its power output. This makes it a valuable component for hybrid energy systems with high renewable penetration. The GE LM6000 is modeled by modifying the "GasTurbineSimplified" component found in the ThermoPower section of the TANDEM library \cite{TANDEM}.
 
@@ -199,14 +181,6 @@ The only output of the Gas Turbine is:
 \begin{itemize}
   \item $fuelFlowRateOut$: the mass flow rate of syngas required to meet the setpoint load
 \end{itemize}
-.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-    \caption{Simple schematic of the Gas Turbine model in Dymola.}
-    \label{fig:GasTurbine_schematic}
-\end{figure}
 
 
 \subsubsection{$H_2$ and $CH_4$ buffers}
@@ -226,24 +200,6 @@ The instantaneous content of each buffer is then computed through a mass balance
 
 As stated previously, the $H_2$ buffer is used to store the $10\%$ of the produced hydrogen, which is then sold.
 The $CH_4$ buffer is used to store the syngas produced by the methanation reactor, which can later be used to cover the residual fossil fuel demand of the region.
-\begin{figure}[ht]
-  \centering
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/placeholder.png}
-    \caption{$H_2$ buffer schematic}
-    \label{fig:H2_buffer_schematic}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/placeholder.png}
-    \caption{$CH_4$ buffer schematic}
-    \label{fig:CH4_buffer_schematic}
-  \end{subfigure}
-  \caption{Simple schematics of the $H_2$ (left) and $CH_4$ (right) buffers in Dymola.}
-  \label{fig:buffers_schematic}
-\end{figure}
 
 \subsubsection{Control Room}
 \label{subsubsec:control-room}
@@ -272,10 +228,3 @@ The outputs of the Control Room are:
 \end{itemize}
 
 Within the Control Room, the setpoints for the various components are imported as .csv files. These setpoints are generated beforehand by a Python script focused on analyzing single-day demand profiles, as described in the following section. The Control Room also computes the instantaneous energy excess based on the Energy Balance Equation, which is useful for economic assessment.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-    \caption{Control Room modelling in Dymola.}
-    \label{fig:control_room}
-\end{figure}
