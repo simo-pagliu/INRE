@@ -30,16 +30,23 @@ Regarding the electricity production from photovoltaic system we need to determi
 A reference profile of the PV production for the region is obtained and then weighted on the simulated scenario.
 
 Another electricity contribution is the one from appliances and lighting, $P_{e,other}$ which is assumed to be equal for all classes.
+The reference demand profile can then be determined for each energy class $i$ as follows:
 \begin{equation}
 \begin{aligned}
-P_{e,\text{ref}} = \sum_{i=\text{A4}}^{\text{G}} 
+P_{e,\text{ref},i} =
 \Bigg[
 &\chi_{\text{HP},i}
 \cdot 
 \left(
-\frac{\dot{Q}_{h,i}}{\text{COP}} 
+\frac{\dot{Q}_{h,i} + \dot{Q}_{DHW}}{\text{COP}} 
 + 
 \chi_{\text{cooling}} \cdot \frac{\dot{Q}_{c,i}}{\text{EER}}
+\right)
+\\
+&\left(1 - \chi_{\text{HP},i}\right)
+\cdot 
+\left(
+\frac{\dot{Q}_{h,i} + \dot{Q}_{DHW}}{\eta_{\text{fossil}}} 
 \right)
 \\
 &- 
@@ -57,23 +64,25 @@ P_{e,\text{ref}} = \sum_{i=\text{A4}}^{\text{G}}
 \end{equation}
 
 
-Then, this can be multiplied by the number of buildings in the region $N_{\text{UI}}$ to obtain the total demand $P_{e, \text{tot}}$.
+Then, this can be multiplied by the number of buildings in the region $N_{\text{UI}}$ and the share of each energy class $\chi_i$ to obtain the total demand $P_{e, \text{tot}}$.
 
 \begin{equation}
     P_{e, \text{tot}} = 
+    \sum_{i=\text{A4}}^{\text{G}} 
     N_{\text{UI}} 
     \cdot 
-    P_{e, \text{ref}} 
+    \chi_{i}
+    \cdot
+    P_{e, \text{ref, i}} 
 \end{equation}
 
 
 
-\subsubsection{Data Sources}
-From the CENED database \cite{cened2025} we extracted the information about the relevant municipalities of the region,
-which we derived based on the map of primary substations from the national grid operator (GSE) \cite{gse_cabine_primarie}.
+\paragraph{Data Sources}
+From the CENED database \cite{cened2025} we extracted the information about APEs for the relevant municipalities of the region,
+which were derived based on the map of primary substations from the national grid operator (GSE) \cite{gse_cabine_primarie}.
 The data was also filtered to include only residential buildings, excluding commercial and industrial ones.
-Furthermore, we filtered unhealthy data points at every step of the process, such as buildings with areas larger than $1000 m^2$ (mostly releated to errors in unit of measurement or lack of care in the production of the APE).
-This was necessary given the large amount of data from the complete regional database. This way an easier to manage csv file was obtained.
+Furthermore, we filtered unhealthy data points at every step of the process, most of the times by only only taking the $99^\circ$ percentile. This was necessary given the large amount of data from the complete regional database. After this preliminary filtering an easier-to-manage csv file was obtained.
 The number of buildings was computed from the ISTAT database \cite{istat2023} by extracting the population of the municipities and dividing by the average household size in the province.
 
 \subsection{Heating and Cooling Demand}
@@ -105,19 +114,21 @@ This is a very low share and is to be expected as the region under investigation
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/1_heat_pump_distribution.png}
-    \caption{Distribution of heat pumps across energy classes.}
-    \label{fig:heat_pump_distribution}
-\end{figure}
-
-\subsection{Photovoltaic}
-\subsubsection{Photovoltaic Distribution}
-We identified the share of building that have photovoltaic systems installed per energy class.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/1_photovoltaic_distribution.png}
-    \caption{Distribution of photovoltaic systems across energy classes.}
-    \label{fig:pv_distribution}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/1_heat_pump_distribution.png}
+        \caption{Distribution of heat pumps across energy classes.}
+        \label{fig:heat_pump_distribution}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/1_photovoltaic_distribution.png}
+        \caption{Distribution of photovoltaic systems across energy classes.}
+        \label{fig:pv_distribution}
+    \end{subfigure}
+    \caption{Distribution of heat pumps and photovoltaic systems across energy classes.}
+    \label{fig:hp_pv_distribution_side_by_side}
 \end{figure}
 
 \subsubsection{Photovoltaic System Size}
@@ -145,8 +156,8 @@ From these we plotted the distribution of the size of the photovoltaic system in
 
 The averages values are: $4.30$kW and $3.70$kW for the sistem with and without heat pumps respectevely.
 
-\subsubsection{Reference Production}
-We have to obtain a reference value of the photovoltaic production profile.
+\subsubsection{Reference Photovoltaic Production}
+We have to obtain a reference value of the photovoltaic production profile, rapresentative of the region under study.
 First, the list of municipalities is fed to the Nominatim API \cite{Nominatim} to obtain the coordinates of the center of each municipality.
 Then, we use the PVGIS API \cite{PVGIS} to obtain the hourly production profile for each municipality.
 We fixed the angle to an average $22^\circ$ and a plant size of $1kW$.
@@ -157,7 +168,7 @@ Then we can obtain the reference production profile for each energy class $P_{e,
 
 \subsection{Other Electricity Demand}
 Electrical demand for appliances and lighting is modeled equal for all classes.
-The definition was manual, hour by hour for an average day in the following "seasons":
+The definition was manual, hour by hour for an average day, differentiated between the following cases:
 \begin{itemize}
     \item Winter Weekday
     \item Winter Weekend
@@ -166,7 +177,7 @@ The definition was manual, hour by hour for an average day in the following "sea
     \item Winter Holiday
     \item Summer Holiday
 \end{itemize}
-Moreover we added an absence factor to take into account when people go on holiday massively during august.
+Moreover we added an absence factor to take into account when people go on holiday massively during the summer period.
 
 The profile is defined by considering the following contributions:
 \begin{itemize}
@@ -176,44 +187,44 @@ The profile is defined by considering the following contributions:
 \end{itemize}
 During the summer the need for a cooling fan was added.  
 Moreover we added a parameter to rapresent the share of buildings with an induction system installed.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/placeholder.png}
-    \caption{Reference hourly profile through the year.}
-    \label{fig:reference_hourly_profile}
-\end{figure}
 
 \subsection{Validation}
 To verify our method is acceptable we compare the total demand by the data available online, in particual we compared it to the average annual deamnd,
 in the residential sector for the province of Varese \cite{portaleconsumi_energia_domestica}, which happends to be $1931 kWh$ in 2023,
 with a decreasing trend in the last years ($2016kWh$ in 2022 and $2119kWh$ in 2021).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/1_today_demand_daily_avg.png}
+    \caption{Daily averages thoughout the year of the resulting electric demand profile considering today's energy class distribtion.}
+    \label{fig:reference_hourly_profile}
+\end{figure}
 
 \subsection{Demand Distribution}
-To better visualize the behaviout of the demand we plot the distribution of the demand hour-by-hour for each scenario.
+To better visualize the behaviour of the demand we plot the distribution of the demand hour-by-hour for each scenario.
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/placeholder.png}
-        \caption{Scenario 1}
+        \caption{Today-15 Years}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/placeholder.png}
-        \caption{Scenario 2}
+        \caption{16-30 Years}
     \end{subfigure}
     \vskip\baselineskip
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/placeholder.png}
-        \caption{Scenario 3}
+        \caption{31-45 Years}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/placeholder.png}
-        \caption{Scenario 4}
+        \caption{46-60 Years}
     \end{subfigure}
     \caption{Distribution of the demand hour-by-hour for four scenarios.}
     \label{fig:demand_distribution_grid}
