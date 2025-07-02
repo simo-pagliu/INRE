@@ -87,39 +87,39 @@ Given that the data is based on real buildings, normalization was necessary to o
 \end{equation}
 
 \subsection{Heat Pump distribution and Cooling Demand}
-The share of heat pumps per energy class was identified. Additionally, the share of buildings equipped with cooling systems was determined, which currently stands at $9.58\%$. This relatively low percentage is expected, given that the region under investigation experiences mild summer temperatures.
+The share of heat pumps per energy class was identified \ref{fig:heat_pump_distribution}. Additionally, the share of buildings equipped with cooling systems was determined, which currently stands at $9.58\%$. This relatively low percentage is expected, given that the region under investigation experiences mild summer temperatures.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/1_heat_pump_distribution.png}
-        \caption{Distribution of heat pumps across energy classes.}
+        \caption{Heat pumps across energy classes.}
         \label{fig:heat_pump_distribution}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/1_photovoltaic_distribution.png}
-        \caption{Distribution of photovoltaic systems across energy classes.}
+        \caption{Photovoltaic systems across energy classes.}
         \label{fig:pv_distribution}
     \end{subfigure}
     \caption{Distribution of heat pumps and photovoltaic systems across energy classes.}
 \end{figure}
 
 \subsubsection{Photovoltaic System Size}
-Furthermore, the data was divided into two groups: heat pump equipped and non-equipped buildings. The distribution of the size of the installed photovoltaic systems was then plotted for each group. The average size, calculated based on the 99th percentile, was determined for both groups
+Furthermore, the data was divided into two groups: heat pump equipped and non-equipped buildings. The distribution of the size of the installed photovoltaic systems was then plotted for each group \ref{fog:sub@fig:pv_distribution}. The average size, calculated based on the 99th percentile, was determined for both groups
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/1_pv_size_hp.png}
         \caption{Photovoltaic system size distribution for buildings with heat pumps.}
         \label{fig:pv_size_hp}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/1_pv_size_no_hp.png}
         \caption{Photovoltaic system size distribution for buildings without heat pumps.}
@@ -127,7 +127,7 @@ Furthermore, the data was divided into two groups: heat pump equipped and non-eq
     \end{subfigure}
     \caption{Distribution of photovoltaic system sizes based on heat pump presence.}
 \end{figure}
-The average values for the size of the photovoltaic systems are $4.30$ kW for buildings with heat pumps and $3.70$ kW for those without heat pumps.
+The average values for the size of the photovoltaic systems are $4.30$ kW for buildings with heat pumps \ref{fig:pv_size_hp} and $3.70$ kW for those without heat pumps \ref{fig:pv_size_no_hp}.
 
 \subsubsection{Reference Photovoltaic Production}
 To establish a reference photovoltaic (PV) production profile representative of the analyzed region, the list of municipalities was first input into the Nominatim API \cite{Nominatim} to obtain the coordinates of the center of each municipality. Subsequently, the PVGIS API \cite{PVGIS} was utilized to acquire the hourly production profile for each municipality. The angle was fixed at an average of $22^\circ$, and a plant size of 11 kW was assumed. For each municipality, a profile was generated for every $10^\circ$ of the azimuth angle, ranging from $0^\circ$ to $360^\circ$. These profiles were then weighted according to a Gaussian distribution to reflect the preference for orienting photovoltaic systems towards the south. This process yielded a reference photovoltaic production profile for each municipality, denoted as $P_{e,m}^+$, where $m$ represents the municipality. The reference production profile for each energy class, $P_{e,ref}^+$, was then obtained by weighting the production profile of each municipality based on its population \cite{istat2023}.
@@ -154,7 +154,7 @@ During the summer, the need for cooling fans was included in the model. Furtherm
 
 \subsection{Validation}
 To validate the acceptability of the proposed method, the total demand was compared with data available online. Specifically, it was compared to the average annual demand in the residential sector for the province of Varese \cite{portaleconsumi_energia_domestica}, which was reported to be $1931 \; kWh$ in 2023. This value reflects a decreasing trend in recent years, with figures of $2016 \; kWh$ in 2022 and $2119 \; kWh$ in 2021.
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/1_today_demand_daily_avg.png}
     \caption{Daily averages thoughout the year of the resulting electric demand profile considering today's energy class distribtion.}
@@ -163,7 +163,7 @@ To validate the acceptability of the proposed method, the total demand was compa
 
 \subsection{Demand Distribution}
 To enhance the visualization of demand behavior, the distribution of demand was plotted for each scenario. This graphical representation aids in understanding the temporal variations and patterns in energy consumption across different scenarios.
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \centering

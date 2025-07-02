@@ -78,9 +78,9 @@ where $i$ indexes each energy source and each energy source's share $\chi_{i}$ i
 
 
 \paragraph{Local Energy Mix}
-Using a methodology analogous to the one applied at the regional level, the electricity consumption of the Seven Lakes Region is estimated based on monthly energy balances and photovoltaic production data previously gathered. The local energy mix is reconstructed using three main components: Nuclear, Renewables, and Fossil. The evolution of this mix over time, and its impact on GHG emissions intensity, is evaluated using the previous approach.
+Using a methodology analogous to the one applied at the regional level, the electricity consumption of the Seven Lakes Region is estimated based on monthly energy balances and photovoltaic production data previously gathered. The local energy mix is reconstructed using three main components: Nuclear, Renewables, and Fossil. The evolution of this mix over time \ref{fig:energy_mix_evolution}, and its impact on GHG emissions intensity, is evaluated using the previous approach.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/5_Energy_mix_evolution.png}
     \caption{Local energy mix evolution over time.}
@@ -147,17 +147,17 @@ The impact of the hydrogen produced by the plant is assessed by assuming that it
 Beyond the GHG reduction, it is worth highlighting that hydrogen substitution would also positively affect local air quality due to the elimination of non-GHG emissions typically associated with diesel and gasoline combustion. However, this benefit is not quantified within this study.
 
 \subsubsection{Results}
-All results are summarized in the following plots, which illustrate the evolution of GHG emission intensities over time, along with changes in electricity and fossil fuel demand.
+All results are summarized in plots \ref{fig:ghg_emissions} and \ref{fig:net_electricity_demand}, which illustrate the evolution of GHG emission intensities over time, along with changes in electricity and fossil fuel demand.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
-    \begin{minipage}{0.6\textwidth}
+    \begin{minipage}{0.5\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/5_GHG_emissions_over_time.png}
         \caption{GHG emissions intensity over time.}
         \label{fig:ghg_emissions}
     \end{minipage}\hfill
-    \begin{minipage}{0.6\textwidth}
+    \begin{minipage}{0.5\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/placeholder.png}
         \caption{Local Net Electricity and Fossil Demand evolution over time.}
@@ -175,78 +175,3 @@ The plots highlight several significant trends, including:
 
 \subsection{Land Use}
 One of the key advantages of the proposed project is its minimal land use impact. The compact scale of the facility, combined with its placement in an area already approved for nuclear activities, ensures efficient use of space. The site is located within the Joint Research Centre (JRC) complex, which already hosts research reactors (ESSOR and Ispra-1) and associated nuclear infrastructure. Notably, a containment building is available on-site and is deemed suitable to house at least one of the two planned Small Modular Reactors (SMRs), greatly reducing the need for new construction and environmental disturbance.
-
-\section{Limitations and Possible Improvements}
-\subsection{Data Collection}
-If the data for each class were obtained from a set of real buildings in the region instead of just one, it would yield better results. Ideally, a statistically significant set of buildings and variable utilization profile could be used. Moreover, it would be beneficial to weigh the simulation data on the real energy requirements of those buildings. This is a much more complex task since it would require extensive data acquisition throughout the year.
-
-From the simulation, humidification and dehumidification electricity needs are neglected since these plants are rarely installed today. A better evaluation would consider the possible future share of air treatment plants in the residential sector. For the purpose of this study, the share of installed air conditioning systems for cooling was assumed constant throughout the years, but it might increase in the future.
-
-\subsubsection{Renewable Energy Sources}
-Solar-thermal systems were neglected since they are considered not very impactful and complex to evaluate.
-
-\subsubsection{Conversion to Primary Energy}
-Time-dependent efficiency for heat pumps, taking into account the ambient temperature could improve the model.
-
-\subsubsection{Other Electricity Demand}
-This is the most complex contribution to evaluate, especially considering that it is not easy to forecast how electricity consumption will evolve in 60 years. Collecting a statistically significant number of data from the region regarding the type of appliances installed and their consumption would improve the simulation.
-For the purpose of this study the appliances demand was assumed constant throughout the years.
-
-\subsection{Plant Modelling and Simulation}
-The Modelica model could be utilized to analyze the dynamic response of the plant to transient conditions, thereby evaluating the system's adequacy and frequency control capabilities. This analysis could focus on critical periods, such as specific days of the year characterized by significant demand oscillations.
-
-Additionally, buffers with limited capacity could be modeled to further understand their impact on system dynamics. The hydrogen plant could be simulated to partially shut down some HTSE units, allowing for better adaptation to demand variations.
-
-Incorporating chemical kinetics into the methanation model could enhance the simulation of the plant's dynamic response to transient conditions. Furthermore, the optimization of hydrogen tapped for market consumption could be based on a detailed analysis of the transportation sector.
-
-Lastly, the sizing of the entire plant should be optimized based on a comprehensive economic assessment.
-
-\subsection{Economic Assessment}
-
-\subsubsection{Impact of interest rates on borrowed capital}
-
-\subsubsection{Impact of water cost on HTSE OPEX}
-
-\subsection{Environmental Impact Assessment}
-
-\subsubsection{Water Usage}
-The impact on water resources — primarily needed for reactor operations, Balance of Plant (BoP) systems, and HTSE units — is considered negligible. 
-This is largely due to the plant's proximity to Lake Maggiore, Italy's second-largest lake, which provides a reliable and abundant water supply without significantly affecting the its
-hydrological balance or ecosystem.
-
-However, a quantitative assessment of the water balance is recommended to determine precise water consumption and discharge rates. This evaluation should also consider potential 
-thermal impacts on the lake caused by plant operations. Given the lake's considerable size, such impacts are expected to be minimal, but detailed modeling is necessary for confirmation. 
-The results should be compared with applicable regulatory standards for industrial water use.
-
-For modeling purposes, the water required by the electrolysers is assumed to be unlimited, based on the lake's ample supply. Consequently, water costs are excluded from the HTSEs' 
-operational expenditure (OPEX), influencing the overall economic analysis.
-
-
-\section{Conclusions}
-
-The project demonstrates that hybrid energy systems can significantly reduce carbon emissions in the studied area by fully eliminating fossil 
-fuel use for electricity generation. Moreover, it lays the groundwork for further decarbonization of the transportation and heating sector.
-
-The plant model confirms the technical feasibility of the proposed system, providing a detailed, hour-by-hour account of energy and material 
-flows both within the plant boundaries and between the plant and the surrounding community.
-
-The plant layout was, at first, roughly designed primarily around the operational requirements of the gas turbine. As a result, the number of High-Temperature 
-Steam Electrolyzers (HTSEs) and Small Modular Reactors (SMRs) was determined based on this component constraints. 
-The plant was accordingly oversized, in order to ensure sufficient syngas production to let the gas turbine operate at full capacity.
-
-The ambitious decarbonization goals led to a substantial portion of the nuclear-generated electricity being allocated to 
-low-profit decarbonization processes — such as hydrogen and methane production — rather than being sold directly to the grid.
-
-A key finding of the economic analysis is that the high initial capital costs of the full hybrid system are unlikely to be recovered if all 
-components are built simultaneously. However, a phased implementation strategy can mitigate these costs and ultimately generate positive returns.
-
-To manage the financial burden and benefit from advancements in relevant technologies, the installation of the 
-HTSE-Methanator-Gas Turbine complex is postponed until the 20th year of operation. 
-In the first phase, the electricity from the SMRs is sold directly to the grid, generating more immediate and profitable returns 
-to help offset nuclear capital expenditures.
-
-This phased strategy mirrors the real-world approach of deploying SMRs incrementally to finance subsequent units. 
-Moreover, this strategic choice demonstrates resilience with respect to the main financial parameters possibly affecting its economic viability.
-
-When combined with the project's strong decarbonization potential and the elimination of foreign energy dependence, these results make 
-the proposal a compelling opportunity for the Seven Lakes region and a strategic use of the JRC's nuclear infrastructure.

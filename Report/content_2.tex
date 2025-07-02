@@ -1,6 +1,6 @@
 \section{Technical Plant Modelling}
 The entire plant was modeled using Dymola, a technical software that employs the Modelica language for the dynamic analysis of complex systems. To satisfy the overall energy demand of the target region, the plant design integrates two 177 MWe SMRs with fifteen HTSEs and a Methanation Reactor. The Methanation Reactor produces nearly $CO_2$-neutral syngas for a small Gas Turbine with a capacity of 47 MWe. The TANDEM project library \cite{TANDEM} was extensively utilized to model the entire plant, with the exception of the Methanation Reactor, which was modeled from scratch in Dymola.
-\begin{figure}[ht]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/2_dymola_system.png}
     \caption{Dymola model of the proposed hybrid plant.}
@@ -79,11 +79,11 @@ The electricity consumption is related to the hydrogen production rate according
 \end{equation}
 This relationship was derived by running a sweep simulation of the HTSE model in Dymola.
 
-A key modeling assumption is that the heat input to the HTSE corresponds to the actual value of the heat exchanged in the ideal Heat Exchanger of the Intermediate Pressure (IP) tap loop, once the tap-steam flow rate is defined.
+A key modeling assumption is that the heat input to the HTSE corresponds to the actual value of the heat exchanged in the ideal Heat Exchanger of the Intermediate Pressure (IP) tap loop \ref{fig:IP_tap_schematic}, once the tap-steam flow rate is defined.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/2_IPtap.png}
+    \includegraphics[width=0.45\textwidth]{figures/2_IPtap.png}
     \caption{Model of the Intermediate Pressure (IP) tap loop.}
     \label{fig:IP_tap_schematic}
 \end{figure}
@@ -103,14 +103,14 @@ Based on the thermal input and several operational parameters, the HTSE model ca
 
 The hydrogen ($H_2$) plant is equipped with a buffer tank used to temporarily store the portion of hydrogen intended for sale, while the remainder is sent directly to the methanation reactor.
 
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.75\textwidth]{figures/2_dymola_H2.png}
+    \includegraphics[width=0.65\textwidth]{figures/2_dymola_H2.png}
     \caption{Model of the $H_2$ plant model in Dymola.}
     \label{fig:H2_plant_schematic}
 \end{figure}
 
-As the model is designed to simulate the operation of a single HTSE module, the target hydrogen production rate (and the effective output production rate) is obtained by dividing (and multiplying) the total input (and output) value by the number of modules (15), through a simple "Gain" component.
+As the model is designed to simulate the operation of a single HTSE module, the target hydrogen production rate (and the effective output production rate) is obtained by dividing (and multiplying) the total input (and output) value by the number of modules (15), through a simple "Gain" component \ref{fig:H2_plant_schematic}.
 
 
 \subsubsection{Methanation Reactor Modeling Approach}

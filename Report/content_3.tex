@@ -19,9 +19,9 @@ The simulation methodology follows these steps:
   \item The yearly hydrogen and syngas production data are also extracted from the simulation results and added as input for the economic analysis.
 \end{enumerate}
 
-  \begin{figure}[H]
+  \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/3_clusters.png}
+    \includegraphics[width=0.9\textwidth]{figures/3_clusters.png}
     \caption{Example of clusters for an annual demand profile.}
     \label{fig:clusters}
   \end{figure} 
@@ -94,7 +94,7 @@ In contrast, the HTSE module is subject to a ramping rate limit of $10\%$ per ho
 
 A Python function manages the ramping behavior of both the turbine and HTSE loads, updating the previously calculated load profiles and corresponding energy balances accordingly.
  %put reference to appendix
-\begin{figure}[ht]
+\begin{figure}[!htbp]
   \centering
   \begin{minipage}[b]{0.48\textwidth}
     \centering
@@ -129,9 +129,9 @@ Each annual electricity balance includes:
   \item Energy acquired from the community's photovoltaic excess production.
 \end{itemize}
 
-\begin{figure}[ht]
+\begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{figures/3_Energy_Results.png}
+  \includegraphics[width=0.9\textwidth]{figures/3_Energy_Results.png}
   \caption{1-year energy balance for the last simulated period (year 45 to 60).}
   \label{fig:energy_results}
 \end{figure} 
