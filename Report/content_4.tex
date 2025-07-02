@@ -5,114 +5,311 @@ This economic assessment evaluates both investment and operational costs for the
 
 The analysis adopts the perspective of a public-sector energy agency, acting as a government-backed institution tasked with implementing regional decarbonization strategies. This agency benefits from dedicated funding from the Italian government in the form of zero-interest loans, facilitating investment in hybrid low-carbon infrastructure.
 
-The assessment spans a 60-year project horizon, divided into four incremental 20-year scenarios. While the analysis assumes a start year of 2025, which is not practically feasible for commissioning such complex infrastructure, this date was chosen to ensure a consistent framework amid limited long-term forecasting data. The first scenario considers the fully integrated system operational from the outset, but initial calculations suggest that such a configuration would not be economically sustainable under current market conditions. Consequently, an alternative scenario was explored, beginning with a fully electric configuration to then reach a subsequent integration of hydrogen and syngas production.
+The assessment spans a 60-year project horizon, divided into four incremental 15-year scenarios. While the analysis assumes a start year of 2025, which is not practically feasible for commissioning such complex infrastructure, this date was chosen to ensure a consistent framework amid limited long-term forecasting data. The first scenario considers the fully integrated system operational from the outset, but initial calculations suggest that such a configuration would not be economically sustainable under current market conditions. Consequently, an alternative scenario was explored, beginning with a fully electric configuration to then reach a subsequent integration of hydrogen and syngas production.
 
 \subsection{CAPEX}
-The estimation of capital expenditures (CAPEX) has been carried out for the main components of the proposed infrastructure, namely the E-SMRs, high-temperature steam electrolysers (HTSE), the hydrogen storage buffer, the hydrogen compressor, the gas turbine, and the methanation reactor. It is important to note that the balance of plant (BoP) costs and system integration costs have already been incorporated within the CAPEX figures reported, therefore they do not constitute separate cost items.
+The estimation of capital expenditures (CAPEX) has been carried out for the main components of the proposed infrastructure, namely the SMR, high-temperature steam electrolysers (HTSE), the hydrogen storage buffer, the hydrogen compressor, the gas turbine, and the methanation reactor. It is important to note that the balance of plant (BoP) costs and system integration costs have already been incorporated within the CAPEX figures reported, therefore they do not constitute separate cost items.
 
-\subsubsection {Capex for E-SMRs}
-The CAPEX for the E-SMRs have been estimated based on existing literature related to the TANDEM project. According to it, both reactors are assumed to have a technical lifetime of 60 years, and the specific investment cost, referred to the year 2023, is estimated at 6,050,000 EUR per MWe. This value emerges from the review conducted by CEA, where different references report investment costs ranging from 3,874,000 EUR/MWe to 7,712,000 EUR/MWe (TANDEM Project Documentation, 2023). This results in a total CAPEX of approximately 2,141.7 million EUR, considering a combined electrical output capacity of 354 MWe. This cost estimation is directly linked to the design choices adopted in the Modelica simulations, where the same libraries used within the TANDEM project framework have been selected, ensuring consistency between technical modeling and economic assessment.
+\subsubsection {Capex for SMR}
+The CAPEX for the SMR have been estimated based on existing literature \cite{TANDEM2023} related to the TANDEM project. Table~\ref{tab:esmrs_capex} summarizes the main investment cost figures:
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lcc}
+        \hline
+        \textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\
+        \hline
+        Technical lifetime & 60 & years \\
+        Specific investment cost & 6,050,000 & EUR/MWe \\
+        Combined electrical output & 354 & MWe \\
+        Total CAPEX & 2,141,700,000 & EUR \\
+        \hline
+    \end{tabular}
+    \caption{CAPEX estimation for SMR}
+    \label{tab:esmrs_capex}
+\end{table}
 
 \subsubsection {Capex for HTSE}
-The CAPEX for the HTSEs have been estimated again from the literature of the TANDEM project, in line with the methodology adopted for the E-SMRs. According to the TANDEM documentation, the specific investment cost for HTSE technology is approximately 780,000 EUR per MW of nominal power. Given that the system design includes fifteen electrolyser units, each with a nominal power of 21 MW, this leads to a total CAPEX of approximately 245.7 million EUR for the HTSE section. 
+The CAPEX for the HTSEs have been estimated again from the literature of the TANDEM project, in line with the methodology adopted for the SMR.
 
-Each HTSE unit is assumed to have a technical lifetime of around 20 years, so that considering a 60-year project horizon, the units will need to be replaced twice after the initial investment. It is, however, reasonable to assume that the cost of HTSE technology will decrease over time as the technology matures and economies of scale are realized. The estimation of the future reduction in CAPEX relies on the cost trends observed in the hydrogen market. The report 'The European Hydrogen Market Landscape' (2024) highlights that the production cost of green hydrogen decreased by 0.25 EUR/kg over one year, falling from 6.86 EUR/kg to 6.61 EUR/kg, corresponding to an annual reduction of approximately $3.5\%$. Conversely, data from the German market indicate a period of price stability (European Energy Exchange, 2025). Balancing these observations, and given the strong correlation between production costs and selling prices, an average annual cost reduction of $1.75\%$ is plausible, leading to a decrease of approximately $30\%$ after the first 20-year period. In the subsequent 20-year period, technological improvements will continue, albeit at a slower pace as the technology reaches maturity. Therefore, for the second replacement cycle, a more conservative annual decrease rate of $0.875\%$ has been assumed, corresponding to a cumulative CAPEX reduction of about $15\%$ over the second 20-year period. This anticipated decrease is primarily attributed to technological learning curves and increased manufacturing efficiencies as HTSE technology becomes more established in the market.
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lcc}
+        \hline
+        \textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\
+        \hline
+        Total nominal power (15 units) & 315 & MW \\
+        Specific investment cost & 780,000 & EUR/MW \\
+        Total CAPEX & 245,700,000 & EUR \\
+        Technical lifetime & 20 & years \\
+        \hline
+    \end{tabular}
+    \caption{CAPEX estimation for HTSE units}
+    \label{tab:htse_capex}
+\end{table}
+
+Considering a 60-year project horizon, the units will need to be replaced twice after the initial investment. It is, however, reasonable to assume that the cost of HTSE technology will decrease over time as the technology matures and economies of scale are realized. The estimation of the future reduction in CAPEX relies on the cost trends observed in the hydrogen market. The available data highlights that the production cost of green hydrogen decreased by 0.25 EUR/kg over one year, falling from 6.86 EUR/kg to 6.61 EUR/kg, corresponding to an annual reduction of approximately $3.5\%$ \cite{HydrogenMarket2024}. Conversely, data from the German market indicate a period of price stability \cite{EEX2025}. Balancing these observations, and given the strong correlation between production costs and selling prices, an average annual cost reduction of $1.75\%$ is plausible, leading to a decrease of approximately $30\%$ after the first 20-year period. In the subsequent 20-year period, technological improvements will continue, albeit at a slower pace as the technology reaches maturity. Therefore, for the second replacement cycle, a more conservative annual decrease rate of $0.875\%$ has been assumed, corresponding to a cumulative CAPEX reduction of about $15\%$. This anticipated decrease is primarily attributed to technological learning curves and increased manufacturing efficiencies as HTSE technology becomes more established in the market.
 
 \subsubsection {Capex for Hydrogen Storage Buffer}
-Also the CAPEX for the hydrogen buffer storage system have been estimated looking at the TANDEM project. In this case the specific investment cost is reported as 490 EUR per kg of hydrogen storage capacity. The hydrogen buffer has been sized to accommodate a maximum of one week of hydrogen production at full nominal capacity. Specifically, the storage capacity has been calculated considering a nominal production flow of 0.1 kg/s per electrolyser module, with fifteen modules operating simultaneously, resulting in a weekly storage requirement of approximately 100 tonnes:
+The CAPEX for the hydrogen buffer storage system is reported as 490 EUR per kg of hydrogen storage capacity \cite{TANDEM2023}. The hydrogen buffer has been sized to accommodate a maximum of one week of hydrogen production at full nominal capacity. Specifically, the storage capacity has been calculated considering a nominal production flow of 0.1 kg/s per electrolyser module, with fifteen modules operating simultaneously, considering $10\%$ of the flow going to storage, resulting in a weekly storage requirement of approximately 100 tonnes.
 
 \begin{equation}
-    \mathrm{Storage\ capacity\ [kg]} = 0.1 \left[ \frac{kg}{s}\right] \times 0.1 \left[ - \right] \times 15 \left[ \# \right] \times 3600 \left[ \frac{s}{h}\right] \times 24 \left[ \frac{h}{day}\right] \times 0.1 \left[ - \right] \times 7 \left[ day\right] \approx 100 \text{ton}
+    \mathrm{Storage\ capacity\ [kg]} = 0.1 \left[ \frac{kg}{s}\right] \times 0.1 \left[ - \right] \times 15 \left[ \# \right] \times 3600 \left[ \frac{s}{h}\right] \times 24 \left[ \frac{h}{day}\right] \times 7 \left[ day\right] \approx 100 \text{ton}
 \end{equation}
 
-Based on this storage capacity, the total CAPEX for the hydrogen buffer is estimated at approximately 49 million EUR (TANDEM Project Documentation). Similar to the assumptions made for the HTSE units, the hydrogen buffer is assumed to have a technical lifetime of 20 years, implying that it will need to be replaced twice during the 60-year project horizon, and the same cost reduction assumptions adopted for HTSE technology are applied.
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lcc}
+        \hline
+        \textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\
+        \hline
+        Total storage capacity & 100,000 & kg \\
+        Specific investment cost & 490 & EUR/kg \\
+        Total CAPEX & 49,000,000 & EUR \\
+        Technical lifetime & 20 & years \\
+        \hline
+    \end{tabular}
+    \caption{CAPEX estimation for hydrogen buffer storage system}
+    \label{tab:hydrogen_buffer_capex}
+\end{table}
+
+The buffer will need to be replaced twice during the 60-year project horizon, and the same cost reduction assumptions adopted for HTSE technology are applied.
 
 \subsubsection {Capex for Hydrogen Compressor}
-CAPEX have been still estimated based on data from the TANDEM project. The specific investment cost is reported as 1,000,000 EUR per MW of electrical power input, and the required compressor capacity has been determined using TANDEM’s reference, which indicates that compressing a hydrogen mass flow rate of 8,257 kg/h requires 17.82 MW of electrical power. Adapting this ratio to mass flow rates results in a required compressor capacity of approximately 1.5 MW, leading to a total CAPEX of around 1,500,000 EUR. The compressor is assumed by TANDEM to have a lifetime of 10 years, and the same cost reduction dynamics assumed for HTSE units have been applied.
+The required compressor capacity has been determined using TANDEM \cite{TANDEM2023}, which indicates that compressing a hydrogen mass flow rate of $8257 \; kg/h$ requires $17.82 \; MWh$. Scaling this information to the project mass flow results in the following:
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lcc}
+        \hline
+        \textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\
+        \hline
+        Required compressor capacity & 1.5 & MW \\
+        Specific investment cost & 1,000,000 & EUR/MW \\
+        Total CAPEX & 1,500,000 & EUR \\
+        Technical lifetime & 10 & years \\
+        \hline
+    \end{tabular}
+    \caption{CAPEX estimation for hydrogen compressor}
+    \label{tab:compressor_capex}
+\end{table}
+
+The compressor has a lifetime of 10 years, and the same cost reduction dynamics assumed for HTSE units have been applied.
 
 \subsubsection {Capex for Gas Turbine}
-The CAPEX for the gas turbine LM6000 have been estimated based on data reported in the study by Riboldi et al. (2020), which analyzed the environmental and economic impacts of offshore oil platform electrification. According to this study, the investment cost for one LM6000 gas turbine is approximately 23.2 million EUR. Although the system design requires a gas turbine capacity of 47 MW, to adopt a conservative approach, cost figures were retained corresponding to the 57 MW LM6000 unit as reported in the article, given that the model and technology are identical to those implemented in the selected design. The operational lifetime of the LM6000 gas turbine is assumed to be approximately 20 years.
+The CAPEX for the gas turbine LM6000 have been estimated based on data reported in the study by Riboldi et al. \cite{Riboldi2020}. According to this study, the investment cost for one LM6000 gas turbine is approximately \textbf{23.2 million EUR}. Although the system design requires a gas turbine capacity of 47 MW, to adopt a conservative approach, cost figures were retained corresponding to the 57 MW LM6000 unit as reported in the article, given that the model and technology are identical to those implemented in the selected design. The operational lifetime of the LM6000 gas turbine is assumed to be approximately 20 years.
 
 \subsubsection {Capex for Methanation Reactor}
-The CAPEX for the methanation reactor have been estimated at approximately 8.19 million EUR. This value has been derived based on the work of Götz et al. (2016), who reported that the investment cost of a methanation unit is roughly one-thirtieth of the cost of electrolysers. Accordingly, the same ratio was applied to specific electrolyser CAPEX figures to estimate the cost of the methanation subsystem in our project. The methanation reactor is assumed to have a technical lifetime of 20 years, and similarly as the HTSEs the methanation reactor is expected to benefit from cost reductions over time as the technology matures.
+The CAPEX for the methanation reactor have been estimated at approximately \textbf{8.19 million EUR}. This value has been derived based on the work of Götz et al. \cite{Gotz2016}, who reported that the investment cost of a methanation unit is roughly one-thirtieth of the cost of electrolysers. Accordingly, the same ratio was applied to specific electrolyser CAPEX figures. The methanation reactor is assumed to have a technical lifetime of 20 years, and similarly to the HTSEs the methanation reactor is expected to benefit from cost reductions over time as the technology matures.
 
 \subsection{OPEX}
-The estimation of OPEX has been carried out primarily based on data and assumptions provided in the TANDEM project documentation, with few exceptions of other sources. This analysis includes costs related to operation, maintenance, consumables, and other recurring expenses over the plant’s lifetime.
+The estimation of OPEX has been carried out primarily based on data and assumptions provided in the TANDEM \cite{TANDEM2023}, with few exceptions of other sources. This analysis includes costs related to operation, maintenance, consumables, and other recurring expenses over the plant’s lifetime.
 
-\subsubsection{Opex for E-SMRs}
-The OPEX for the E-SMRs are divided into variable costs, which amount to 24.4 EUR2023 per MWh of electrical output, and fuel costs are reported as 7.4 EUR2023 per MWh (TANDEM Project Documentation, 2023). Therefore, the total operating cost for the e-SMR system is calculated as 31.8 EUR2023/MWhe. Considering a combined power of 354 MW for the two E-SMR units, operating for 8,760 hours per year at a load factor of 0.98, the annual OPEX amounts to approximately 96,640,811 EUR:
+\subsubsection{Opex for SMR}
+The OPEX for the SMR are divided into variable costs and fuel costs.
+Considering a combined power of 354 MW for the two E-SMR units, operating for 8,760 hours per year at a load factor of 0.98, the final results are summarized in Table~\ref{tab:smr_opex}.
 
-\begin{equation}
-\mathrm{Annual\ OPEX\ [EUR/year]} = 354 \times 8{,}760 \times 0.98 \times 31.8 \approx 96{,}640{,}811
-\end{equation}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lcc}
+        \hline
+        \textbf{Cost Component} & \textbf{Value} & \textbf{Unit} \\
+        \hline
+        Variable OPEX & 24.4 & EUR$_{2023}$/MWh$_e$ \\
+        Fuel cost & 7.4 & EUR$_{2023}$/MWh$_e$ \\
+        Total OPEX & 31.8 & EUR$_{2023}$/MWh$_e$ \\
+        Annual OPEX & 96,640,811 & EUR/year \\
+        \hline
+    \end{tabular}
+    \caption{OPEX breakdown for SMR}
+    \label{tab:smr_opex}
+\end{table}
 
-Moreover, as highlighted in Riboldi et al. (2024), OPEX are expected to decrease over time as the technology transitions from First-of-a-Kind (FOAK) to Nth-of-a-Kind (NOAK) status.     After the initial 15 years of operation, costs are projected to decrease by approximately $30\%$ due to increased technological maturity and operational experience. During the subsequent 15 years, a further reduction of $10\%$ is expected, reflecting continued but slower learning curve effects. Beyond the first 30 years, OPEX levels are expected to stabilize, approaching their asymptotic lower limit. Unlike CAPEX reductions, these OPEX decreases have been modeled as gradual annual reductions.
+Moreover, as highlighted in \cite{VanHee2024}, OPEX are expected to decrease over time as the technology transitions from First-of-a-Kind (FOAK) to Nth-of-a-Kind (NOAK) status. After the initial 15 years of operation, costs are projected to decrease by approximately $30\%$ due to increased technological maturity and operational experience. During the subsequent 15 years, a further reduction of $10\%$ is expected, reflecting continued but slower learning curve effects. Beyond the first 30 years, OPEX levels are expected to stabilize, approaching their asymptotic lower limit. Unlike CAPEX reductions, these OPEX decreases have been modeled as gradual annual reductions.
 
 \subsubsection{Opex for HTSEs}
+<<<<<<< Updated upstream
 The OPEX for the HTSE have been set to $2.5\%$ of the corresponding CAPEX (TANDEM Project Documentation, 2023), corresponding to an annual OPEX of approximately 6.1425 million EUR.
 The OPEX for HTSE units is expected to annually decrease over time with the same cost reduction dynamics assumed for CAPEX, namely a $30\%$ reduction after the first 20 years and an additional $15\%$ reduction in the following 20 years. A small share of the electricity required to operate the HTSE units is repurchased from the local energy community through a dedicated offtake agreement at a price of 46.8 EUR/MWh, corresponding to the guaranteed minimum price for 2025; this price is assumed to increase proportionally in line with the general electricity price trend over time.
+=======
+The OPEX for the HTSE have been set to $2.5\%$ of the corresponding CAPEX \cite{TANDEM2023}, corresponding to an annual OPEX of approximately \textbf{6.1425 million EUR}. The OPEX for HTSE units is expected to annually decrease over time with the same cost reduction dynamics assumed for CAPEX, namely a $30\%$ reduction after the first 20 years and an additional $15\%$ reduction in the following 20 years.
+>>>>>>> Stashed changes
 
 \subsubsection{Opex for Hydrogen Storage Buffer and Compressor}
-Annual OPEX for the Buffer are considered equal to $1.5\%$ of the CAPEX, while those for the hydrogen compressor are equal to $1\%$ of the CAPEX (TANDEM Project Documentation, 2023), resulting in respectively 735,000 and 15,000EUR per year. As with the electrolysers, the OPEX for hydrogen storage is expected to decrease over time, following the same cost reduction trends applied to the CAPEX of hydrogen technologies.
+Annual OPEX for the Buffer are considered equal to $1.5\%$ of the CAPEX, while those for the hydrogen compressor are equal to $1\%$ of the CAPEX \cite{TANDEM2023}, resulting in respectively \textbf{735,000 EUR} and \textbf{15,000 EUR} per year. As with the electrolysers, the OPEX for hydrogen storage and compression is expected to decrease over time, following the same cost reduction trends applied to the CAPEX of hydrogen technologies.
 
 \subsubsection{Opex for Gas Turbine}
-OPEX have been estimated using data from Gas Turbine World (2024), which reports fixed O\&M costs of 16.30 USD/kW, resulting in about 13,930 EUR/MW annually, after conversion from USD and applying an exchange rate of 1.17 USD/EUR. Therefore, the total annual OPEX for the LM6000 gas turbine would be approximately 654,710 EUR. Since the project already secures its fuel supply from other subsystems, we have conservatively assumed that fuel-related OPEX can be reduced by $50\%$, leading to the final estimate of 327,355 EUR.
+OPEX have been estimated using data from Gas Turbine World (2024) \cite{GTW2024}, which reports fixed O\&M costs of 16.30 USD/kW, resulting in about 13,930 EUR/MW annually, by applying an exchange rate of 1.17 USD/EUR. Therefore, the total annual OPEX for the LM6000 gas turbine would be approximately 654,710 EUR. Since the project already secures its fuel supply from other subsystems, we have conservatively assumed that OPEX can be reduced by $50\%$, leading to the final estimate of \textbf{327,355 EUR}.
 
 \subsubsection{Opex for Methanation Reactor}
 The OPEX of a Methanation Reactor are significantly influenced by the costs of its input streams, particularly hydrogen and carbon dioxide ($CO_2$). While hydrogen is produced on-site, the required $CO_2$ must be sourced externally. It has been assumed that the acquired $CO_2$ is captured from industrial processes, where capture costs largely depend on the concentration of $CO_2$ in the flue gas stream, since higher $CO_2$ concentrations generally reduce capture costs.
 
-Two primary references have been considered for estimating $CO_2$ capture costs, which were used as proxies for C02 price. The first, the Global CCS Institute report (2017), indicates costs ranging from 30 to 70 $\frac{EUR}{ton-CO_2}$ depending on the industrial source, from coal-based to natural gas processes. The second study by Smith et al. (2024) reports an average cost of approximately 60 $\frac{EUR}{ton-CO_2}$, although without specifying the industrial source. Based on these data, a mean $CO_2$ capture cost of 55 $\frac{EUR}{ton-CO_2}$ has been assumed as a balanced compromise between the reported values.
+Two primary references have been considered for estimating $CO_2$ capture costs, which were used as proxies for $CO_2$ price. The first \cite{GCCS2017} indicates costs ranging from 30 to 70 $\frac{EUR}{ton-CO_2}$ depending on the industrial source, from coal-based to natural gas processes. The second study \cite{Smith2024} reports an average cost of approximately 60 $\frac{EUR}{ton-CO_2}$, although without specifying the industrial source. Based on these data, a mean $CO_2$ capture cost of 55 $\frac{EUR}{ton-CO_2}$ has been assumed as a balanced compromise between the reported values.
 
-Furthermore, future projections for $CO_2$ capture costs have been informed by findings from Gruber et al. (2022), who suggest that ongoing research and technological improvements are expected to reduce these costs of approximately $73.5\%$ (from 95 USD/ton to 25 in the long term), leading the initial 55 $\frac{EUR}{ton-CO_2}$ to an estimated cost of roughly 14.5 $\frac{EUR}{ton-CO_2}$ by around 2085. This cost reduction has been implemented as a gradual decrease over time.
+Furthermore, future projections for $CO_2$ capture costs have been informed by findings from Gruber et al. \cite{Gruber2022}, who suggest that ongoing research and technological improvements are expected to reduce these costs of approximately $73.5\%$ (from 95 USD/ton to 25 USD/ton in the long term), leading the initial 55 $\frac{EUR}{ton-CO_2}$ to an estimated cost of roughly 14.5 $\frac{EUR}{ton-CO_2}$ by around 2085. This cost reduction has been implemented as a gradual decrease over time.
 
 \subsection{Revenues}
-The revenue streams originate from multiple products and market segments. Specifically, revenues are generated through the sale of electricity to the local energy community (Comunità Energetica Rinnovabile, CER) and, when production exceeds local demand, through sales to the wholesale electricity market. Additionally, revenues are derived from hydrogen sales targeted primarily at the transport sector, as well as from synthetic gas (syngas) sales intended to meet the residual fossil fuel demand within the region and, in case of surplus production, to external markets beyond the project’s geographical scope. 
+Revenues streams originate from the sale of electricity to the local energy community (\textit{Comunità Energetica Rinnovabile}, CER for short) and, when production exceeds local demand, sales to the wholesale electricity market. Additional revenues are derived from hydrogen sales, targeted at the transport sector, and from syngas sales. The syngas is intended to meet the residual fossil fuel demand within the region and, in case of surplus production, to external markets beyond the project’s geographical scope.
 
 \subsubsection{Electricity Revenues}
-For electricity, revenues have been computed as the sum of earnings from sales to the CER and revenues from surplus electricity dispatched to the wholesale market. 
+For electricity, revenues have been computed as the sum of earnings from sales to the \textit{CER} and revenues from surplus electricity dispatched to the wholesale market. 
 
-Revenues from sales to the CER have been determined by considering the total annual electricity output delivered to the community, as calculated by the Modelica simulation outputs. The electricity price applied for these calculations has been derived from historical data of the zonal day-ahead electricity price (PUN zonale) for the Northern Italian market area, adjusted by a discount factor to promote public acceptance of the infrastructure. Specifically, the reference electricity price has been established by analyzing the monthly PUN zonale data recorded from 2022 to the present(GSE, 2023). An initial estimation of the zonal price for the remaining months of 2025 was obtained by extrapolating the trend observed in 2023 and 2024 through linear interpolation. Subsequently, a weighted average monthly price over the past three years was calculated, assigning higher weights to more recent data to reflect current market dynamics. Finally, the average annual price was determined by computing a weighted mean of these monthly values, where the weighting was based on the quantity of electricity sold to the community in each month, since this parameter is strongly influenced by seasonal variations in the community’s photovoltaic self-generation capacity. To enhance public acceptance and encourage regional engagement, a $10\%$ discount was applied to the final price offered to the CER as a form of implicit subsidy.
+Revenues from sales to the \textit{CER} have been determined by considering the total annual electricity output delivered to the community, as calculated by the Modelica simulation outputs. The electricity price applied for these calculations has been derived from historical data of the zonal day-ahead electricity price \textit{(PUN zonale)} for the Northern Italian market area, adjusted by a discount factor to promote public acceptance of the infrastructure.
 
-For electricity sold to the wholesale market, the same methodology was adopted for price estimation, following identical steps in the analysis of historical and projected PUN zonale data, since it is assumed that the energy surplus will be distributed in Lombardy. However, in this case, the $10\%$ discount was not applied, as market sales are not subject to local incentives or community agreements.
+Specifically, the reference electricity price has been established by analyzing the monthly PUN zonale data recorded from 2022 to the present \cite{GSE2023}. An initial estimation of the zonal price for the remaining months of 2025 was obtained by extrapolating the trend observed in 2023 and 2024 through linear interpolation. 
 
-Furthermore, long-term electricity price evolution has been informed by the work of Gabrielli et al. (2022), where in a scenario modeled for the UK electricity market in 2035, the study predicted a moderate growth. Based on these findings and the graphical results presented in the paper, we have assumed a cumulative electricity price increase of approximately 10% over 15 years. This corresponds to an annual average growth rate of roughly 0.6%, which has been applied consistently throughout the entire analysis horizon.
+Subsequently, a weighted average monthly price over the past three years was calculated, assigning higher weights to more recent data to reflect current market dynamics. Finally, the average annual price was determined by computing a weighted mean of these monthly values, where the weighting was based on the quantity of electricity sold to the community in each month, since this parameter is strongly influenced by seasonal variations in the community’s photovoltaic self-generation capacity. 
+
+To enhance public acceptance and encourage regional engagement, a $10\%$ discount was applied to the final price offered to the \textit{CER} as a form of implicit subsidy.
+
+For electricity sold to the wholesale market, the same methodology was adopted for price estimation, following identical steps in the analysis of historical and projected \textit{PUN zonale} data, since it is assumed that the energy surplus will be distributed in Lombardy. However, in this case, the $10\%$ discount was not applied, as market sales are not subject to local incentives or community agreements.
+
+Furthermore, long-term electricity price evolution has been informed by the work of Gabrielli et al. \cite{Gabrielli2022}, where in a scenario modeled for the UK electricity market in 2035, the study predicted a moderate growth. Based on these findings and the graphical results presented in the paper, we have assumed a cumulative electricity price increase of approximately $10\%$ over 15 years. This corresponds to an annual average growth rate of roughly $0.6\%$, which has been applied consistently throughout the entire analysis horizon.
 
 \subsubsection{Hydrogen Revenues}
 Hydrogen is commonly categorized based on its production pathway, which determines both its carbon footprint and market value. Among the different classifications, green hydrogen is produced through water electrolysis powered exclusively by renewable energy sources, while hydrogen produced via nuclear-powered electrolysis (referred to as pink or purple hydrogen) utilizes low-carbon electricity from nuclear reactors. 
 
-Due to a lack of robust market data on nuclear-derived hydrogen, the selected price has been approximated using the market value of green hydrogen, which was identified at approximately 240 EUR per MWh (EEX, 2025). This corresponds to a price of slightly over 8.5 EUR per kg of hydrogen. Consistent with the assumptions made for the declining production costs of hydrogen over time, the same approach has been applied to the projected sales price. The only difference with respect to the previous assumptions is that, for the final 20 years of the analysis, hydrogen is considered a sufficiently mature commodity whose price dynamics are expected to align with those of electricity, thereby following the same trend as electricity prices in the long term.
+Due to a lack of robust market data on nuclear-derived hydrogen, the selected price has been approximated using the market value of green hydrogen, which was identified at approximately \textbf{240 EUR per MWh} \cite{EEX2025}. This corresponds to a price of slightly over 8.5 EUR per kg of hydrogen. Consistent with the assumptions made for the declining production costs of hydrogen over time, the same approach has been applied to the projected sales price. The only difference with respect to the previous assumptions is that, for the final 20 years of the analysis, hydrogen is considered a sufficiently mature commodity whose price dynamics are expected to align with those of electricity, thereby following the same trend as electricity prices in the long term.
 
 \subsubsection{Synthethic Gas Revenues}
-Revenues from syngas sales have been estimated using data from the TANDEM project, which reports a market price of approximately 120 EUR per MWh for synthetic methane or syngas. Given that syngas production relies on hydrogen and captured CO₂ as input streams, which are projected to have a similar evolution in term of price reduction over time, its cost structure and market price are inherently linked to the dynamics of these two commodities.
-Consequently, the price of syngas is expected to evolve similarly to that of hydrogen. As with hydrogen, it has been assumed that in the final 20 years of the analysis, syngas will be a mature commodity whose price trends will align more closely with those of electricity and its associated energy markets.
+Revenues from syngas sales have been estimated using data from the TANDEM project \cite{TANDEM2023}, which reports a market price of approximately \textbf{120 EUR per MWh} for synthetic methane or syngas. Given that syngas production relies on hydrogen and captured $CO_2$ as input streams, which are projected to have a similar evolution in term of price reduction over time, its cost structure and market price are inherently linked to the dynamics of these two commodities.
+Consequently, the price of syngas is expected to evolve similarly to that of hydrogen. 
 
 \subsection{Economic Results: Base Solution}
-For the economic evaluation of the base case scenario, in which the hybrid energy system is implemented from the beginning, several financial performance indicators have been calculated, including the Net Present Value (NPV), the Levelized Cost of Electricity (LCOE), and the Internal Rate of Return (IRR). To perform these calculations, the economic model incorporates all cost and revenue data discussed in the previous sections, enabling the reconstruction of a comprehensive income statement and cash flow statement over the entire project horizon.
+For the economic evaluation of the base case scenario, in which the hybrid energy system is implemented from the beginning, several financial performance indicators have been calculated, including the NPV, the Levelized Cost of Electricity (LCOE), and the Internal Rate of Return (IRR). To perform these calculations, the economic model incorporates all cost and revenue data discussed in the previous sections, enabling the reconstruction of a comprehensive income statement and cash flow statement over the entire project horizon.
 
-A discount rate of 5% was selected for the financial analysis, representing a balanced assumption between what is cited in the literature (Associazione Italiana Nucleare, 2023). Additionally, the model accounts for corporate taxation, including the Italian corporate income tax (IRES) at a rate of 24% and the regional production tax (IRAP) at 3.9%.
+\begin{table}[ht]
+\centering
+\scriptsize
+\begin{tabular}{lrrrr}
+\toprule
+ & \multicolumn{4}{c}{Income Statement} \\
+\cmidrule(l){2-5}
+ & 2025 & 2026 & 2027 & 2028 \\
+Electricity & - & 96,007,787.40 € & 96,619,764.23 € & 97,235,618.60 € \\
+Hydrogen & - & 49,193,284.54 € & 48,332,402.06 € & 47,486,585.02 € \\
+Syngas & - & 41,031,126.49 € & 40,313,081.77 € & 39,607,602.84 € \\
+SMR & - & -94,369,959.29 € & -92,152,468.14 € & -89,987,083.27 € \\
+Hydrogen System & - & -6,730,541.07 € & -6,572,387.82 € & -6,417,950.84 € \\
+Methanator & - & -1,971,061.32 € & -1,915,259.80 € & -1,861,038.04 € \\
+Turbine & - & -327,355.00 € & -327,355.00 € & -327,355.00 € \\
+Opex & - & -103,398,916.68 € & -100,967,470.76 € & -98,593,427.15 € \\
+Investment & - 2,469,290,000.00 € & - & - & - \\
+EBITDA & - & 82,833,281.74 € & 84,297,777.29 € & 85,736,379.32 € \\
+Depreciation & - & -50,989,500.00 € & -50,989,500.00 € & -50,989,500.00 € \\
+EBIT & - & 31,843,781.74 € & 33,308,277.29 € & 34,746,879.32 € \\
+Taxes & - & -8,884,415.11 € & -9,293,009.36 € & -9,694,379.33 € \\
+Net income & - & 22,959,366.64 € & 24,015,267.93 € & 25,052,499.99 € \\
+Present value of costs & 2,469,290,000.00 € & 98,475,158.74 € & 91,580,472.35 € & 85,168,709.34 € \\
+Present value of energy & - & 1,379,115,005.67 € & 1,313,442,862.54 € & 1,250,897,964.33 € \\
+LCOE (€/kWh) & 0.15149 € & & & \\
+\bottomrule
+\end{tabular}
+\caption{Income Statement for the Base Case Scenario}
+\end{table}
 
-Consistent with prior assumptions in the economic model, the first project year, 2025, is entirely dedicated to capital investment expenditures, which for this base case scenario amount to a total of 2,469,290,000 EUR. As anticipated, the NPV over the considered project horizon results significantly negative, with a calculated value of approximately -982 million EUR and an Internal Rate of Return (IRR) of about 2.54%. This outcome reflects the fact that hydrogen and syngas production technologies are not yet fully mature and currently require excessive electrical energy input compared to the quantity and value of the output produced. This conclusion is further supported by the Levelized Cost of Energy (LCOE), which, when considering the entire mix of energy products, is estimated at approximately 151.5 EUR per MWh: such a high LCOE underscores the current economic challenges associated with deploying a fully hybrid system from the outset under existing technological and market conditions.
+\begin{table}[ht]
+\centering
+\scriptsize
+\begin{tabular}{lrrrr}
+\toprule
+ & \multicolumn{4}{c}{CF Statement} \\
+\cmidrule(l){2-5}
+ & 2025 & 2026 & 2027 & 2028 \\
+\midrule
+EBITDA & - & 82,833,281.74 € & 84,297,777.29 € & 85,736,379.32 € \\
+Investment & -2,469,290,000.00 € & - & - & - \\
+Taxes & - & -8,884,415.11 € & -9,293,009.36 € & -9,694,379.33 € \\
+Cash Flow & -2,469,290,000.00 € & 73,948,866.64 € & 75,004,767.93 € & 76,041,999.99 € \\
+Cumulative Cash flow & -2,469,290,000.00 € & -2,395,341,133.36 € & -2,320,336,365.44 € & -2,244,294,365.45 € \\
+Discounted CF & - & 70,427,492.04 € & 68,031,535.53 € & 65,687,938.66 € \\
+$\sum$ DCF & 1,487,355,681.63 € & - & - & - \\
+Initial Investment & - 2,469,290,000.00 € & - & - & - \\
+NPV & - 981,934,318.37 € & - & - & - \\
+IRR & 2.54\% & - & - & - \\
+\bottomrule
+\end{tabular}
+\caption{Cash Flow Statement for the Base Case Scenario}
+\end{table}
+
+A discount rate of $5\%$ was selected for the financial analysis, representing a balanced assumption from what is cited in the literature \cite{IEA_OECDNEA_2020}. Additionally, the model accounts for corporate taxation, including the Italian corporate income tax (\textit{IRES}) at a rate of $24\%$ and the regional production tax (\textit{IRAP}) at $3.9\%$.
+
+Consistent with prior assumptions in the economic model, the first project year, 2025, is entirely dedicated to capital investment expenditures, which for this base case scenario amount to a total of 2,469,290,000 EUR. As anticipated, the NPV over the considered project horizon results significantly negative, with a calculated value of approximately -982 million EUR and an IRR of about $2.54\%$. This outcome reflects the fact that hydrogen and syngas production technologies are not yet fully mature and currently require excessive electrical energy input compared to the quantity and value of the output produced. This conclusion is further supported by the Levelized Cost of Energy ($LCOE_{en}$), which, when considering the entire mix of energy products, is estimated at approximately 151.5 EUR per MWh: such high $LCOE_{en}$ underscores the current economic challenges associated with deploying a fully hybrid system from the outset under existing technological and market conditions.
 
 \subsubsection{Sensitivity Analysis}
-To enhance the robustness of the economic assessment, a sensitivity analysis was performed to evaluate how variations in CAPEX and the discount rate affect the Net Present Value (NPV) and Levelized Cost of Energy (LCOE) of the fully hybrid system.
+To enhance the robustness of the economic assessment, a sensitivity analysis was performed to evaluate how variations in CAPEX and the discount rate affect the NPV and LCOE of the fully hybrid system.
 
-Results presented in the Appendix show that achieving NPV break-even would require CAPEX to drop to around 1,487 million EUR, with more attractive scenarios falling in the 800–1,200 million EUR range—levels currently unrealistic for a facility of this scale and technology maturity. Similarly, the LCOE would need to decrease to approximately 115 EUR/MWh to reach economic viability under these conditions.
+Results show that achieving NPV break-even would require CAPEX to drop to around 1,487 million EUR, with more attractive scenarios falling in the $800 \sim 1,200$ million EUR range—levels currently unrealistic for a facility of this scale and technology maturity. Similarly, the $LCOE_{en}$ would need to decrease to approximately 115 EUR/MWh to reach economic viability under these conditions.
 
-Regarding the discount rate, values between 0.5% and 2.25% would be needed for the investment to become sustainable, with the calculated break-even rate at about 2.54%. However, such low discount rates are equally impractical, as they imply financial conditions far too optimistic for an investment of this magnitude. The same conclusions apply when analyzing the LCOE’s sensitivity to discount rate changes
+Regarding the discount rate, values between $0.5\%$ and $2.25\%$ would be needed for the investment to become sustainable, with the calculated break-even rate at about $2.54\%$. However, such low discount rates are equally impractical, as they imply financial conditions far too optimistic for an investment of this magnitude. The same conclusions apply when analyzing the $LCOE_{en}$ sensitivity to discount rate changes
+
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/4_npv_vs_capex.png}
+        \caption*{(a) NPV vs CAPEX}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/4_LCOE_vs_capex.png}
+        \caption*{(b) $LCOE_{en}$ vs CAPEX}
+    \end{minipage}
+    \vspace{0.5cm}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/4_NPV_vs_discount.png}
+        \caption*{(c) NPV vs discount rate}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/4_LCOE_vs_discount.png}
+        \caption*{(d) $LCOE_{en}$ vs discount rate}
+    \end{minipage}
+    \caption{Sensitivity analysis results: (a) NPV vs CAPEX, (b) $LCOE_{en}$ vs CAPEX, (c) NPV vs discount rate, (d) $LCOE_{en}$ vs discount rate for the base case scenario.}
+    \label{fig:sensitivity_analysis_base}
+\end{figure}
 
 \subsection{Economic Results: Alternative Solution}
-To further explore viable pathways, an alternative “middle-of-the-road” scenario was analyzed. Initially, a full-electric configuration was simulated in which only electricity is produced and sold, and solely the capital and operational costs of the E-SMR reactors are considered. This scenario yielded highly positive results, with an NPV of approximately 2.5 billion EUR and an LCOE of 61.5 EUR/MWh.
+To further explore viable pathways, an alternative “middle-of-the-road” scenario was analyzed. Initially, a full-electric configuration was simulated in which only electricity is produced and sold, and solely the capital and operational costs of the E-SMR reactors are considered. This scenario yielded highly positive results, with an NPV of approximately 2.5 billion EUR and an $LCOE_{el}$ of 61.5 EUR/MWh.
 
 However, as previously discussed in the case study section, the EU project aims to finance hybrid system solutions. Therefore, a purely full-electric approach, despite its favorable economics, is not feasible from a policy and funding perspective. This underscores the need for a balanced intermediate solution that satisfies both technical and financial constraints.
 
-The chosen “middle-of-the-road” approach foresees operating exclusively in full-electric mode during the first 20 years, with only the CAPEX and OPEX of the E-SMRs accounted for in 2025. From 2046 onwards, the remaining parts of the hybrid system are integrated. This scenario results in a profitable outcome, delivering an NPV of approximately 1,160 million EUR with a payback time of 14 years, an IRR of 9.03%, and an LCOE of 78.34 EUR/MWh.
+The chosen “middle-of-the-road” approach foresees operating exclusively in full-electric mode during the first 20 years, with only the CAPEX and OPEX of the SMR accounted for in 2025. From 2046 onwards, the remaining parts of the hybrid system are integrated. This scenario results in a profitable outcome, delivering an NPV of approximately 1,160 million EUR with a payback time of 14 years, an IRR of $9.03\%$, and an $LCOE_{en}$ of 78.34 EUR/MWh.
 
 \subsection{Sensitivity Analysis: Alternative Solution}
 The same sensitivity analysis methodology used for the base case was applied to the middle-of-the-road scenario, providing clear evidence of the robustness of this more balanced approach.
 
-Analyzing the NPV as a function of CAPEX shows that the solution is resilient, given the breakeven CAPEX of approximately 3,302 million EUR, which is a velue well above the actual investment made. Similar conclusions emerge when examining the LCOE relative to CAPEX: the breakeven LCOE is around 100 EUR/MWh, while the observed LCOE from the analysis is significantly lower, at 78.34 EUR/MWh.
+Analyzing the NPV as a function of CAPEX shows that the solution is resilient, given the breakeven CAPEX of approximately 3,302 million EUR, which is a value well above the actual investment made. Similar conclusions emerge when examining the $LCOE_{en}$ relative to CAPEX: the breakeven $LCOE_{en}$ is around 100 EUR/MWh, while the observed $LCOE_{en}$ from the analysis is significantly lower, at 78.34 EUR/MWh.
 
-Consistent results are observed when assessing the NPV and LCOE as functions of the discount rate, the break even value of which is equal to 9,3%. The NPV analysis demonstrates that the investment remains profitable for discount rates up to 8–9%, which represents a notably conservative assumption. The LCOE analysis similarly confirms the financial soundness of the middle-of-the-road scenario under this range of discount rate conditions. 
+Consistent results are observed when assessing the NPV and $LCOE_{en}$ as functions of the discount rate, the break even value of which is equal to $9.03\%$. The NPV analysis demonstrates that the investment remains profitable for discount rates up to $8\sim9\%$, which represents a notably conservative assumption. The $LCOE_{en}$ analysis similarly confirms the financial soundness of the middle-of-the-road scenario under this range of discount rate conditions.
+
+\begin{figure}[ht]
+    \centering
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/4_npv_vs_capex_OPT.png}
+        \caption*{(a) NPV vs CAPEX}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/4_LCOE_vs_capex_OPT.png}
+        \caption*{(b) $LCOE_{en}$ vs CAPEX}
+    \end{minipage}
+    \vspace{0.5cm}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/4_NPV_vs_discount_OPT.png}
+        \caption*{(c) NPV vs discount rate}
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{./figures/4_LCOE_vs_discount_OPT.png}
+        \caption*{(d) $LCOE_{en}$ vs discount rate}
+    \end{minipage}
+    \caption{Sensitivity analysis results: (a) NPV vs CAPEX, (b) $LCOE_{en}$ vs CAPEX, (c) NPV vs discount rate, (d) $LCOE_{en}$ vs discount rate for the optimized scenario.}
+    \label{fig:sensitivity_analysis_opt}
+\end{figure}
 
 
 
