@@ -1,6 +1,6 @@
 \section{Data Collection}
 \label{sec:data-collection}
-The foundation of this study lies in the necessity to establish a realistic energy demand profile for the residential sector within the examined region. Given the focus on residential energy consumption, the total energy demand is conceptualized as the sum of heating and cooling contributions, in addition to electricity consumption for appliances and lighting. Throughout the subsequent analysis, several simplifications are employed. However, potential improvements that could be made but were deemed beyond the scope of this work are duly noted.
+The foundation of this study lies in the necessity to establish a realistic energy demand profile for the residential sector within the examined region. Given the focus on residential energy consumption, the total energy demand is conceptualized as the sum of heating and cooling contributions, in addition to electricity consumption for appliances and lighting. Throughout the subsequent analysis, several simplifications are employed. However, potential improvements were duly noted but deemed beyond the scope of this work.
 
 \subsection{Approach}
 \subsubsection{Introduction}
@@ -11,17 +11,17 @@ The APE categorizes buildings into energy classes, denoted by letter grades rang
 Each unit pertains to a distinct and identifiable segment of a real estate property, such as an apartment, a house, or a commercial space, which can be individually owned, sold, or rented. For example, a building comprising three apartments will have three separate APEs, each corresponding to an individual apartment. Consequently, it is reasonable to assume that each unit serves as the residence of a single family.
 
 \subsubsection{Methodology}
-The objective is to ascertain the electricity demand profile for the region, denoted as $P_{e, \text{tot}}$ based on the distribution of energy classes. To achieve this, it is essential to first establish the reference demand profile for each energy class, represented as $P_{e, \text{ref}, i}$, where $i$ signifies the specific energy class.
+The objective is to obtain the electricity demand profile for the region, denoted as $P_{e, \text{tot}}$ based on the distribution of energy classes. To achieve this, it is essential to first establish the reference demand profile for each energy class, represented as $P_{e, \text{ref}, i}$, where $i$ signifies the specific energy class.
 
 For each energy class, it is necessary to determine the following parameters:
 \begin{itemize}
     \item Heating thermal demand $\dot{Q}_h$
     \item Cooling thermal demand $\dot{Q}_c$
-    \item Domestic hot water thermal demand $\dot{Q}_{dhw}$
+    \item Domestic hot water thermal demand $\dot{Q}_{DHW}$
 \end{itemize}
-Additionally, the share of heat pumps, denoted as $\text{\chi}_{HP,i}$ must be established for each energy class to distinguish between electrified and fossil fuel-based heat generation. The primary energy demand, whether for electricity or fossil fuels, is calculated using average efficiencies in a simplified manner.
+Additionally, the share of heat pumps, denoted as $\text{\chi}_{HP,i}$ must be established for each energy class to distinguish between electrified and fossil fuel-based heat generation. The primary energy demand, whether for electricity or fossil fuels, is calculated using average efficiencies in a simplified manner. Moreover, $\chi_{cooling}$ represents the share of buildings equipped with cooling systems, which is currently at $9.58\%$.
 
-Regarding the electricity production from photovoltaic systems, it is essential to determine the share of buildings equipped with such systems for each energy class, denoted as  $\text{\chi}_{PV,i}$​. Additionally, the average size of the photovoltaic system, represented as $P_{e,i}^+$​, must be established for each energy class. This parameter is further differentiated between households with and without a heat pump. A reference profile of photovoltaic (PV) production for the region is obtained and subsequently weighted according to the simulated scenario.
+Regarding the electricity production from photovoltaic systems, it is essential to determine the share of buildings equipped with such systems for each energy class, denoted as  $\text{\chi}_{PV,i}$​. Additionally, the average size of the photovoltaic system, must be established for each energy class taking into account the different plant size installed in household with $P_{\text{PV},\text{w/HP}}$ or without $P_{\text{PV},\text{w/oHP}}$ an heat pump. This parameter is further differentiated between households with and without a heat pump. A reference profile of photovoltaic (PV) production for the region is obtained and subsequently weighted according to the simulated scenario.
 
 An additional electricity contribution arises from appliances and lighting, denoted as $P_{e,other}$, which is assumed to be consistent across all energy classes. The reference demand profile for each energy class $i$ can then be determined using the following equation:
 \begin{equation}
@@ -36,7 +36,7 @@ P_{e,\text{ref},i} =
 \chi_{\text{cooling}} \cdot \frac{\dot{Q}_{c,i}}{\text{EER}}
 \right)
 \\
-&\left(1 - \chi_{\text{HP},i}\right)
+&+ \left(1 - \chi_{\text{HP},i}\right)
 \cdot 
 \left(
 \frac{\dot{Q}_{h,i} + \dot{Q}_{DHW}}{\eta_{\text{fossil}}} 
@@ -72,7 +72,7 @@ Subsequently, the reference demand profile can be multiplied by the number of bu
 
 
 \paragraph{Data Sources}
-Data pertaining to APEs for the relevant municipalities within the region were extracted from the CENED database \cite{cened2025}. The selection of municipalities was based on the map of primary substations provided by the national grid operator (GSE) \cite{gse_cabine_primarie}. The dataset was subsequently filtered to include exclusively residential buildings, thereby excluding commercial and industrial structures. Additionally, data points deemed unhealthy were filtered out at each stage of the process, primarily by considering only the 99th percentile. This filtering was necessitated by the extensive volume of data contained within the complete regional database. Following this preliminary filtering, a more manageable CSV file was obtained. The number of buildings was calculated using data from the ISTAT database \cite{istat2023}, where the population of the municipalities was extracted and divided by the average household size in the province.
+Data pertaining to APEs for the relevant municipalities within the region were extracted from the CENED database \cite{cened2025}. The selection of municipalities was based on the map of primary substations provided by the national grid operator (GSE) \cite{gse_cabine_primarie}. The dataset was subsequently filtered to include exclusively residential buildings, thereby excluding commercial and industrial structures. Additionally, data points deemed unhealthy were filtered out at each stage of the process, primarily by considering only the 99th percentile. This filtering was necessary due to the extensive volume of data contained within the complete regional database. Following this preliminary filtering, a more manageable CSV file was obtained. The number of buildings was calculated using data from the ISTAT database \cite{istat2023}, where the population of the municipalities was extracted and divided by the average household size in the province.
 
 \subsection{Heating and Cooling Demand}
 For each energy class, a representative residential building from the region under study was selected, and the hourly thermal demand for heating and cooling was computed over the course of a year. This computation was performed using professional software (TERMOLOG), which enables dynamic simulation of a building's energy system. The calculations were conducted in accordance with the UNI EN ISO 52016 standard. A single reference building with a consistent utilization profile was employed for each energy class. The result of these calculations is an hourly profile of the thermal demand for both heating and cooling.
@@ -108,7 +108,7 @@ The share of heat pumps per energy class was identified. Additionally, the share
 \end{figure}
 
 \subsubsection{Photovoltaic System Size}
-Furthermore, the data was divided into two groups: buildings with heat pumps and those without. The distribution of the size of the installed photovoltaic systems was then plotted for each group. The average size, calculated based on the 99th percentile, was determined for both groups
+Furthermore, the data was divided into two groups: heat pump equipped and non-equipped buildings. The distribution of the size of the installed photovoltaic systems was then plotted for each group. The average size, calculated based on the 99th percentile, was determined for both groups
 
 \begin{figure}[H]
     \centering
@@ -130,7 +130,7 @@ Furthermore, the data was divided into two groups: buildings with heat pumps and
 The average values for the size of the photovoltaic systems are $4.30$ kW for buildings with heat pumps and $3.70$ kW for those without heat pumps.
 
 \subsubsection{Reference Photovoltaic Production}
-To establish a reference photovoltaic (PV) production profile representative of the region under study, the list of municipalities was first input into the Nominatim API \cite{Nominatim} to obtain the coordinates of the center of each municipality. Subsequently, the PVGIS API \cite{PVGIS} was utilized to acquire the hourly production profile for each municipality. The angle was fixed at an average of $22^\circ$, and a plant size of 11 kW was assumed. For each municipality, a profile was generated for every $10^\circ$ of the azimuth angle, ranging from $0^\circ$ to $360^\circ$. These profiles were then weighted according to a Gaussian distribution to reflect the preference for orienting photovoltaic systems towards the south. This process yielded a reference photovoltaic production profile for each municipality, denoted as $P_{e,m}^+$, where $m$ represents the municipality. The reference production profile for each energy class, $P_{e,ref}^+$, was then obtained by weighting the production profile of each municipality based on its population \cite{istat2023}.
+To establish a reference photovoltaic (PV) production profile representative of the analyzed region, the list of municipalities was first input into the Nominatim API \cite{Nominatim} to obtain the coordinates of the center of each municipality. Subsequently, the PVGIS API \cite{PVGIS} was utilized to acquire the hourly production profile for each municipality. The angle was fixed at an average of $22^\circ$, and a plant size of 11 kW was assumed. For each municipality, a profile was generated for every $10^\circ$ of the azimuth angle, ranging from $0^\circ$ to $360^\circ$. These profiles were then weighted according to a Gaussian distribution to reflect the preference for orienting photovoltaic systems towards the south. This process yielded a reference photovoltaic production profile for each municipality, denoted as $P_{e,m}^+$, where $m$ represents the municipality. The reference production profile for each energy class, $P_{e,ref}^+$, was then obtained by weighting the production profile of each municipality based on its population \cite{istat2023}.
 
 \subsection{Other Electricity Demand}
 The electrical demand for appliances and lighting is modeled uniformly across all energy classes. The demand profile was manually defined on an hourly basis for an average day, with distinctions made between the following scenarios:
@@ -153,7 +153,7 @@ The profile was established by considering the following contributions:
 During the summer, the need for cooling fans was included in the model. Furthermore, a parameter was introduced to represent the share of buildings equipped with induction cooking systems.
 
 \subsection{Validation}
-To validate the acceptability of the proposed method, the total demand was compared with data available online. Specifically, it was compared to the average annual demand in the residential sector for the province of Varese \cite{portaleconsumi_energia_domestica}, which was reported to be 19311931 kWh in 2023. This value reflects a decreasing trend in recent years, with figures of $2016kWh$ in 2022 and $2119kWh$ in 2021.
+To validate the acceptability of the proposed method, the total demand was compared with data available online. Specifically, it was compared to the average annual demand in the residential sector for the province of Varese \cite{portaleconsumi_energia_domestica}, which was reported to be $1931 \; kWh$ in 2023. This value reflects a decreasing trend in recent years, with figures of $2016 \; kWh$ in 2022 and $2119 \; kWh$ in 2021.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/1_today_demand_daily_avg.png}
@@ -162,7 +162,7 @@ To validate the acceptability of the proposed method, the total demand was compa
 \end{figure}
 
 \subsection{Demand Distribution}
-To enhance the visualization of demand behavior, the hourly distribution of demand was plotted for each scenario. This graphical representation aids in understanding the temporal variations and patterns in energy consumption across different scenarios.
+To enhance the visualization of demand behavior, the distribution of demand was plotted for each scenario. This graphical representation aids in understanding the temporal variations and patterns in energy consumption across different scenarios.
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
