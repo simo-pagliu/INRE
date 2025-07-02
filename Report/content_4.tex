@@ -128,7 +128,7 @@ Considering a combined power of 354 MW for the two E-SMR units, operating for 8,
 Moreover, as highlighted in \cite{VanHee2024}, OPEX are expected to decrease over time as the technology transitions from First-of-a-Kind (FOAK) to Nth-of-a-Kind (NOAK) status. After the initial 15 years of operation, costs are projected to decrease by approximately $30\%$ due to increased technological maturity and operational experience. During the subsequent 15 years, a further reduction of $10\%$ is expected, reflecting continued but slower learning curve effects. Beyond the first 30 years, OPEX levels are expected to stabilize, approaching their asymptotic lower limit. Unlike CAPEX reductions, these OPEX decreases have been modeled as gradual annual reductions.
 
 \subsubsection{Opex for HTSEs}
-The OPEX for the HTSE have been set to $2.5\%$ of the corresponding CAPEX \cite{TANDEM2023}, corresponding to an annual OPEX of approximately \textbf{6.1425 million EUR}. The OPEX for HTSE units is expected to annually decrease over time with the same cost reduction dynamics assumed for CAPEX, namely a $30\%$ reduction after the first 20 years and an additional $15\%$ reduction in the following 20 years.
+The OPEX for the HTSE have been set to $2.5\%$ of the corresponding CAPEX \cite{TANDEM2023}, corresponding to an annual OPEX of approximately \textbf{6.1425 million EUR}. The OPEX for HTSE units is expected to annually decrease over time with the same cost reduction dynamics assumed for CAPEX, namely a $30\%$ reduction after the first 20 years and an additional $15\%$ reduction in the following 20 years. A small share of the electricity required to operate the HTSE units is repurchased from the local energy community through a dedicated offtake agreement at a price of 46.8 EUR/MWh, corresponding to the guaranteed minimum price for 2025 \cite{GSE2025}; this price is assumed to increase proportionally in line with the general electricity price trend over time.
 
 \subsubsection{Opex for Hydrogen Storage Buffer and Compressor}
 Annual OPEX for the Buffer are considered equal to $1.5\%$ of the CAPEX, while those for the hydrogen compressor are equal to $1\%$ of the CAPEX \cite{TANDEM2023}, resulting in respectively \textbf{735,000 EUR} and \textbf{15,000 EUR} per year. As with the electrolysers, the OPEX for hydrogen storage and compression is expected to decrease over time, following the same cost reduction trends applied to the CAPEX of hydrogen technologies.
@@ -173,7 +173,7 @@ Consequently, the price of syngas is expected to evolve similarly to that of hyd
 \subsection{Economic Results: Base Solution}
 For the economic evaluation of the base case scenario, in which the hybrid energy system is implemented from the beginning, several financial performance indicators have been calculated, including the NPV, the Levelized Cost of Electricity (LCOE), and the Internal Rate of Return (IRR). To perform these calculations, the economic model incorporates all cost and revenue data discussed in the previous sections, enabling the reconstruction of a comprehensive income statement and cash flow statement over the entire project horizon.
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering
 \scriptsize
 \begin{tabular}{lrrrr}
@@ -203,7 +203,7 @@ LCOE (€/kWh) & 0.15149 € & & & \\
 \caption{Income Statement for the Base Case Scenario}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[!htbp]
 \centering
 \scriptsize
 \begin{tabular}{lrrrr}
@@ -238,6 +238,20 @@ Results show that achieving NPV break-even would require CAPEX to drop to around
 
 Regarding the discount rate, values between $0.5\%$ and $2.25\%$ would be needed for the investment to become sustainable, with the calculated break-even rate at about $2.54\%$. However, such low discount rates are equally impractical, as they imply financial conditions far too optimistic for an investment of this magnitude. The same conclusions apply when analyzing the $LCOE_{en}$ sensitivity to discount rate changes
 
+\subsection{Economic Results: Alternative Solution}
+To further explore viable pathways, an alternative “middle-of-the-road” scenario was analyzed. Initially, a full-electric configuration was simulated in which only electricity is produced and sold, and solely the capital and operational costs of the E-SMR reactors are considered. This scenario yielded highly positive results, with an NPV of approximately 2.5 billion EUR and an $LCOE_{el}$ of 61.5 EUR/MWh.
+
+However, as previously discussed in the case study section, the EU project aims to finance hybrid system solutions. Therefore, a purely full-electric approach, despite its favorable economics, is not feasible from a policy and funding perspective. This underscores the need for a balanced intermediate solution that satisfies both technical and financial constraints.
+
+The chosen “middle-of-the-road” approach foresees operating exclusively in full-electric mode during the first 20 years, with only the CAPEX and OPEX of the SMR accounted for in 2025. From 2046 onwards, the remaining parts of the hybrid system are integrated. This scenario results in a profitable outcome, delivering an NPV of approximately 1,160 million EUR with a payback time of 14 years, an IRR of $9.03\%$, and an $LCOE_{en}$ of 78.34 EUR/MWh.
+
+\subsection{Sensitivity Analysis: Alternative Solution}
+The same sensitivity analysis methodology used for the base case was applied to the middle-of-the-road scenario, providing clear evidence of the robustness of this more balanced approach.
+
+Analyzing the NPV as a function of CAPEX shows that the solution is resilient, given the breakeven CAPEX of approximately 3,302 million EUR, which is a value well above the actual investment made. Similar conclusions emerge when examining the $LCOE_{en}$ relative to CAPEX: the breakeven $LCOE_{en}$ is around 100 EUR/MWh, while the observed $LCOE_{en}$ from the analysis is significantly lower, at 78.34 EUR/MWh.
+
+Consistent results are observed when assessing the NPV and $LCOE_{en}$ as functions of the discount rate, the break even value of which is equal to $9.03\%$. The NPV analysis demonstrates that the investment remains profitable for discount rates up to $8\sim9\%$, which represents a notably conservative assumption. The $LCOE_{en}$ analysis similarly confirms the financial soundness of the middle-of-the-road scenario under this range of discount rate conditions.
+
 \begin{figure}[!htbp]
     \centering
     \begin{minipage}[t]{0.48\textwidth}
@@ -264,20 +278,6 @@ Regarding the discount rate, values between $0.5\%$ and $2.25\%$ would be needed
     \caption{Sensitivity analysis results: (a) NPV vs CAPEX, (b) $LCOE_{en}$ vs CAPEX, (c) NPV vs discount rate, (d) $LCOE_{en}$ vs discount rate for the base case scenario.}
     \label{fig:sensitivity_analysis_base}
 \end{figure}
-
-\subsection{Economic Results: Alternative Solution}
-To further explore viable pathways, an alternative “middle-of-the-road” scenario was analyzed. Initially, a full-electric configuration was simulated in which only electricity is produced and sold, and solely the capital and operational costs of the E-SMR reactors are considered. This scenario yielded highly positive results, with an NPV of approximately 2.5 billion EUR and an $LCOE_{el}$ of 61.5 EUR/MWh.
-
-However, as previously discussed in the case study section, the EU project aims to finance hybrid system solutions. Therefore, a purely full-electric approach, despite its favorable economics, is not feasible from a policy and funding perspective. This underscores the need for a balanced intermediate solution that satisfies both technical and financial constraints.
-
-The chosen “middle-of-the-road” approach foresees operating exclusively in full-electric mode during the first 20 years, with only the CAPEX and OPEX of the SMR accounted for in 2025. From 2046 onwards, the remaining parts of the hybrid system are integrated. This scenario results in a profitable outcome, delivering an NPV of approximately 1,160 million EUR with a payback time of 14 years, an IRR of $9.03\%$, and an $LCOE_{en}$ of 78.34 EUR/MWh.
-
-\subsection{Sensitivity Analysis: Alternative Solution}
-The same sensitivity analysis methodology used for the base case was applied to the middle-of-the-road scenario, providing clear evidence of the robustness of this more balanced approach.
-
-Analyzing the NPV as a function of CAPEX shows that the solution is resilient, given the breakeven CAPEX of approximately 3,302 million EUR, which is a value well above the actual investment made. Similar conclusions emerge when examining the $LCOE_{en}$ relative to CAPEX: the breakeven $LCOE_{en}$ is around 100 EUR/MWh, while the observed $LCOE_{en}$ from the analysis is significantly lower, at 78.34 EUR/MWh.
-
-Consistent results are observed when assessing the NPV and $LCOE_{en}$ as functions of the discount rate, the break even value of which is equal to $9.03\%$. The NPV analysis demonstrates that the investment remains profitable for discount rates up to $8\sim9\%$, which represents a notably conservative assumption. The $LCOE_{en}$ analysis similarly confirms the financial soundness of the middle-of-the-road scenario under this range of discount rate conditions.
 
 \begin{figure}[!htbp]
     \centering
